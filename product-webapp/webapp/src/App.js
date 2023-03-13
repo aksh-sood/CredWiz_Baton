@@ -1,6 +1,6 @@
 import "./App.css";
-import SignIn from "./components/SignIn/SignIn";
-import SignLayout from "./components/SignLayout/SignLayout";
+import SignIn from "./components/signIn/SignIn";
+import SignLayout from "./components/signLayout/SignLayout";
 import {
   createBrowserRouter,
   createRoutesFromElements,

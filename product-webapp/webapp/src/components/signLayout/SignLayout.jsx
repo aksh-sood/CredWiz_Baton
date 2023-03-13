@@ -1,5 +1,5 @@
 import react from "react";
-import SignIn from "../SignIn/SignIn";
+import SignIn from "../signIn/SignIn";
 import "./signLayoutStyle.css";
 
 const SignLayout = (props) => {
