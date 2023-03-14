@@ -12,6 +12,8 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import SendMoney from "./components/SendMoney/SendMoney";
 import AddMoney from "./components/AddMoney/AddMoney";
 import WithdrawMoney from "./components/WidthdrawMoney/WithdrawMoney";
+import Dashboard from "./components/dashboard/dashboard";
+import Transaction from "./components/history/transaction";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,6 +25,8 @@ const router = createBrowserRouter(
       <Route exact path="/sendMoney" element={<SendMoney></SendMoney>}/>
       <Route exact path="/addMoney" element={<AddMoney></AddMoney>}/>
       <Route exact path="/withdrawMoney" element={<WithdrawMoney></WithdrawMoney>}/>
+      <Route exact path="/transaction" element={<Transaction/>}/>
+      <Route exact path="/dashboard" element={<Dashboard/>}/>
     </Route>
 
     // </Route>

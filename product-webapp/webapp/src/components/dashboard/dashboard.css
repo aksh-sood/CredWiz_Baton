@@ -1,0 +1,30 @@
+.body{background-color: rgb(155, 151, 150);}
+.column {
+    float: left;
+    padding: 0 10px;
+  }
+  .row {
+    margin: 0 -5px;
+    align-items: center;
+  }
+  .float-left {
+    text-align: left;
+  }
+  .float-right {
+    text-align: right;
+  }
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  #main-div{
+    align-items: center;
+    width: 65%;
+  }
+  #notification-div{
+    width: 25%;
+  }
+  card{
+    width: 350
+  };
