@@ -1,6 +1,7 @@
 import "./App.css";
 import SignIn from "./components/signIn/SignIn";
 import SignLayout from "./components/signLayout/SignLayout";
+import LandingPage from "./components/landing/LandingPage";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -14,7 +15,7 @@ const router = createBrowserRouter(
     // <Route exact path="/" element={<h1>haii</h1>}>
     <Route>
       <Route exact path="/signin" element={<SignLayout comp={<SignIn />} />} />
-      <Route exact path="/" element={<h1>haii</h1>}></Route>
+      <Route exact path="/" element={<LandingPage />}></Route>
     </Route>
 
     // </Route>
