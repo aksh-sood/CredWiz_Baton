@@ -1,10 +1,14 @@
-.body{background-color: rgb(155, 151, 150);}
+.body{
+  background-color: rgb(223, 219, 218);
+  min-height: "100%";
+  padding:'3rem'
+}
 .column {
     float: left;
     padding: 0 10px;
   }
   .row {
-    margin: 0 -5px;
+    padding: '2rem';
     align-items: center;
   }
   .float-left {
@@ -25,6 +29,9 @@
   #notification-div{
     width: 25%;
   }
-  card{
-    width: 350
-  };
+.card{
+  width: '25rem';
+  height: '5rem';
+  padding: '1rem'; 
+  background-color: "white"  
+}

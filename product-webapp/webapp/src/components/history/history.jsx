@@ -1,6 +1,7 @@
+import './history.css' 
 export default function HistoryTable(){
     return(
-        <div>
+        <div style={{alignContent:'center'}}>
             <table>
                 <tr>
                     <th>Date</th>
@@ -14,7 +15,7 @@ export default function HistoryTable(){
                     <td>Anu</td>
                     <td>1000</td>
                     <td>..</td>
-                    <td>...</td>
+                    <td><img src="../images/cross.jpeg" width="100px" height="100px" alt="sorry !"/></td>
                 </tr>
                 <tr>
                     <td>03/12/2023</td>
