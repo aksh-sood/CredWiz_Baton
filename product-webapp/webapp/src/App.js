@@ -32,7 +32,7 @@ const router = createBrowserRouter(
       <Route
         exact
         path="/"
-        element={<h1>haii i am vivekanandan and i am coollllll....</h1>}
+        element={<LandingPage/>}
       />
       <Route exact path="/userProfile" element={<UserProfile></UserProfile>} />
       <Route exact path="/sendMoney" element={<SendMoney></SendMoney>} />
