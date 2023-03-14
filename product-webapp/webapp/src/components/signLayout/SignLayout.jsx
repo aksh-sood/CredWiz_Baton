@@ -21,8 +21,8 @@ const SignLayout = (props) => {
                 </ButtonBase>
                 <h3>New here ?</h3>
                 <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Debitis, ex ratione. Aliquid!
+                  Join us to have the best expereince in digital wallet
+                  platforms
                 </p>
 
                 <Button
@@ -33,7 +33,9 @@ const SignLayout = (props) => {
                   Sign Up
                 </Button>
               </div>
-              <img src={HomeIll} class="image" alt="" />
+              <ButtonBase sx={{ width: 450, height: 450 }}>
+                <img src={HomeIll} class="image" alt="" />
+              </ButtonBase>
             </>
           ) : (
             <>
@@ -45,8 +47,8 @@ const SignLayout = (props) => {
                 </ButtonBase>
                 <h3>One of us ?</h3>
                 <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Nostrum laboriosam ad deleniti.
+                  Click the button below to login and continue your journey with
+                  us
                 </p>
 
                 <Button
@@ -57,7 +59,9 @@ const SignLayout = (props) => {
                   Sign In
                 </Button>
               </div>
-              <img src={HomeIll} class="image" alt="" />
+              <ButtonBase sx={{ width: 450, height: 450 }}>
+                <img src={HomeIll} class="image" alt="" />
+              </ButtonBase>
             </>
           )}
         </div>

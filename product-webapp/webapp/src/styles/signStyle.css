@@ -59,19 +59,12 @@ input {
 }
 .signupfields {
   position: absolute;
-  top: 15%;
-
-  /* transform: translate(-50%, -50%); */
+  top: 20%;
   left: 30%;
-  /* width: 50%; */
   transition: 1s 0.7s ease-in-out;
-  /* display: grid; */
-  /* grid-template-columns: 1fr; */
+
   z-index: 5;
 }
-/* .signupfields form {
-  padding: 0;
-} */
 
 form {
   display: flex;
