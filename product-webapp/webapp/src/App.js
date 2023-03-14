@@ -23,6 +23,7 @@ const router = createBrowserRouter(
       <Route exact path="/sendMoney" element={<SendMoney></SendMoney>}/>
       <Route exact path="/addMoney" element={<AddMoney></AddMoney>}/>
       <Route exact path="/withdrawMoney" element={<WithdrawMoney></WithdrawMoney>}/>
+      
     </Route>
 
     // </Route>
