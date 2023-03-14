@@ -1,7 +1,9 @@
+import "../../styles/signStyle.css";
 import react from "react";
-import SignIn from "../signIn/SignIn";
-import "./signLayoutStyle.css";
-
+import Button from "@mui/material/Button";
+import ButtonBase from "@mui/material/ButtonBase";
+import HomeIll from "../../assets/home.png";
+import Logo from "../../assets/logo.png";
 const SignLayout = (props) => {
   return (
     <div class="container">
@@ -9,30 +11,55 @@ const SignLayout = (props) => {
 
       <div class="panels-container">
         <div class="panel left-panel">
-          <div class="content">
-            <h3>New here ?</h3>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-              ex ratione. Aliquid!
-            </p>
-            <button class="btn transparent" id="sign-up-btn">
-              Sign up
-            </button>
-          </div>
-          <img src="img/log.svg" class="image" alt="" />
-        </div>
-        <div class="panel right-panel">
-          <div class="content">
-            <h3>One of us ?</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-              laboriosam ad deleniti.
-            </p>
-            <button class="btn transparent" id="sign-in-btn">
-              Sign in
-            </button>
-          </div>
-          <img src="home.png" class="image" alt="" />
+          {props.path === "/signIn" ? (
+            <>
+              <div class="content">
+                <ButtonBase sx={{ width: 128, height: 128 }}>
+                  <a href="/">
+                    <img src={Logo} alt="logo" class="image" />
+                  </a>
+                </ButtonBase>
+                <h3>New here ?</h3>
+                <p>
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Debitis, ex ratione. Aliquid!
+                </p>
+
+                <Button
+                  href="/signUp"
+                  class="btn transparent bubble"
+                  id="sign-in-btn"
+                >
+                  Sign Up
+                </Button>
+              </div>
+              <img src={HomeIll} class="image" alt="" />
+            </>
+          ) : (
+            <>
+              <div class="content">
+                <ButtonBase sx={{ width: 128, height: 128 }}>
+                  <a href="/">
+                    <img src={Logo} alt="logo" class="image" />
+                  </a>
+                </ButtonBase>
+                <h3>One of us ?</h3>
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Nostrum laboriosam ad deleniti.
+                </p>
+
+                <Button
+                  href="/signIn"
+                  class="btn transparent bubble"
+                  id="sign-in-btn"
+                >
+                  Sign In
+                </Button>
+              </div>
+              <img src={HomeIll} class="image" alt="" />
+            </>
+          )}
         </div>
       </div>
     </div>

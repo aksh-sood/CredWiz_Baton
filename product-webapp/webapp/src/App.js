@@ -1,5 +1,6 @@
 import "./App.css";
 import SignIn from "./components/signIn/SignIn";
+import SignUp from "./components/signUp/SignUp";
 import SignLayout from "./components/signLayout/SignLayout";
 import {
   createBrowserRouter,
@@ -13,8 +14,21 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route exact path="/" element={<h1>haii</h1>}>
     <Route>
-      <Route exact path="/signin" element={<SignLayout comp={<SignIn />} />} />
-      <Route exact path="/" element={<h1>haii</h1>}></Route>
+      <Route
+        exact
+        path="/signIn"
+        element={<SignLayout comp={<SignIn />} path="/signIn" />}
+      />
+      <Route
+        exact
+        path="/signUp"
+        element={<SignLayout comp={<SignUp />} path="/signUp" />}
+      />
+      <Route
+        exact
+        path="/"
+        element={<h1>haii i am vivekanandan and i am coollllll....</h1>}
+      ></Route>
     </Route>
 
     // </Route>
