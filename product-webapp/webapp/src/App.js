@@ -9,6 +9,10 @@ import {
   RouterProvider,
   Router,
 } from "react-router-dom";
+import UserProfile from "./components/UserProfile/UserProfile";
+import SendMoney from "./components/SendMoney/SendMoney";
+import AddMoney from "./components/AddMoney/AddMoney";
+import WithdrawMoney from "./components/WidthdrawMoney/WithdrawMoney";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,7 +32,15 @@ const router = createBrowserRouter(
         exact
         path="/"
         element={<h1>haii i am vivekanandan and i am coollllll....</h1>}
-      ></Route>
+      />
+      <Route exact path="/userProfile" element={<UserProfile></UserProfile>} />
+      <Route exact path="/sendMoney" element={<SendMoney></SendMoney>} />
+      <Route exact path="/addMoney" element={<AddMoney></AddMoney>} />
+      <Route
+        exact
+        path="/withdrawMoney"
+        element={<WithdrawMoney></WithdrawMoney>}
+      />
     </Route>
 
     // </Route>
