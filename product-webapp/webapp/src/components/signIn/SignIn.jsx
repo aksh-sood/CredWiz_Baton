@@ -1,23 +1,36 @@
-import react from "react";
 import SignInput from "../signInput/SignInput";
-
-import "./style.css";
+import Grid from "@mui/material/Grid";
+import "../../styles/signStyle.css";
 const SignIn = () => {
   return (
-    <div class="forms-container">
-      <div class="signin-signup">
-        <form action="#" class="sign-in-form">
-          <h2 class="title">Sign in</h2>
-          <SignInput icon="fas fa-user" placeholder="Username" type="email" />
-          <SignInput
-            icon="fas fa-lock"
-            placeholder="Password"
-            type="password"
-          />
+    <>
+      <div class="forms-container">
+        <div class="signinpos">
+          <form action="#" class="sign-in-form">
+            <h2 class="title">Welcome Back!</h2>
+            <Grid container spacing={1}>
+              <Grid item md={3} />
+              <Grid item xs={3} md={6}>
+                <SignInput
+                  icon="fas fa-user"
+                  placeholder="Username"
+                  type="email"
+                />
+              </Grid>
+              <Grid item md={3} />
+              <Grid item md={3} />
+              <Grid item xs={3} md={6}>
+                <SignInput
+                  icon="fas fa-lock"
+                  placeholder="Password"
+                  type="password"
+                />
+              </Grid>
+            </Grid>
 
-          <input type="submit" value="Login" class="btn solid" />
-        </form>
-        {/* <form action="#" class="sign-up-form">
+            <input type="submit" value="Login" class="btn solid" />
+          </form>
+          {/* <form action="#" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -48,8 +61,9 @@ const SignIn = () => {
               </a>
             </div>
           </form> */}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 export default SignIn;
