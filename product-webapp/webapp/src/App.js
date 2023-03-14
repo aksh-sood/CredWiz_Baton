@@ -1,6 +1,7 @@
 import "./App.css";
 import SignIn from "./components/signIn/SignIn";
 import SignLayout from "./components/signLayout/SignLayout";
+import UpdateUser from "./components/UpdateUser/UpdateUser";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -23,6 +24,7 @@ const router = createBrowserRouter(
       <Route exact path="/sendMoney" element={<SendMoney></SendMoney>}/>
       <Route exact path="/addMoney" element={<AddMoney></AddMoney>}/>
       <Route exact path="/withdrawMoney" element={<WithdrawMoney></WithdrawMoney>}/>
+      <Route exact path="updateUser" element={<UpdateUser></UpdateUser>}/>
       
     </Route>
 

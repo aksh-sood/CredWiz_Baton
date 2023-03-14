@@ -1,0 +1,15 @@
+h2{
+    font-size: 50px;
+    font-weight: 700;
+}
+#head{
+    display: flex;
+    align-items: center;
+}
+svg path{
+    fill: #fff;
+}
+svg {
+    background-color: #27282b;
+    border-radius: 100px;
+}
