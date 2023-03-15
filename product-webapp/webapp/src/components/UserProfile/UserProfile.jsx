@@ -8,10 +8,13 @@ import './UserProfile.css';
 const UserProfile = () => {
     return (
         <>
-            <Row>
+            {/* <Row>
                 <h2 id="head-h2">User Profile</h2>
-            </Row>
+            </Row> */}
             <Form id="form">
+                <div className='row'>
+                    <h1>User Profile</h1>
+                </div>
                 <div className='row'>
                     <Col className='mx-4'>
                         <div className='row'>
