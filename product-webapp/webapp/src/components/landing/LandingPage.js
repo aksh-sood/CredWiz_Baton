@@ -1,9 +1,13 @@
 import React from "react";
-import Navbar from './Navbar'
-const LandingPage = ()=>{
-    return(
-        <>
-        <Navbar/>
-        </>
-    )
-}
+import Carousel from "./Carousal";
+import Navbar from "./Navbar";
+const LandingPage = () => {
+  return (
+    <>
+      <Navbar />
+      <Carousel />
+    </>
+  );
+};
+
+export default LandingPage;
