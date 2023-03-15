@@ -2,11 +2,8 @@ import "./App.css";
 import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 import SignLayout from "./components/signLayout/SignLayout";
-<<<<<<< HEAD
 import UpdateUser from "./components/UpdateUser/UpdateUser";
-=======
 import LandingPage from "./components/landing/LandingPage";
->>>>>>> c7cedd3ad52d236076b210913d75247c750b7fb4
 import {
   createBrowserRouter,
   createRoutesFromElements,
