@@ -1,0 +1,40 @@
+#head-h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 36px;
+    background-color: rgb(172, 172, 172);
+    font-weight: 500;
+    height: 80px;
+    padding-top: 19px;
+    width: 100%;
+    padding-left: 20px;
+    text-align: left;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 50%;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-right: 20px;
+}
+
+.input-md {
+    border-radius: 2px;
+    border:2px solid #DADADA;
+    padding-left: 10px;
+    width: 300px;
+    height: 40px;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+img{
+    margin-left: auto;
+    margin-right: auto;
+}
