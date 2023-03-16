@@ -15,15 +15,15 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import SendMoney from "./components/SendMoney/SendMoney";
 import AddMoney from "./components/AddMoney/AddMoney";
 import WithdrawMoney from "./components/WidthdrawMoney/WithdrawMoney";
-import ThemeDashboard from "./components/dashboard/themedashboard";
-import Transaction from "./components/history/transaction";
+import ThemeDashboard from "./components/Dashboard/ThemeDashboard";
+import ThemeTransaction from "./components/History/ThemeTransaction";
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route exact path="/" element={<h1>haii</h1>}>
     
     <Route>
 
-      <Route exact path="/transaction" element={<Transaction/>}/>
+      <Route exact path="/transaction" element={<ThemeTransaction/>}/>
 
       <Route exact path="/dashboard" element={<ThemeDashboard/>}/>
 
