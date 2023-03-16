@@ -16,9 +16,10 @@ svg {
 }
 .input-md {
     border-radius: 2px;
-    border:2px solid #DADADA;
+    border:2px solid #99dcec;
     padding-left: 10px;
     width: 300px;
+    padding-left: 10px;
     height: 40px;
 }
 #forms{
@@ -27,14 +28,14 @@ svg {
 
 }
 .bg{
-    background-image: url("../../assets/ajilbg1.jpg");
+    background-image: url("../../assets/userpbg.jpg");
     background-size: cover;
 }
 .groups {
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 50%;
+    width: 40%;
 
     margin-left: 18px;
     margin-bottom: 23px;
