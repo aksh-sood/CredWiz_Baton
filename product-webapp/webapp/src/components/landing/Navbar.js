@@ -12,6 +12,50 @@ import Button from '@mui/material/Button';
 // import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@emotion/react';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#241C22',
+      darker: '#1a141f',
+      lighter: '#36293c',
+    },
+    secondary: {
+      main: '#9c27b0',
+      darker: '#6d1b7b',
+      lighter: '#be4c9d',
+    },
+    error: {
+      main: '#f44336',
+      darker: '#ba000d',
+      lighter: '#ff7961',
+    },
+    warning: {
+      main: '#ff9800',
+      darker: '#c66900',
+      lighter: '#ffc947',
+    },
+    info: {
+      main: '#2196f3',
+      darker: '#1769aa',
+      lighter: '#4dabf5',
+    },
+    success: {
+      main: '#4caf50',
+      darker: '#087f23',
+      lighter: '#80e27e',
+    },
+    text: {
+      primary: '#241C22',
+      secondary: '#616161',
+      disabled: '#9e9e9e',
+      hint: '#9e9e9e',
+    },
+  },
+});
+
 
 const pages = ['About', 'Login', 'Signup','Features'];
 // const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -36,9 +80,10 @@ function ResponsiveAppBar() {
 //   };
 
   return (
-    <AppBar position="static">
+    <ThemeProvider theme={theme}>
+    <AppBar position="static" color="primary">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters >
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -125,38 +170,11 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          {/* <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box> */}
+
         </Toolbar>
       </Container>
     </AppBar>
+    </ThemeProvider>
   );
 }
 export default ResponsiveAppBar;
