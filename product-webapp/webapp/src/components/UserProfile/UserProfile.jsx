@@ -20,11 +20,11 @@ const UserProfile = () => {
                         <div className='row'>
                             <Form.Group className='group'>
                                 <Form.Label>FIRST NAME</Form.Label>
-                                <Form.Control className='input-md' type='text' name='firstname' placeholder='First Name' required />
+                                <Form.Control className='input-md' type='text' name='firstname' placeholder='Eg: John' required />
                             </Form.Group>
                             <Form.Group className='group'>
                                 <Form.Label>LAST NAME</Form.Label>
-                                <Form.Control className="input-md" type="text" name="lastname" placeholder='Last Name' required />
+                                <Form.Control className="input-md" type="text" name="lastname" placeholder='Eg: Doe' required />
                             </Form.Group>
 
                         </div>
@@ -35,18 +35,18 @@ const UserProfile = () => {
                             </Form.Group>
                             <Form.Group className='group'>
                                 <Form.Label>PAN</Form.Label>
-                                <Form.Control className="input-md" type="password" name="pan" placeholder='PAN' required />
+                                <Form.Control className="input-md" type="password" name="pan" placeholder='XXXXX1234X' required />
                             </Form.Group>
                         </div>
                         <div className="row">
 
                             <Form.Group className='group'>
                                 <Form.Label>MOBILE NUMBER</Form.Label>
-                                <Form.Control className='input-md' type='tel' name='mobile' placeholder=' 123-452-6738' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                                <Form.Control className='input-md' type='tel' name='mobile' placeholder=' +123-452-6738' pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
                             </Form.Group>
                             <Form.Group className='group'>
                                 <Form.Label>GENDER</Form.Label>
-                                <Form.Control className="input-md" type="text" name="gender" placeholder='Gender' required />
+                                <Form.Control className="input-md" type="text" name="gender" placeholder='Male/Female/Other' required />
                             </Form.Group>
                         </div>
                         <div className="row">
@@ -56,7 +56,7 @@ const UserProfile = () => {
                             </Form.Group>
                             <Form.Group className='group'>
                                 <Form.Label>MARITAL STATUS</Form.Label>
-                                <Form.Control className="input-md" type="text" name="marital" placeholder='Status' required />
+                                <Form.Control className="input-md" type="text" name="marital" placeholder='Single/Married' required />
                             </Form.Group>
                         </div>
                     </Col>
