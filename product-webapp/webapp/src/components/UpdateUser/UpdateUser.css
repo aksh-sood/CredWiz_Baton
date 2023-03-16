@@ -1,0 +1,50 @@
+h2{
+    font-size: 50px;
+    font-weight: 700;
+}
+#head{
+    display: flex;
+    align-items: center;
+    margin-right: 50%;
+}
+svg path{
+    fill: #fff;
+}
+svg {
+    background-color: #27282b;
+    border-radius: 100px;
+}
+.input-md {
+    border-radius: 2px;
+    border:2px solid #DADADA;
+    padding-left: 10px;
+    width: 300px;
+    height: 40px;
+}
+#forms{
+    margin-top:50px;
+    margin-left: 9%;
+
+}
+.bg{
+    background-image: url("../../assets/ajilbg1.jpg");
+    background-size: cover;
+}
+.groups {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 50%;
+
+    margin-left: 18px;
+    margin-bottom: 23px;
+    margin-top: 23px;
+    margin-right: 18px;
+}
+
+#rows {
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+    justify-content: center;
+}

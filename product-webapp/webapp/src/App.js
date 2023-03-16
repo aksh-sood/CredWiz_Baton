@@ -3,6 +3,7 @@ import SignIn from "./components/signIn/SignIn";
 import Footer from "./components/footer/Footer";
 import SignUp from "./components/signUp/SignUp";
 import SignLayout from "./components/signLayout/SignLayout";
+import UpdateUser from "./components/UpdateUser/UpdateUser";
 import LandingPage from "./components/landing/LandingPage";
 import UserProfile from "./components/userProfile/UserProfile";
 import SendMoney from "./components/sendMoney/SendMoney";
@@ -16,12 +17,21 @@ import {
   RouterProvider,
   Router,
 } from "react-router-dom";
+import ThemeDashboard from "./components/dashboard/themedashboard";
+import Transaction from "./components/history/transaction";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route exact path="/" element={<h1>haii</h1>}>
+
     <Route>
       <Route path="/" element={<LandingPage />} />
+
+      <Route exact path="/transaction" element={<Transaction />} />
+
+      <Route exact path="/dashboard" element={<ThemeDashboard />} />
+
+      <Route exact path="/updateUser" element={<UpdateUser />} />
       <Route
         exact
         path="/signIn"
@@ -37,8 +47,6 @@ const router = createBrowserRouter(
       <Route exact path="/addMoney" element={<AddMoney />} />
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
     </Route>
-
-    // </Route>
   )
 );
 
