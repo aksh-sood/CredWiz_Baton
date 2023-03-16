@@ -10,8 +10,8 @@ import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-import NotificationCard from "../Notification/NotificationCard";
-import TransactionCard from "../History/TransactionCard";
+import NotificationCard from "../notification/NotificationCard";
+import TransactionCard from "../history/TransactionCard";
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);

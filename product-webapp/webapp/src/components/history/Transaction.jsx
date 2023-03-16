@@ -6,7 +6,7 @@ import StatBox from "../statebox/StatBox";
 import { useContext } from "react";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import TransactionBar from "../History/TransactionBar";
+import TransactionBar from "../history/TransactionBar";
 export default function Transaction() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
