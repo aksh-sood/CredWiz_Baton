@@ -14,16 +14,16 @@ import UserProfile from "./components/UserProfile/UserProfile";
 import SendMoney from "./components/SendMoney/SendMoney";
 import AddMoney from "./components/AddMoney/AddMoney";
 import WithdrawMoney from "./components/WidthdrawMoney/WithdrawMoney";
-import Dashboard from "./components/dashboard/dashboard";
+import ThemeDashboard from "./components/dashboard/themedashboard";
 import Transaction from "./components/history/transaction";
-
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route exact path="/" element={<h1>haii</h1>}>
+    
     <Route>
 
       <Route exact path="/transaction" element={<Transaction/>}/>
-      <Route exact path="/dashboard" element={<Dashboard/>}/>
+      <Route exact path="/dashboard" element={<ThemeDashboard/>}/>
       <Route
         exact
         path="/signIn"
