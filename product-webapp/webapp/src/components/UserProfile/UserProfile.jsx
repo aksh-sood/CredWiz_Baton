@@ -8,10 +8,13 @@ import './UserProfile.css';
 const UserProfile = () => {
     return (
         <>
-            <Row>
+            {/* <Row>
                 <h2 id="head-h2">User Profile</h2>
-            </Row>
-            <Form>
+            </Row> */}
+            <Form id="form">
+                <div className='row'>
+                    <h1>User Profile</h1>
+                </div>
                 <div className='row'>
                     <Col className='mx-4'>
                         <div className='row'>
@@ -59,7 +62,7 @@ const UserProfile = () => {
                     </Col>
 
                     <Col>
-                        <div className='row'>
+                        <div className='row' style={{marginBottom:"0px"}}>
                             <img src={img} width="250px" />
 
                         </div>

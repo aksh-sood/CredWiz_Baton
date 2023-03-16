@@ -2,6 +2,7 @@ import "./App.css";
 import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
 import SignLayout from "./components/signLayout/SignLayout";
+import UpdateUser from "./components/UpdateUser/UpdateUser";
 import LandingPage from "./components/landing/LandingPage";
 import {
   createBrowserRouter,
@@ -23,7 +24,11 @@ const router = createBrowserRouter(
     <Route>
 
       <Route exact path="/transaction" element={<Transaction/>}/>
+
       <Route exact path="/dashboard" element={<ThemeDashboard/>}/>
+
+      <Route exact path="/userProfile" element={<UserProfile></UserProfile>}/>
+      <Route exact path="/updateUser" element={<UpdateUser></UpdateUser>}/>
       <Route
         exact
         path="/signIn"
