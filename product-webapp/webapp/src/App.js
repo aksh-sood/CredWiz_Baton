@@ -1,9 +1,15 @@
 import "./App.css";
 import SignIn from "./components/signIn/SignIn";
+import Footer from "./components/footer/Footer";
 import SignUp from "./components/signUp/SignUp";
 import SignLayout from "./components/signLayout/SignLayout";
 import UpdateUser from "./components/UpdateUser/UpdateUser";
 import LandingPage from "./components/landing/LandingPage";
+import UserProfile from "./components/userProfile/UserProfile";
+import SendMoney from "./components/sendMoney/SendMoney";
+import AddMoney from "./components/addMoney/AddMoney";
+import RootLayout from "./components/rootLayout/RootLayout";
+import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -11,22 +17,21 @@ import {
   RouterProvider,
   Router,
 } from "react-router-dom";
-import UserProfile from "./components/UserProfile/UserProfile";
-import SendMoney from "./components/SendMoney/SendMoney";
-import AddMoney from "./components/AddMoney/AddMoney";
-import WithdrawMoney from "./components/WidthdrawMoney/WithdrawMoney";
-import Dashboard from "./components/dashboard/dashboard";
+import ThemeDashboard from "./components/dashboard/themedashboard";
 import Transaction from "./components/history/transaction";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     // <Route exact path="/" element={<h1>haii</h1>}>
-    <Route>
 
-      <Route exact path="/transaction" element={<Transaction/>}/>
-      <Route exact path="/dashboard" element={<Dashboard/>}/>
-      <Route exact path="/userProfile" element={<UserProfile></UserProfile>}/>
-      <Route exact path="/updateUser" element={<UpdateUser></UpdateUser>}/>
+    <Route>
+      <Route path="/" element={<LandingPage />} />
+
+      <Route exact path="/transaction" element={<Transaction />} />
+
+      <Route exact path="/dashboard" element={<ThemeDashboard />} />
+
+      <Route exact path="/updateUser" element={<UpdateUser />} />
       <Route
         exact
         path="/signIn"
@@ -37,29 +42,22 @@ const router = createBrowserRouter(
         path="/signUp"
         element={<SignLayout comp={<SignUp />} path="/signUp" />}
       />
-      <Route
-        exact
-        path="/"
-        element={<LandingPage/>}
-      />
-      <Route exact path="/userProfile" element={<UserProfile></UserProfile>} />
-      <Route exact path="/sendMoney" element={<SendMoney></SendMoney>} />
-      <Route exact path="/addMoney" element={<AddMoney></AddMoney>} />
-      <Route
-        exact
-        path="/withdrawMoney"
-        element={<WithdrawMoney></WithdrawMoney>}
-      />
+      <Route exact path="/userProfile" element={<UserProfile />} />
+      <Route exact path="/sendMoney" element={<SendMoney />} />
+      <Route exact path="/addMoney" element={<AddMoney />} />
+      <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
     </Route>
-
   )
 );
 
 function App() {
   return (
-    <div className="App">
-      <RouterProvider router={router} />
-    </div>
+    <>
+      <div className="App">
+        <RouterProvider router={router} />
+      </div>
+      <Footer />
+    </>
   );
 }
 

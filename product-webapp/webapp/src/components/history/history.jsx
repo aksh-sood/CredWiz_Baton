@@ -1,51 +1,8 @@
 import './history.css' 
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CancelIcon from '@mui/icons-material/Cancel';
 export default function HistoryTable(){
     return(
-        <div style={{alignContent:'center'}}>
-            <table>
-                <tr>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Type</th>
-                    <th>Status</th>
-                </tr>
-                <tr>
-                    <td>03/12/2023</td>
-                    <td>Anu</td>
-                    <td>1000</td>
-                    <td>..</td>
-                    <td><img src="../images/cross.jpeg" width="100px" height="100px" alt="sorry !"/></td>
-                </tr>
-                <tr>
-                    <td>03/12/2023</td>
-                    <td>Anu</td>
-                    <td>1000</td>
-                    <td>..</td>
-                    <td>...</td>
-                </tr>
-                <tr>
-                    <td>03/12/2023</td>
-                    <td>Anu</td>
-                    <td>1000</td>
-                    <td>..</td>
-                    <td>...</td>
-                </tr>
-                <tr>
-                    <td>03/12/2023</td>
-                    <td>Anu</td>
-                    <td>1000</td>
-                    <td>..</td>
-                    <td>...</td>
-                </tr>
-                <tr>
-                    <td>03/12/2023</td>
-                    <td>Anu</td>
-                    <td>1000</td>
-                    <td>..</td>
-                    <td>...</td>
-                </tr>
-            </table>
-        </div>
+        <div></div>
     )
 }
