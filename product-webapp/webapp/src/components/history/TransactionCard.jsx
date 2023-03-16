@@ -32,6 +32,7 @@ const TransactionCard = () => {
             key={i}
            id={transaction.id}
             name={transaction.user}
+            cost={transaction.cost}
             date={transaction.date}
             status={transaction.status}
             type={transaction.type}

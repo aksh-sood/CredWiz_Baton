@@ -3,16 +3,31 @@ import { tokens } from "../../theme";
 import PersonIcon from '@mui/icons-material/Person';
 import Modal from "react-modal";
 import { useState } from "react";
+
 const NotificationBar = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const [isOpen, setIsOpen] = useState(false);
+
     function toggleModal() {
         setIsOpen(!isOpen);
     }
 
-    return (
+    // custom style for the Modal component
+    const customStyles = {
+        content: {
+            width: '25%', // set the width of the modal
+            height: '25%', // set the height of the modal
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
+        }
+    };
 
+    return (
         <Box
             key={`${props.txId}-${props.key}`}
             display="flex"
@@ -32,42 +47,34 @@ const NotificationBar = (props) => {
                     {props.data}
                 </Typography>
             </Button>
-            <Box
-                    gridColumn="span 4"
-                    gridRow="span 4"
-                    backgroundColor={colors.primary[400]}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                > 
+
             <Modal
                 isOpen={isOpen}
                 onRequestClose={toggleModal}
                 contentLabel="Notifications"
-                gridColumn="span 3"
+                style={customStyles} // set the custom style
             >
-               <Typography
+                <Typography
                     color={colors.greenAccent[500]}
+                    variant="h2"
+                    fontWeight="600"
+                    marginLeft="12px"
+                >
+                    {props.data}
+                </Typography>
+                <Typography
+                    color="black"
                     variant="h5"
                     fontWeight="600"
                     marginLeft="12px"
                 >
-                        {props.data}
-                    </Typography>
-                    <Typography
-                        color={colors.greenAccent[500]}
-                        variant="h5"
-                        fontWeight="600"
-                        marginLeft="12px"
-                    >
-                        {props.message}
-                    </Typography>
+                    {props.message}
+                </Typography>
                
-                <button onClick={toggleModal}>Close</button>
-            </Modal> </Box>
+                <Button onClick={toggleModal}>Close</Button>
+            </Modal>
         </Box>
-
-
     )
 }
+
 export default NotificationBar;

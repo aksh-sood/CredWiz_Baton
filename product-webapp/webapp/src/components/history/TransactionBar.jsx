@@ -11,36 +11,21 @@ const TransactionBar = (props) => {
     return (
       
         <Box
-        key={`${props.txId}-${props.key}`}
+        keys={`${props.txId}-${props.key}`}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
         borderBottom={`4px solid ${colors.primary[500]}`}
         p="15px"
       >
-        <Box>
-          <Typography
-            color={colors.greenAccent[500]}
-            variant="h5"
-            fontWeight="600"
-          >
-            {props.txId}
-          </Typography>
-        </Box>
-        <Box>
+        <Box width="20%">
           <Typography color={colors.grey[100]}>
             {props.name}
           </Typography>
         </Box>
-        <Box color={colors.grey[100]}>{props.date}</Box>
-        <Box
-          backgroundColor={colors.greenAccent[500]}
-          p="5px 10px"
-          borderRadius="4px"
-        >
-          ${props.cost}
-        </Box>
-        <Box>
+        <Box width="20%" color={colors.grey[100]}>{props.date}</Box>
+        <Box width="20%" color={colors.grey[100]}>${props.cost}</Box>
+        <Box width="20%">
           <IconButton >
             {props.type === "credit" ? (
               <KeyboardDoubleArrowDownIcon sx={{ color: "white", backgroundColor: "green", fontSize: "28px" }} />
@@ -49,7 +34,7 @@ const TransactionBar = (props) => {
             )}
           </IconButton>
         </Box>
-        <Box>
+        <Box width="20%">
           <IconButton >
             {props.status === "successful" ?
               (<CheckCircleIcon sx={{ color: "white", backgroundColor: "green", fontSize: "28px" }} />)
