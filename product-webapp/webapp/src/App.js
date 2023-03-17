@@ -19,6 +19,7 @@ import {
   RouterProvider,
   Router,
 } from "react-router-dom";
+import Home from './components/mui/Home'
 
 
 const router = createBrowserRouter(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
 
 
       <Route exact path="/dashboard" element={<ThemeDashboard />} />
+      <Route exact path="/test" element={<Home />} />
 
       <Route exact path="/updateUser" element={<UpdateUser />} />
       <Route

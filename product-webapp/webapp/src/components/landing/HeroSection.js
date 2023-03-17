@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,12 +44,12 @@ export default function Header(props) {
   const classes = useStyles();
 
   const content = {
-    'header-p1': 'Lorem ipsum dolor',
-    'header-p2': 'sit amet, consectetur adipiscing elit.',
-    'description': 'Suspendisse aliquam tellus ante, porttitor mattis diam eleifend quis. Pellentesque pulvinar commodo eros sit amet finibus.',
-    'primary-action': 'Action',
-    'secondary-action': 'Action',
-    'pattern': 'nereus-assets/img/bg/pattern2.png',
+    'header-p1': 'Welcome to',
+    'header-p2': 'CredWiz',
+    'description': ',the payment wallet service that makes managing your money easy and convenient. With CredWiz, you can send and receive money, add funds, withdraw to your bank, view transactions, and check your balance all in one place.',
+    'primary-action': 'Sign Up',
+    'secondary-action': 'Sign In',
+    'pattern': 'https://www.globalpaymentsgaming.com/hubfs/option2%20%285%29.png',
     ...props.content
   };
 
@@ -64,8 +65,8 @@ export default function Header(props) {
             <Typography variant="subtitle1" color="textSecondary" paragraph={true} className={classes.description}>{content['description']}</Typography>
           </Container>
           <Box mt={3}>
-            <Button variant="contained" color="secondary" className={classes.primaryAction}>{content['primary-action']}</Button>
-            <Button variant="outlined" color="secondary" className={classes.secondaryAction}>{content['secondary-action']}</Button>
+            <Button variant="contained" color="secondary" className={classes.primaryAction} component={Link} to="/signup">{content['primary-action']}</Button>
+            <Button variant="outlined" color="secondary" className={classes.secondaryAction} component={Link} to="/signin">{content['secondary-action']}</Button>
           </Box>
         </Box>
       </Container>
