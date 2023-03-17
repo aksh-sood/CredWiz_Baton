@@ -1,12 +1,9 @@
 import { Box, Button, Grid, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
 import PersonIcon from '@mui/icons-material/Person';
 import Modal from "react-modal";
 import { useState } from "react";
 
 const NotificationBar = (props) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
     const [isOpen, setIsOpen] = useState(false);
 
     function toggleModal() {
@@ -30,15 +27,15 @@ const NotificationBar = (props) => {
     return (
         <Box
             key={`${props.txId}-${props.key}`}
-            borderBottom={`4px solid ${colors.primary[500]}`}
+            borderBottom={`4px solid black`}
             p="15px"
         >
             <Grid container alignItems="center" justifyContent="space-between">
                 <Grid item xs={12} md={6}>
                     <Button onClick={toggleModal} fullWidth>
-                        <PersonIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />
+                        <PersonIcon sx={{ color:"gray", fontSize: "26px" }} />
                         <Typography
-                            color={colors.greenAccent[500]}
+                             color="#241C2C"
                             variant="h5"
                             fontWeight="600"
                             marginLeft="12px"
@@ -55,7 +52,7 @@ const NotificationBar = (props) => {
                         style={customStyles} // set the custom style
                     >
                         <Typography
-                            color={colors.greenAccent[500]}
+                             color="#241C2C"
                             variant="h2"
                             fontWeight="600"
                             marginLeft="12px"
@@ -63,7 +60,7 @@ const NotificationBar = (props) => {
                             {props.data}
                         </Typography>
                         <Typography
-                            color="black"
+                            color="#241C2C"
                             variant="h5"
                             fontWeight="600"
                             marginLeft="12px"
@@ -71,7 +68,7 @@ const NotificationBar = (props) => {
                             {props.message}
                         </Typography>
                         <Box mt={2}>
-                            <Button onClick={toggleModal} fullWidth>Close</Button>
+                            <Button onClick={toggleModal}  color="#241C2C" fullWidth>Close</Button>
                         </Box>
                     </Modal>
                 </Grid>

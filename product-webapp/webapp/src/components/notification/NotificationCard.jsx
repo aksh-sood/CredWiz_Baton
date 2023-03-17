@@ -1,19 +1,17 @@
 import { Notifications } from "@mui/icons-material";
 import { Box, Grid, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
 import NotificationBar from "./NotificationBar";
 import { mockNotification } from "../../data/mockNotification";
-import bankImage from "../../assets/bank.png";
+import bankImage from "../../assets/Wallet-bro.png";
 import AddIcon from '@mui/icons-material/Add';
 const NotificationCard = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+
   const notification=false;
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
         <Box
-          backgroundColor={colors.primary[400]}
+     backgroundColor="white"
           overflow="auto"
           p={2}
         >
@@ -21,21 +19,21 @@ const NotificationCard = () => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
+            borderBottom={`4px solid black`}
+            backgroundColor="white"
             p={1}
           >
             <Typography
-              variant="h2"
+              variant="h3"
               fontWeight="600"
-              color={colors.grey[100]}
+              color="#241C2C"
             >
               Notifications
             </Typography>
     
           <IconButton>
             <Notifications
-              sx={{ fontSize: { xs: "22px", sm: "26px" }, color: colors.greenAccent[500] }}
+              sx={{ fontSize: { xs: "22px", sm: "26px" }, color:"gray"}}
             />
           </IconButton>
         </Box>
@@ -70,8 +68,8 @@ const NotificationCard = () => {
 ):(<Box sx={{ position: 'relative' }}>
 <img src={bankImage} style={{ maxWidth: '100%', maxHeight: '100%' }} alt="No notification"/>
 <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-  <AddIcon sx={{ fontSize: '48px', color: colors.grey[300] }} />
-  <Typography variant="h5" sx={{ color: "white", mt: 1 }}>Add bank</Typography>
+  <AddIcon sx={{ fontSize: '48px', color: "grey" }} />
+  <Typography variant="h3" sx={{ color: "Red", mt: 1 }}>Add bank</Typography>
 </Box>
 </Box>
 )}
