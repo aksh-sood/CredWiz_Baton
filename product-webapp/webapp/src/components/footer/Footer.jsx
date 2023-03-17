@@ -8,17 +8,7 @@ import {
 } from "mdb-react-ui-kit";
 import Logo from "../../assets/logo.png";
 import "../../styles/colors.css";
-import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiFilledInput-root": {
-      background: "none",
-      width: "90%",
-      padding: "0 0.4rem",
-    },
-  },
-}));
 
 export default function App() {
   return (

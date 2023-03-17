@@ -15,47 +15,47 @@ export default function Transaction() {
   return (
     <Box m="20px" >
 
-    {/* HEADER */}
-    <Box display="flex" justifyContent="space-between" alignItems="left">
+      {/* HEADER */}
       <Box >
-        
-        {/* Icon for changing mode */}
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
-        </IconButton>
-
+        <Box justifyContent="flex-end">
+          {/* Icon for changing mode */}
+          <IconButton onClick={colorMode.toggleColorMode}>
+            {theme.palette.mode === "dark" ? (
+              <DarkModeOutlinedIcon />
+            ) : (
+              <LightModeOutlinedIcon />
+            )}
+          </IconButton>
+        </Box>
       </Box>
-    </Box>
 
-    {/* GRID & CHARTS */}
-    <Box
-      display="grid"
-      gridTemplateColumns="repeat(12, 1fr)"
-      gridAutoRows="140px"
-      gap="20px"
-    >
-      {/* ROW 1 */}
+
+
+      {/* GRID & CHARTS */}
       <Box
-        gridColumn="span 3"
-        backgroundColor={colors.primary[400]}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
+        display="grid"
+        gridTemplateColumns="repeat(12, 1fr)"
+        gridAutoRows="140px"
+        gap="20px"
       >
-        <StatBox
-          subtitle="12,361"
-          title="Balance"
-          icon={
-            <AccountBalanceIcon
-              sx={{ color: colors.greenAccent[600], fontSize: "28px" }}
-            />
-          }
-        />
-      </Box>
+        {/* ROW 1 */}
+        <Box
+          gridColumn={{ xs: '1', sm: 'span 3' }}
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            subtitle="12,361"
+            title="Balance"
+            icon={
+              <AccountBalanceIcon
+                sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
+              />
+            }
+          />
+        </Box>
       </Box>
 
       {/* ROW 2 */}
@@ -68,30 +68,31 @@ export default function Transaction() {
         mt="15px"
       >
         <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
-          >
-            <Typography color={colors.grey[100]} variant="h2" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-          {mockTransactions.map((transaction, i) => (
-            <TransactionBar 
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          borderBottom={`4px solid ${colors.primary[500]}`}
+          colors={colors.grey[100]}
+          p="15px"
+        >
+          <Typography color={colors.grey[100]} variant="h2" fontWeight="600">
+            Recent Transactions
+          </Typography>
+        </Box>
+        {mockTransactions.map((transaction, i) => (
+          <TransactionBar
             key={i}
-           id={transaction.id}
+            id={transaction.id}
             name={transaction.user}
+            cost={transaction.cost}
             date={transaction.date}
             status={transaction.status}
             type={transaction.type}
-           />
-          ))}
-        </Box>
+          />
+        ))}
+      </Box>
     </Box>
-     
+
 
   )
 }
