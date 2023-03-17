@@ -21,24 +21,20 @@ const Dashboard = () => {
     <Box m="20px" >
 
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box mb="30px">
+      <Box display="flex" flexDirection={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center">
+        <Box mb={{ xs: '20px', sm: '30px' }} mr={{ xs: 0, sm: '30px' }}>
           <Typography
-            variant="h2"
+            variant={{ xs: 'h3', sm: 'h2' }}
             color={colors.grey[100]}
             fontWeight="bold"
             sx={{ m: "0 0 5px 0" }}
           >
-            Dashboard
-          </Typography>
-
-          <Typography variant="h5" color={colors.greenAccent[400]}>
-            Welcome
+          Welcome to Dashboard
           </Typography>
         </Box>
-        <Box>
-          
-          <IconButton type="button" sx={{ p: 1 }}>
+        <Box display="flex" alignItems="center">
+
+          <IconButton type="button" sx={{ p: 1, display: { xs: 'inline-flex', sm: 'none' } }}>
             <SearchIcon />
           </IconButton>
           <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
@@ -58,13 +54,13 @@ const Dashboard = () => {
       {/* GRID & CHARTS */}
       <Box
         display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
+        gridTemplateColumns={{ xs: 'repeat(1, 1fr)', sm: 'repeat(12, 1fr)' }}
         gridAutoRows="140px"
         gap="20px"
       >
         {/* ROW 1 */}
         <Box
-          gridColumn="span 3"
+          gridColumn={{ xs: '1', sm: 'span 3' }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -75,13 +71,13 @@ const Dashboard = () => {
             title="Balance"
             icon={
               <AccountBalanceIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "28px" }}
+                sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
               />
             }
           />
         </Box>
         <Box
-          gridColumn="span 3"
+          gridColumn={{ xs: '1', sm: 'span 3' }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -92,13 +88,13 @@ const Dashboard = () => {
             title="Funds Transfered"
             icon={
               <CurrencyExchangeIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "35px" }}
+              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
               />
             }
           />
         </Box>
         <Box
-          gridColumn="span 3"
+          gridColumn={{ xs: '1', sm: 'span 3' }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -109,13 +105,13 @@ const Dashboard = () => {
             title=""
             icon={
               <PersonAddIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
               />
             }
           />
         </Box>
         <Box
-          gridColumn="span 3"
+          gridColumn={{ xs: '1', sm: 'span 3' }}
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -128,7 +124,7 @@ const Dashboard = () => {
             increase="+43%"
             icon={
               <TrafficIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
               />
             }
           />
@@ -142,14 +138,14 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-        <TransactionCard/>
-      </Box>
+          <TransactionCard />
+        </Box>
         <Box
           gridColumn="span 3"
           gridRow="span 4"
           backgroundColor={colors.primary[400]}
         >
-            <NotificationCard/>
+          <NotificationCard />
         </Box>
       </Box>
     </Box>
