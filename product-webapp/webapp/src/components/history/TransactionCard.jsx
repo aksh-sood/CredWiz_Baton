@@ -3,11 +3,12 @@ import { tokens } from "../../theme";
 import { mockTransactions } from "../../data/mockData";
 import { Link } from "react-router-dom";
 import TransactionBar from "./TransactionBar";
-
+import bankImage from "../../assets/bank.png";
+import AddIcon from '@mui/icons-material/Add';
 const TransactionCard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  const transaction=false;
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -29,6 +30,7 @@ const TransactionCard = () => {
             </Typography>
             <Link color="white" to="/transaction">Show more</Link>
           </Box>
+          {transaction==true?(
           <Box>
             {mockTransactions.map((transaction, i) => (
               <TransactionBar 
@@ -41,7 +43,17 @@ const TransactionCard = () => {
                 type={transaction.type}
               />
             ))}
+          </Box>):(
+          <Box display="flex" flexDirection="column" alignItems="center">
+          <Box position="relative" maxWidth="40%" maxHeight="100%">
+            <img src={bankImage} style={{ maxWidth: '100%', maxHeight: '100%' }} alt="No history"/>
+            <Box position="absolute" top="50%" left="50%" transform="translate(-50%, -50%)" textAlign="center">
+              <AddIcon style={{ fontSize: 64, color: 'white' }} />
+              <Typography variant="h5" color="white" fontWeight="600" mt={2}>Add Bank</Typography>
+            </Box>
           </Box>
+        </Box>
+          )}
         </Box>
       </Grid>
     </Grid>

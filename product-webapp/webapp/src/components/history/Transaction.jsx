@@ -16,7 +16,7 @@ export default function Transaction() {
     <Box m="20px" >
 
       {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" alignItems="left">
+      <Box >
         <Box justifyContent="flex-end">
           {/* Icon for changing mode */}
           <IconButton onClick={colorMode.toggleColorMode}>
@@ -28,6 +28,7 @@ export default function Transaction() {
           </IconButton>
         </Box>
       </Box>
+
 
 
       {/* GRID & CHARTS */}

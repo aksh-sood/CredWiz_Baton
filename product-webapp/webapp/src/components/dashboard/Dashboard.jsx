@@ -1,8 +1,7 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens, ColorModeContext } from "../../theme";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import TrafficIcon from "@mui/icons-material/Traffic";
+import AddIcon from '@mui/icons-material/Add';
 import StatBox from "../statebox/StatBox";
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange';
 import { useContext } from "react";
@@ -16,6 +15,8 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const isBankAdded=false;
+  const isMoneyAdded=false;
   return (
 
     <Box m="20px" >
@@ -24,7 +25,7 @@ const Dashboard = () => {
       <Box display="flex" flexDirection={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center">
         <Box mb={{ xs: '20px', sm: '30px' }} mr={{ xs: 0, sm: '30px' }}>
           <Typography
-            variant={{ xs: 'h3', sm: 'h2' }}
+            variant='h2'
             color={colors.grey[100]}
             fontWeight="bold"
             sx={{ m: "0 0 5px 0" }}
@@ -35,7 +36,7 @@ const Dashboard = () => {
         <Box display="flex" alignItems="center">
 
           <IconButton type="button" sx={{ p: 1, display: { xs: 'inline-flex', sm: 'none' } }}>
-            <SearchIcon />
+            <SearchIcon sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}/>
           </IconButton>
           <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search" />
 
@@ -59,7 +60,46 @@ const Dashboard = () => {
         gap="20px"
       >
         {/* ROW 1 */}
+     
+        {
+        
+        isBankAdded==false?(    <Box
+          gridColumn={{ xs: '1', sm: 'span 3' }}
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+  
+            title="Add Bank"
+            icon={
+              <AddIcon
+              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
+              />
+            }
+          />
+        </Box>):(   
         <Box
+          gridColumn={{ xs: '1', sm: 'span 3' }}
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <StatBox
+            title="Add Money"
+            icon={
+              <AddIcon
+              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
+              />
+            }
+          />
+        </Box> )
+        }
+        { isMoneyAdded==true?(<Box  display="flex"
+        gap="20px">
+          <Box
           gridColumn={{ xs: '1', sm: 'span 3' }}
           backgroundColor={colors.primary[400]}
           display="flex"
@@ -92,44 +132,8 @@ const Dashboard = () => {
               />
             }
           />
-        </Box>
-        <Box
-          gridColumn={{ xs: '1', sm: 'span 3' }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            subtitle="1000"
-            title=""
-            icon={
-              <PersonAddIcon
-              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
-              />
-            }
-          />
-        </Box>
-        <Box
-          gridColumn={{ xs: '1', sm: 'span 3' }}
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            subtitle="1,325,134"
-            title=""
-            progress="0.80"
-            increase="+43%"
-            icon={
-              <TrafficIcon
-              sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
-              />
-            }
-          />
-        </Box>
-
+        </Box></Box>):(   <Box></Box>)}
+        
         {/* ROW 2 */}
 
         <Box
@@ -138,7 +142,7 @@ const Dashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <TransactionCard />
+         <TransactionCard />
         </Box>
         <Box
           gridColumn="span 3"

@@ -9,7 +9,6 @@ import CachedIcon from '@mui/icons-material/Cached';
 const TransactionBar = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   return (
     <Box
       keys={`${props.txId}-${props.key}`}
