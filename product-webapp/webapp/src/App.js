@@ -19,8 +19,7 @@ import {
   RouterProvider,
   Router,
 } from "react-router-dom";
-import Home from './components/mui/Home'
-
+import Home from "./components/mui/Home";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,8 +28,7 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<LandingPage />} />
 
-      <Route exact path="/transaction" element={<Transaction/>}/>
-
+      <Route exact path="/transaction" element={<Transaction />} />
 
       <Route exact path="/dashboard" element={<Dashboard />} />
       <Route exact path="/test" element={<Home />} />
@@ -61,7 +59,6 @@ function App() {
         <RouterProvider router={router} />
         <Footer />
       </div>
-   
     </>
   );
 }
