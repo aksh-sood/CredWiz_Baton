@@ -10,8 +10,8 @@ import SendMoney from "./components/sendMoney/SendMoney";
 import AddMoney from "./components/addMoney/AddMoney";
 import RootLayout from "./components/rootLayout/RootLayout";
 import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
-import ThemeDashboard from "./components/dashboard/ThemeDashboard";
-import ThemeTransaction from "./components/history/ThemeTransaction";
+import Dashboard from "./components/dashboard/Dashboard";
+import Transaction from "./components/history/Transaction";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -19,8 +19,7 @@ import {
   RouterProvider,
   Router,
 } from "react-router-dom";
-import Home from './components/mui/Home'
-
+import Home from "./components/mui/Home";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,10 +28,9 @@ const router = createBrowserRouter(
     <Route>
       <Route path="/" element={<LandingPage />} />
 
-      <Route exact path="/transaction" element={<ThemeTransaction/>}/>
+      <Route exact path="/transaction" element={<Transaction />} />
 
-
-      <Route exact path="/dashboard" element={<ThemeDashboard />} />
+      <Route exact path="/dashboard" element={<Dashboard />} />
       <Route exact path="/test" element={<Home />} />
 
       <Route exact path="/updateUser" element={<UpdateUser />} />
@@ -61,7 +59,6 @@ function App() {
         <RouterProvider router={router} />
         <Footer />
       </div>
-   
     </>
   );
 }

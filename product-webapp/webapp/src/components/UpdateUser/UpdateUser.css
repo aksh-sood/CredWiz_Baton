@@ -1,51 +1,37 @@
-h2{
-    font-size: 50px;
-    font-weight: 700;
-}
-#head{
-    display: flex;
-    align-items: center;
-    margin-right: 50%;
-}
-svg path{
-    fill: #fff;
-}
-svg {
-    background-color: #27282b;
-    border-radius: 100px;
-}
-.input-md {
-    border-radius: 2px;
-    border:2px solid #99dcec;
-    padding-left: 10px;
-    width: 300px;
-    padding-left: 10px;
-    height: 40px;
-}
-#forms{
-    margin-top:50px;
-    margin-left: 9%;
-
-}
-.bg{
-    background-image: url("../../assets/userpbg.jpg");
-    background-size: cover;
-}
-.groups {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    width: 40%;
-
-    margin-left: 18px;
-    margin-bottom: 23px;
-    margin-top: 23px;
-    margin-right: 18px;
-}
-
-#rows {
+.updateBody {
     display: flex;
     width: 100%;
-    margin-bottom: 30px;
+    height: 80vh;
+    margin-bottom: 100px;
+}
+.updateImage {
+    background-image: url('../../assets/updatebg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:100%;
+    width: 50%;
+}
+.updateForm {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 50%;
+}
+@media (max-width:1280px) {
+    .updateBody{
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+    .updateForm{
+        width:100%;
+        margin-top: 120px;
+    }
+    .updateImage{
+        /* margin-left: auto;
+        margin-right: auto; */
+        height: 100%;
+    }
 }
