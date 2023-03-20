@@ -12,9 +12,11 @@ const UpdateUser = () => {
                 }} >Update Profile</Typography></Box>
                 <Box sx={{ paddingTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h4" gutterBottom sx={{
-                    fontWeight: 'semi-bold',
+                   fontWeight:'normal',
+                   fontStyle: 'italic',
+                   color:'GrayText'
                     
-                }} >“The principles of wealth are true regarding large amounts and small amounts. It all begins with the smallest unit of currency.”</Typography></Box>
+                }} >“Wealth is the ability to fully experience Life”</Typography></Box>
             <div className="updateBody">
                 <div className="updateImage"></div>
                 <div className="updateForm">
@@ -55,9 +57,27 @@ const UpdateUser = () => {
                             textAlign: 'center',
                             marginTop: '50px'
                         }}>
-                            <Button variant="contained" sx={{
-                                textAlign: 'center'
-                            }}>UPDATE</Button>
+                            <Button
+                    type="submit"
+                    className="btn bubble "
+                    id="sign-in-btn"
+                    value="Sign up"
+                    // color="#241C2C"
+                    sx={{
+                      backgroundColor: "#241C2C",
+                      color: "#AEAE50",
+                      border: "2px solid #AEAE50",
+                      borderRadius: "20px",
+                      "&:hover": {
+                        boxShadow: "none",
+                        backgroundColor: "#AEAE50",
+                        color: "#241C2C",
+                        border: "2px solid #241C2C",
+                      },
+                    }}
+                  >
+                    Update
+                  </Button>
                         </Box>
                     </Box>
                 </div>

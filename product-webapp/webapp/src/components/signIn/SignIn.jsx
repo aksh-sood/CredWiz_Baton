@@ -1,168 +1,217 @@
-import Grid from "@mui/material/Grid";
-import "../../styles/signStyle.css";
-import { Formik } from "formik";
-import UserContext from "../../Services/context";
-import { Box, Button, TextField, MenuItem } from "@mui/material";
-import { useRef, useState } from "react";
-import InputAdornment from "@mui/material/InputAdornment";
-import { makeStyles } from "@material-ui/core/styles";
+// import * as React from "react";
+// import InputAdornment from "@mui/material/InputAdornment";
+// import * as yup from "yup";
+// import useMediaQuery from "@mui/material/useMediaQuery";
+// import { Box, Button, TextField, MenuItem } from "@mui/material";
+// import "../../styles/signStyle.css";
+// import Grid from "@mui/material/Grid";
+// import { Formik } from "formik";
+// import UserContext from "../../Services/context";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiFilledInput-root": {
-      background: "none",
-      width: "90%",
-      padding: "0 0.4rem",
-    },
-  },
-  // inputField: {
-  //     max-width: "100%",
-  // width: "100%",
-  // background-color: "#f0f0f0",
-  // margin: "10px 0",
-  // height: "55px",
-  // border-radius: 55px;
-  // display: grid;
-  // grid-template-columns: 15% 85%;
-  // padding: 0 0.4rem;
-  // position: relative;
-  // },
-}));
+// import { useRef, useState } from "react";
 
-export const validEmail = new RegExp(
-  "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
-);
-export const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
+// import { makeStyles } from "@material-ui/core/styles";
 
-const SignIn = () => {
-  const classes = useStyles();
+// export const validEmail = new RegExp(
+//   "^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$"
+// );
+// export const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
 
-  const ref = useRef();
-  const [error, setError] = useState();
-  const [data, setData] = useState({ email: "", password: "" });
-  // const { isLogin, setIsLogin } = useContext(UserContext);
-  const print = () => {
-    console.log("Sign In Successful");
-  };
+// // const useStyles = makeStyles((theme) => ({
+// //   // root: {
+// //   //   "& .MuiFilledInput-root": {
+// //   //     // background: "none",
+// //   //   },
+// //   // },
+// //   root: {
+// //     color: "#241c2c",
+// //   },
+// // }));
 
-  return (
-    <>
-      <div className="forms-container">
-        <div className="signinpos">
-          <Formik
-            initialValues={data}
-            validate={(values) => {
-              const errors = {};
-              if (!values.email) {
-                errors.email = "Required";
-              } else if (!validEmail.test(values.email)) {
-                errors.email = "Invalid email address";
-              }
-              if (!values.password) {
-                errors.password = "Required";
-              } else if (!validPassword.test(values.password)) {
-                errors.password =
-                  "Password must contain at least 1 letter and 1 number";
-              }
+// const SignIn = () => {
+//   // const classes = useStyles();
+//   const isNonMobile = useMediaQuery("(min-width:600px)");
+//   // const ref = useRef();
+//   const [error, setError] = useState();
+//   const [data, setData] = useState({ email: "", password: "" });
+//   // const { isLogin, setIsLogin } = useContext(UserContext);
+//   const [showPassword, setShowPassword] = React.useState(false);
 
-              return errors;
-            }}
-            handleChange={(e) => {
-              e.preventDefault();
-              console.log(e.target.value);
-              setData({ ...data, [e.target.name]: e.target.value });
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                console.log(data);
+//   const initialValues = {
+//     userEmail: "",
+//     password: "",
+//   };
+//   const toggle = [
+//     {
+//       value: true,
+//       label: "Admin",
+//     },
+//     {
+//       value: false,
+//       label: "User",
+//     },
+//   ];
+//   const userSchema = yup.object().shape({
+//     userEmail: yup.string().email().required("Email is required"),
 
-                console.log(data);
-                setSubmitting(false);
-              }, 400);
-            }}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-            }) => (
-              <form onSubmit={handleSubmit} action="#" className="sign-in-form">
-                <h2 className="title">Welcome Back!</h2>
-                <Grid container spacing={1}>
-                  <Grid item md={3} />
-                  <Grid item xs={3} md={6}>
-                    {errors.email && touched.email && errors.email}
-                    <div className="input-field">
-                      <i className="fas fa-user" />
-                      <input
-                        type="text"
-                        placeholder="Username"
-                        onChange={() => {
-                          console.log("hfdslk");
-                          handleChange();
-                        }}
-                        name="email"
-                        // value={values.email}
-                        // style={`color:${errors.echange} `}
-                        // color={errors.echange}
-                      />
-                    </div>
+//     password: yup
+//       .string()
+//       .required("Password is required")
+//       .min(6, "Password is too short - should be 6 chars minimum"),
+//   });
 
-                    {/* <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      type="text"
-                      label="Name"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.userName}
-                      name="userName"
-                      error={!!touched.userName && !!errors.userName}
-                      helperText={touched.userName && errors.userName}
-                      sx={{ gridColumn: "span 2" }}
-                      id="outlined-password-input"
-                      className={`${classes.root} ${classes.inputField} input-field `}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i className="fas fa-user input-field-icon" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    /> */}
-                  </Grid>
-                  <Grid item md={3} />
-                  <Grid item md={3} />
-                  <Grid item xs={3} md={6}>
-                    {errors.password && touched.password && errors.password}
-                    <div className="input-field">
-                      <i className="fas fa-lock"></i>
-                      <input
-                        type="password"
-                        placeholder="Password"
-                        onChange={handleChange}
-                        name="password"
-                        // value={values.password}
-                      />
-                    </div>
-                  </Grid>
-                </Grid>
+//   const handleFormSubmit = (values, actions, setSubmitting) => {
+//     console.log("FormSubmit");
+//     setTimeout(() => {
+//       alert(JSON.stringify(values, null, 2));
+//       setSubmitting(false);
+//     }, 400);
+//   };
+//   return (
+//     <>
+//       <div className="forms-container">
+//         <div className="signinpos">
+//           <div className="signinfields">
+//             <Formik
+//               onSubmit={handleFormSubmit}
+//               initialValues={initialValues}
+//               validationSchema={userSchema}
+//             >
+//               {({
+//                 values,
+//                 errors,
+//                 touched,
+//                 handleBlur,
+//                 handleChange,
+//                 handleSubmit,
+//               }) => (
+//                 <form onSubmit={handleSubmit}>
+//                   <Box
+//                     display="flex"
+//                     justifyContent="left"
+//                     mt="30px"
+//                     sx={{
+//                       // "& > div": {
+//                       //   gridColumn: isNonMobile ? undefined : "span 4",
+//                       // },
+//                       marginBottom: "4%",
+//                     }}>
+//                     <h2 className="title">Welcome Back !</h2>
+//                   </Box>
 
-                <input type="submit" value="Login" className="btn solid" />
-              </form>
-            )}
-          </Formik>
-        </div>
-      </div>
-    </>
-  );
-};
-export default SignIn;
+//                   <Box
+//                     display="grid"
+//                     component="form"
+//                     // gap="30px"
+//                     // gridTemplateColumns="repeat(1,minmax(0,2fr))"
+//                     sx={{
+//                       // "& > div": {
+//                       //   gridColumn: isNonMobile ? undefined : "span 4",
+//                       // },
+//                       "& .MuiTextField-root": {
+//                         m: 2,
+//                         backgroundColor: "white",
+//                         width: "35ch",
+//                         borderRadius: "20px",
+//                         // fontFamily: "Poppins",
+//                         // fontSize: "10px",
+//                       },
+//                       width: "70%",
+//                       height: "100%",
+//                       background: "#241c2c",
+//                       borderRadius: "20px",
+//                       justifyContent: "center",
+//                     }}
+//                   >
+//                     <p>&nbsp;</p>
+//                     <TextField
+//                       autoComplete="off"
+//                       variant="filled"
+//                       // id="filled-basic"
+//                       placeholder="Email"
+//                       type="email"
+//                       // label="Email"
+//                       onBlur={handleBlur}
+//                       onChange={handleChange}
+//                       value={values.userEmail}
+//                       name="userEmail"
+//                       error={!!touched.userEmail && !!errors.userEmail}
+//                       helperText={touched.userEmail && errors.userEmail}
+//                       sx={{
+//                         gridColumn: "span ",
+//                         width: "100%",
+//                         margin: "1%",
+//                         fontFamily: "Poppins",
+//                       }}
+                      // InputProps={{
+                      //   startAdornment: (
+                      //     <InputAdornment position="start">
+                      //       <i class="fas fa-user" />
+                      //     </InputAdornment>
+                      //   ),
+                      // }}
+//                     />
+//                     <TextField
+//                       autoComplete="off"
+//                       variant="filled"
+//                       type={showPassword ? "text" : "password"}
+//                       // label="Password"
+//                       placeholder="Enter your password"
+//                       onBlur={handleBlur}
+//                       onChange={handleChange}
+//                       value={values.password}
+//                       name="password"
+//                       error={!!touched.password && !!errors.password}
+//                       helperText={touched.password && errors.password}
+//                       sx={{
+//                         gridColumn: "span ",
+//                         width: "100%",
+//                         margin: "1%",
+//                         fontFamily: "Poppins",
+//                       }}
+                      // InputProps={{
+                      //   startAdornment: (
+                      //     <InputAdornment position="start">
+                      //       <i class="fas fa-lock" />
+                      //     </InputAdornment>
+                      //   ),
+                      // }}
+//                     />
+//                     <p>&nbsp;</p>
+//                     <Button
+//                       onSubmit={handleFormSubmit}
+//                       type="submit"
+//                       className="btn bubble "
+//                       id="sign-in-btn"
+//                       value="Sign up"
+//                       sx={{
+//                         marginX: "30%",
+//                         borderRadius: "20px",
+//                         backgroundColor: "#aeae50",
+//                         color: "#241c2c",
+//                         border: "2px solid #241c2c",
+//                         "&:hover": {
+//                           boxShadow: "none",
+//                           backgroundColor: "#241c2c",
+//                           color: "#aeae50",
+//                           border: "2px solid #aeae50",
+//                         },
+//                       }}
+//                     >
+//                       Sign In
+//                     </Button>
+//                     <p>&nbsp;</p>
+//                   </Box>
+//                 </form>
+//               )}
+//             </Formik>
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+// export default SignIn;
 
 // <Formik
 //   initialValues={{ email: "", password: "" }}
@@ -226,3 +275,149 @@ export default SignIn;
 //     </form>
 //   )}
 // </Formik>;
+
+
+
+import "./SignIn.css"
+import { Box, Button, TextField } from "@mui/material"
+import Logo from "../../assets/logo.png"
+import { Link } from "react-router-dom"
+import { color } from "@mui/system"
+import InputAdornment from "@mui/material/InputAdornment"
+
+const SignIn = () => {
+    return (
+        <>
+            <div className="signinbody">
+                <div className="leftbody">
+                    <div className="leftinnerbody">
+                        <div className="leftbodylogo">
+                            {/* <Link to=""> */}
+                            <img src={Logo} alt="logo" className="imagelogo" />
+                            {/* </Link> */}
+                            <h1 style={{ color: '#AEAE50' }}>New here ?</h1>
+                            <p style={{ color: '#AEAE50' }}>
+                                Join us to have the best expereince in digital wallet
+                                platforms
+                            </p>
+                            <Button
+                                type="submit"
+                                className="btn bubble "
+                                id="sign-in-btn"
+                                value="Sign up"
+                                sx={{
+                                    width: "20ch",
+                                    backgroundColor: "#241C2C",
+                                    color: "#AEAE50",
+                                    border: "2px solid #AEAE50",
+                                    borderRadius: "20px",
+                                    "&:hover": {
+                                        boxShadow: "none",
+                                        backgroundColor: "#AEAE50",
+                                        color: "#241C2C",
+                                        border: "2px solid #241C2C",
+                                    },
+                                }}
+                            >
+                                Sign Up
+                            </Button>
+                        </div>
+                        <div className="leftbodyimage">
+                        </div>
+                    </div>
+                </div>
+                <div className="rightbody">
+                    <div className="rightinnerbody">
+                        <Box>
+                            <h1>Welcome Back!</h1>
+                        </Box>
+                        <Box
+                            className="formbody"
+                            display="grid"
+                            component="form"
+                            sx={{
+                                "& .MuiTextField-root": {
+                                    m: 2,
+                                    backgroundColor: "white",
+                                    width: "35ch",
+                                    borderRadius: "20px",
+                                },
+                                width: "50%",
+                                height: "100%",
+                                background: "#241c2c",
+                                borderRadius: "20px",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <p>&nbsp;</p>
+                            <TextField
+                                label="Email"
+                                autoComplete="off"
+                                variant="filled"
+                                type="email"
+                                name="email"
+                                sx={{
+                                    gridColumn: "span ",
+                                    width: "100%",
+                                    margin: "1%",
+                                    fontFamily: "Poppins",
+                                }}
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <i class="fas fa-user" />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                            />
+                            <TextField
+                                label="Password"
+                                autoComplete="off"
+                                variant="filled"
+                                type="password"
+                                name="password"
+                                sx={{
+                                    gridColumn: "span ",
+                                    width: "100%",
+                                    margin: "1%",
+                                    fontFamily: "Poppins",
+                                }}
+                                InputProps={{
+                                  startAdornment: (
+                                    <InputAdornment position="start">
+                                      <i class="fas fa-lock" />
+                                    </InputAdornment>
+                                  ),
+                                }}
+                            />
+                            <p>&nbsp;</p>
+                            <Button
+                                type="submit"
+                                className="btn bubble "
+                                id="sign-in-btn"
+                                value="Sign up"
+                                sx={{
+                                    marginX: "30%",
+                                    borderRadius: "20px",
+                                    backgroundColor: "#241c2c",
+                                    color: "#aeae50",
+                                    border: "2px solid #aeae50",
+                                    "&:hover": {
+                                        boxShadow: "none",
+                                        backgroundColor: "#aeae50",
+                                        color: "#241c2c",
+                                        border: "2px solid #aeae50",
+                                    },
+                                }}
+                            >
+                                Sign In
+                            </Button>
+                            <p>&nbsp;</p>
+                        </Box>
+                    </div>
+                </div>
+            </div>
+        </>
+    )
+}
+export default SignIn
