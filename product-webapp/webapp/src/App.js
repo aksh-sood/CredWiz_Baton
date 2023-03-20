@@ -2,7 +2,7 @@ import "./App.css";
 import SignIn from "./components/signIn/SignIn";
 import Footer from "./components/footer/Footer";
 import SignUp from "./components/signUp/SignUp";
-import SignLayout from "./components/signLayout/SignLayout";
+// import SignLayout from "./components/signLayout/SignLayout";
 import UpdateUser from "./components/UpdateUser/UpdateUser";
 import LandingPage from "./components/landing/LandingPage";
 import UserProfile from "./components/userProfile/UserProfile";
@@ -34,16 +34,18 @@ const router = createBrowserRouter(
       <Route exact path="/test" element={<Home />} />
 
       <Route exact path="/updateUser" element={<UpdateUser />} />
-      <Route
+      {/* <Route
         exact
         path="/signIn"
         element={<SignLayout comp={<SignIn />} path="/signIn" />}
-      />
-      <Route
+      /> */}
+      <Route exact path="/signIn" element={<SignIn />} />
+      <Route exact path="/signUp" element={<SignUp />} />
+      {/* <Route
         exact
         path="/signUp"
         element={<SignLayout comp={<SignUp />} path="/signUp" />}
-      />
+      /> */}
       <Route exact path="/userProfile" element={<UserProfile />} />
       <Route exact path="/sendMoney" element={<SendMoney />} />
       <Route exact path="/addMoney" element={<AddMoney />} />
