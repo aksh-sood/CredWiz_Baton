@@ -10,8 +10,8 @@ import SendMoney from "./components/sendMoney/SendMoney";
 import AddMoney from "./components/addMoney/AddMoney";
 import RootLayout from "./components/rootLayout/RootLayout";
 import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
-import Dashboard from "./components/dashboard/Dashboard";
-import Transaction from "./components/history/Transaction";
+import ThemeDashboard from "./components/dashboard/themedashboard";
+import Transaction from "./components/history/transaction";
 import {
   createBrowserRouter,
   createRoutesFromElements,
