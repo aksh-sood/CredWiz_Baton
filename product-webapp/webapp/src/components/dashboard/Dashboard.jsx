@@ -12,7 +12,7 @@ const Dashboard = () => {
   const isMoneyAdded = false;
   return (
 
-    <Box p="25px" sx={{ backgroundColor: " #d2dae0" }}>
+    <Box p="25px" sx={{ backgroundColor: "#E7E7E8" }}>
 
       {/* HEADER */}
       <Box display="flex" flexDirection={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center">

@@ -6,7 +6,7 @@ import TransactionBar from "../history/TransactionBar";
 export default function Transaction() {
   const theme = useTheme();
   return (
-    <Box p="20px" sx={{ backgroundColor: " #d2dae0" }} >
+    <Box p="20px" sx={{ backgroundColor: "#E7E7E8" }} >
 
 
 
