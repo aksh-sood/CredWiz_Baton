@@ -1,51 +1,37 @@
-h1 {
-    font-family:Arial, Helvetica, sans-serif;
-    font-size: 36px;
-    font-weight: bold;
-    height: 80px;
-    padding-top: 19px;
-    width: 100%;
-    margin-right: 100px;
-    text-align: center;
-}
-
-.group {
+.userprofileBody {
     display: flex;
-    flex-direction: column;
-    text-align: left;
+    width: 100%;
+    height: 80vh;
+    margin-bottom: 100px;
+}
+.userprofileImage {
+    background-image: url('../../assets/userbg.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:100%;
     width: 50%;
-    margin-left: 15px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-right: 15px;
 }
-#form{
-    height: 100vh;
-    padding-top: 30px;
-    padding-left: 500px;
-    background-image: url("../../assets/updatepbg.jpg");
-    background-size: cover;
-    
-
-}
-
-.input-md {
-    border-radius: 2px;
-    border:2px solid #f1f2f3;
-    padding-left: 10px;
-    background-color: #d2dae0;
-    border-radius: 25px;
-    width: 300px;
-    height: 40px;
-}
-
-.row {
+.userprofileForm {
     display: flex;
-    width: 100%;
     justify-content: center;
-    margin-bottom: 30px;
+    align-items: center;
+    height: 100%;
+    width: 50%;
 }
-img{
-    margin-left: auto;
-    margin-right: auto;
+@media (max-width:1280px) {
+    .userprofileBody{
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+    .userprofileForm{
+        width:100%;
+        margin-top: 120px;
+    }
+    .userprofileImage{
+        /* margin-left: auto;
+        margin-right: auto; */
+        height: 100%;
+    }
 }

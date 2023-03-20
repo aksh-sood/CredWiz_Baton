@@ -1,33 +1,13 @@
 import { mockTransactions } from "../../data/mockData";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens, ColorModeContext } from "../../theme";
+import { Box, Typography, useTheme } from "@mui/material";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import StatBox from "../statebox/StatBox";
-import { useContext } from "react";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import TransactionBar from "../history/TransactionBar";
 export default function Transaction() {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  const colorMode = useContext(ColorModeContext);
   return (
-    <Box m="20px" >
+    <Box p="20px" sx={{ backgroundColor: " #d2dae0" }} >
 
-      {/* HEADER */}
-      <Box display="flex" justifyContent="space-between" alignItems="left">
-        <Box justifyContent="flex-end">
-          {/* Icon for changing mode */}
-          <IconButton onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === "dark" ? (
-              <DarkModeOutlinedIcon />
-            ) : (
-              <LightModeOutlinedIcon />
-            )}
-          </IconButton>
-        </Box>
-      </Box>
 
 
       {/* GRID & CHARTS */}
@@ -40,7 +20,7 @@ export default function Transaction() {
         {/* ROW 1 */}
         <Box
           gridColumn={{ xs: '1', sm: 'span 3' }}
-          backgroundColor={colors.primary[400]}
+           backgroundColor="white"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -50,7 +30,7 @@ export default function Transaction() {
             title="Balance"
             icon={
               <AccountBalanceIcon
-                sx={{ color: colors.greenAccent[600], fontSize: { xs: '20px', sm: '28px' } }}
+                sx={{ color:"black", fontSize: { xs: '20px', sm: '28px' } }}
               />
             }
           />
@@ -62,7 +42,7 @@ export default function Transaction() {
       <Box
         gridColumn="span 9"
         gridRow="span 4"
-        backgroundColor={colors.primary[400]}
+             backgroundColor="white"
         overflow="auto"
         mt="15px"
       >
@@ -70,11 +50,11 @@ export default function Transaction() {
           display="flex"
           justifyContent="space-between"
           alignItems="center"
-          borderBottom={`4px solid ${colors.primary[500]}`}
-          colors={colors.grey[100]}
+          borderBottom={`4px solid black`}
+          colors="white"
           p="15px"
         >
-          <Typography color={colors.grey[100]} variant="h2" fontWeight="600">
+          <Typography  color="#241C2C" variant="h2" fontWeight="600">
             Recent Transactions
           </Typography>
         </Box>

@@ -1,5 +1,4 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../theme";
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -7,8 +6,6 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import CachedIcon from '@mui/icons-material/Cached';
 
 const TransactionBar = (props) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
 
   return (
     <Box
@@ -17,7 +14,7 @@ const TransactionBar = (props) => {
       flexDirection={{ xs: 'column', sm: 'row' }}
       justifyContent="space-between"
       alignItems="center"
-      borderBottom={`4px solid ${colors.primary[500]}`}
+      borderBottom={`4px solid black`}
       p="15px"
       sx={{
         maxWidth: "100%",
@@ -34,12 +31,12 @@ const TransactionBar = (props) => {
       }}
     >
       <Box>
-        <Typography color={colors.grey[100]}>
+        <Typography  color="#241C2C">
           {props.name}
         </Typography>
       </Box>
-      <Box color={colors.grey[100]}>{props.date}</Box>
-      <Box color={colors.grey[100]}>${props.cost}</Box>
+      <Box  color="#241C2C">{props.date}</Box>
+      <Box  color="#241C2C">${props.cost}</Box>
       <Box>
         <IconButton>
           {props.type === "credit" ? (
