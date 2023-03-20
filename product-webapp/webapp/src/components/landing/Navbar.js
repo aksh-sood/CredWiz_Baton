@@ -1,15 +1,24 @@
-import Container from 'react-bootstrap/Container';
-import { Link, NavLink} from 'react-router-dom';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import Container from "react-bootstrap/Container";
+import { Link, NavLink } from "react-router-dom";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import Logo from './logo.png'
 
 function CollapsibleExample() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" style={{background:"#241c2c", position:"fixed", width:"100%"}} variant="dark">
       <Container>
-        <Navbar.Brand as={Link} to="/">Credwiz</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          <img
+            src={Logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="Credwiz logo"
+          />
+          Credwiz
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
@@ -28,13 +37,16 @@ function CollapsibleExample() {
             </NavDropdown> */}
           </Nav>
           <Nav>
-            <Nav.Link as={NavLink} to="/signin">Signin</Nav.Link>
-            <Nav.Link as={NavLink} to="/signup">Signup</Nav.Link>
+            <Nav.Link as={NavLink} to="/signin">
+              Signin
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/signup">
+              Signup
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-
   );
 }
 
