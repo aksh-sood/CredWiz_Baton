@@ -23,10 +23,10 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long walletId;
     @NotEmpty(message="Name should not be empty")
-    private Long userName; 
+    private String userName; 
      @NotEmpty(message="Phone number should not be empty")
-    private int phoneNumber;
+    private String phoneNumber;
      @NotEmpty(message="Aadhaar number should not be empty")
-    private int aadhaarNumber;
+    private String aadhaarNumber;
     private Double amount;
 }
