@@ -15,8 +15,6 @@ public class WalletController {
 	@Autowired
 	private WalletService walletService;
 
-
-
 	@PostMapping("/wallet")
 	public ResponseEntity<?> addWallet(@RequestBody Wallet wallet) {
 		walletService.addWallet(wallet);
