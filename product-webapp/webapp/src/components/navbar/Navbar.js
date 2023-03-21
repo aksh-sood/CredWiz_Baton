@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
+import Logo from "../../assets/logo.png";
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
+
 
 function Navbar() {
   const[sidebar, setSidebar] = useState(false)
@@ -18,6 +21,11 @@ function Navbar() {
             <Link to="#" className='menu-bars'>
                 <FaIcons.FaBars onClick={showSidebar}/>
             </Link>
+            <div className='logontitle'>
+                <img clasName = 'logo' src={Logo} height="40vh" width="40vh" />
+                <h2 className='title'>CREDWIZ</h2>
+            </div>
+            <PowerSettingsNewIcon/>
         </div>
         <nav className={sidebar ? 'nav-menu active' :'nav-menu'}>
             <ul className='nav-menu-items' onClick={showSidebar}>
