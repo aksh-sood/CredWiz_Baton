@@ -1,8 +1,9 @@
 .addbody {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 60vh;
   margin-bottom: 100px;
+  /* position: relative; */
 }
 .addimage {
   background-image: url('../../assets/addmoney.png');
@@ -20,17 +21,20 @@
   width: 50%;
 }
 
-@media (max-width:600px) {
+@media (max-width:800px) {
   .addbody{
       flex-direction: column;
-      justify-content: center;
+      /* justify-content: center; */
   }
   .addform{
       width:100%;
+      height: 50%;
   }
   .addimage{
       margin-left: auto;
       margin-right: auto;
+      width: 100%;
+      height: 50%;
       /* display: none; */
   }
 }

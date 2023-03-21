@@ -490,19 +490,19 @@ const SignIn = () => {
         <div className="leftbody">
           <div className="leftinnerbody">
             <div className="leftbodylogo">
-              {/* <Link to=""> */}
-              <img src={Logo} alt="logo" className="imagelogo" />
-              {/* </Link> */}
-              <h1 style={{ color: '#AEAE50' }}>New here ?</h1>
+              <Link to="/" height="auto" className="imagelogo">
+                <img src={Logo} alt="logo" href="/" />
+              </Link>
+              <h1 style={{ color: '#AEAE50' }}>Existing user ?</h1>
               <p style={{ color: '#AEAE50' }}>
-                Join us to have the best expereince in digital wallet
-                platforms
+                Login here to continue your journey with us
               </p>
               <Button
                 type="submit"
                 className="btn bubble "
                 id="sign-in-btn"
                 value="Sign up"
+                href="/signin"
                 sx={{
                   width: "20ch",
                   backgroundColor: "#241C2C",
@@ -517,7 +517,7 @@ const SignIn = () => {
                   },
                 }}
               >
-                Sign Up
+                Sign In
               </Button>
             </div>
             <div className="leftbodyimage">
@@ -527,7 +527,7 @@ const SignIn = () => {
         <div className="rightbody">
           <div className="rightinnerbody">
             <Box>
-              <h1>Welcome Back!</h1>
+              <h1>Start your j  ourney with us</h1>
             </Box>
             <Box
               sx={{
@@ -539,8 +539,9 @@ const SignIn = () => {
                   // fontFamily: "Poppins",
                   // fontSize: "10px",
                 },
-                marginLeft: "30%",
-                width: "50%",
+                marginLeft: "10%",
+                marginRight: "10%",
+                width: "80%",
                 height: "100%",
                 background: "#241c2c",
                 borderRadius: "20px",
@@ -549,248 +550,212 @@ const SignIn = () => {
               }}
             >
               <p>&nbsp;</p>
-              <Grid container spacing={1}>
-                <Grid item xs={3} md={1} />
-                <Grid container xs={9} md={10} spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      placeholder="First Name"
-                      type="text"
-                      name="firstName"
-                      sx={{
-                        gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-user" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      placeholder="Last Name"
-                      type="text"
-                      name="lastName"
-                      sx={{
-                        gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-user" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-                <Grid item xs={3} md={1} />
-                <Grid item xs={3} md={1} />
-                <Grid container xs={9} md={10} spacing={2}>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      // id="filled-basic"
-                      placeholder="Email"
-                      type="email"
-                      // label="Email"
-                      name="userEmail"
-                      sx={{
-                        // gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-envelope" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      placeholder="Contact Number"
-                      type="text"
-                      name="phoneNumber"
-                      sx={{
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-phone" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={3} md={1} />
-                <Grid item xs={3} md={1} />
-                <Grid container xs={9} md={10} spacing={1}>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      // type={showPassword ? "text" : "password"}
-                      // label="Password"
-                      placeholder="Enter your Password"
-                      name="password"
-                      sx={{
-                        gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-lock" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      // type={showPassword ? "text" : "password"}
-                      placeholder="Confirm Password"
-                      name="cPassword"
-                      sx={{
-                        gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-lock" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-
-                <Grid item xs={3} md={1} />
-                <Grid item xs={3} md={1} />
-                <Grid item xs={9} md={10}>
-                  <TextField
-                    autoComplete="off"
-                    variant="filled"
-                    placeholder="Address Line 1"
-                    name="address1"
-                    sx={{
-                      gridColumn: "span ",
-                      width: "100%",
-                      margin: "1%",
-                      fontFamily: "Poppins",
-                    }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <i class="fas fa-house" />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-                <Grid item xs={3} md={1} />
-                <Grid item xs={3} md={1} />
-                <Grid item xs={9} md={10}>
-                  <TextField
-                    autoComplete="off"
-                    variant="filled"
-                    placeholder="Address Line 2"
-                    name="address2"
-                    sx={{
-                      gridColumn: "span ",
-                      width: "100%",
-                      margin: "1%",
-                      fontFamily: "Poppins",
-                    }}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <i class="fas fa-house" />
-                        </InputAdornment>
-                      ),
-                    }}
-                  />
-                </Grid>
-
-                <Grid item xs={3} md={1} />
-                <Grid item xs={3} md={1} />
-                <Grid container xs={9} md={10} spacing={1}>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      placeholder="PAN Card Number"
-                      name="panNumber"
-                      sx={{
-                        gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-passport" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <TextField
-                      autoComplete="off"
-                      variant="filled"
-                      placeholder="Aadhar Card Number"
-                      name="aadharNumber"
-                      sx={{
-                        gridColumn: "span ",
-                        width: "100%",
-                        margin: "1%",
-                        fontFamily: "Poppins",
-                      }}
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <i class="fas fa-id-card" />
-                          </InputAdornment>
-                        ),
-                      }}
-                    />
-                  </Grid>
-                </Grid>
-              </Grid>
+              <div>
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  placeholder="First Name"
+                  type="text"
+                  name="firstName"
+                  sx={{
+                    gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-user" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  placeholder="Last Name"
+                  type="text"
+                  name="lastName"
+                  sx={{
+                    gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-user" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  // id="filled-basic"
+                  placeholder="Email"
+                  type="email"
+                  // label="Email"
+                  name="userEmail"
+                  sx={{
+                    // gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-envelope" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  placeholder="Contact Number"
+                  type="text"
+                  name="phoneNumber"
+                  sx={{
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-phone" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  // type={showPassword ? "text" : "password"}
+                  // label="Password"
+                  placeholder="Enter your Password"
+                  name="password"
+                  sx={{
+                    gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-lock" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  // type={showPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  name="cPassword"
+                  sx={{
+                    gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-lock" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <div>
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  placeholder="Address Line 1"
+                  name="address1"
+                  sx={{
+                    gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-house" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <TextField
+                  autoComplete="off"
+                  variant="filled"
+                  placeholder="Address Line 2"
+                  name="address2"
+                  sx={{
+                    gridColumn: "span ",
+                    width: "auto",
+                    margin: "1%",
+                    fontFamily: "Poppins",
+                  }}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-house" />
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </div>
+              <TextField
+                autoComplete="off"
+                variant="filled"
+                placeholder="PAN Card Number"
+                name="panNumber"
+                sx={{
+                  gridColumn: "span ",
+                  width: "auto",
+                  margin: "1%",
+                  fontFamily: "Poppins",
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i class="fas fa-passport" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                autoComplete="off"
+                variant="filled"
+                placeholder="Aadhar Card Number"
+                name="aadharNumber"
+                sx={{
+                  gridColumn: "span ",
+                  width: "auto",
+                  margin: "1%",
+                  fontFamily: "Poppins",
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <i class="fas fa-id-card" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
               <p>&nbsp;</p>
               <Button
                 // onSubmit={handleFormSubmit}
@@ -800,13 +765,14 @@ const SignIn = () => {
                 value="Sign up"
                 sx={{
                   borderRadius: "20px",
-                  backgroundColor: "#aeae50",
-                  color: "#241c2c",
-                  border: "2px solid #241c2c",
+                  backgroundColor: "#241c2c",
+                  color: "#aeae50",
+                  border: "2px solid #aeae50",
+                  width: "20ch",
                   "&:hover": {
                     boxShadow: "none",
-                    backgroundColor: "#241c2c",
-                    color: "#aeae50",
+                    backgroundColor: "#aeae50",
+                    color: "#241c2c",
                     border: "2px solid #aeae50",
                   },
                 }}

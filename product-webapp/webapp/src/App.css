@@ -39,16 +39,16 @@
 .App {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   width: 100vw;
   /* margin-top: 20px; */
 }
 
-@media (max-width :600px) {
+@media (max-width :800px) {
   .App {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 300vh;
     width: 100vw;
   }
 }

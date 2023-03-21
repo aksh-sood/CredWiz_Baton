@@ -1,15 +1,15 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
-import './UserProfile.css';
+import './AddBank.css';
 
-const UserProfile = () => {
+const AddBank = () => {
     return (
         <>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
                     
-                }} >User Profile</Typography></Box>
+                }} >Add Bank</Typography></Box>
                 <Box sx={{ paddingTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h4" gutterBottom sx={{
                     fontWeight:'normal',
@@ -17,45 +17,38 @@ const UserProfile = () => {
                     color:'GrayText'
                     
                 }} >“To become wealthy, you have to be making money while you sleep”</Typography></Box>
-            <div className="userprofileBody">
-                <div className="userprofileImage"></div>
-                <div className="userprofileForm">
+            <div className="addbankBody">
+                <div className="addbankImage"></div>
+                <div className="addbankForm">
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '70%', background: 'white' ,borderRadius: "20px", margin: "5%" },
-                            '& #address': { width: '50ch' },
+                            '& .MuiTextField-root': {m:1, width: '25ch', background: 'white' ,borderRadius: "20px", margin: "5%" },
+                            '& #address': { width: '50ch' },    
                             backgroundColor: "#241c2c",
-                            borderRadius: "20px",
-                            paddingTop:"30px",
-                            textAlign:"center",
+                            borderRadius: "20px"
+
                         }}
                         noValidate
                         autoComplete="off"
                         width= "60%"
-                        height= "100%"
+                        height= "40%"
                     >
                         <div>
-                            <TextField id="outlined-basic" label="First Name" variant="outlined" />
-                            <TextField id="outlined-basic" label="Last Name" variant="outlined" />
+                            <TextField id="outlined-basic" label="PAN Card Number" variant="filled" />
+                            <TextField id="outlined-basic" label="IFSC Code" variant="filled" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="DOB(MM/DD/YYYY)" variant="outlined" />
-                            <TextField id="outlined-basic" label="PAN" variant="outlined" />
+                            <TextField id="outlined-basic" label="Account Number" variant="filled" />
+                            <TextField id="outlined-basic" label="Net Banking ID" variant="filled" />
                         </div>
-                        <div>
-                            <TextField id="outlined-basic" label="Mobile Number" variant="outlined" />
-                            <TextField id="outlined-basic" label="Gender" variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" label="Email" variant="outlined" />
-                            <TextField id="outlined-basic" label="Marital Status" variant="outlined" />
-                        </div>
+                        
+                       
                         
                         <Box sx={{
                             textAlign: 'center',
                             marginTop: '30px',
-                            marginBottom: "30px"
+                            marginBottom: '30px'
                         }}>
                  <Button
                     type="submit"
@@ -63,6 +56,7 @@ const UserProfile = () => {
                     id="sign-in-btn"
                     value="Sign up"
                     // color="#241C2C"
+                    // marginBottom="20px"
                     sx={{
                       backgroundColor: "#241C2C",
                       color: "#AEAE50",
@@ -76,7 +70,7 @@ const UserProfile = () => {
                       },
                     }}
                   >
-                    Click Here to Update
+                        Add Bank
                   </Button>
                         </Box>
                     </Box>
@@ -86,4 +80,4 @@ const UserProfile = () => {
         </>
     );
 }
-export default UserProfile;
+export default AddBank;
