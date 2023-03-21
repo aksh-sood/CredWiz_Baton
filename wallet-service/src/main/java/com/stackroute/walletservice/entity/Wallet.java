@@ -1,10 +1,6 @@
 package com.stackroute.walletservice.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
@@ -23,10 +19,13 @@ public class Wallet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long walletId;
     @NotEmpty(message="Name should not be empty")
+    @Column(length = 30)
     private String userName; 
      @NotEmpty(message="Phone number should not be empty")
+     @Column(length = 15)
     private String phoneNumber;
      @NotEmpty(message="Aadhaar number should not be empty")
+     @Column(length = 12)
     private String aadhaarNumber;
     private Double amount;
 }
