@@ -46,7 +46,7 @@ export default function Header(props) {
   const content = {
     'header-p1': 'Welcome to',
     'header-p2': 'CredWiz',
-    'description': ',the payment wallet service that makes managing your money easy and convenient. With CredWiz, you can send and receive money, add funds, withdraw to your bank, view transactions, and check your balance all in one place.',
+    'description': 'Ultimate payment wallet for swift transfers, easy funding, hassle-free withdrawals, and real-time balance updates. Transform your finances today!',
     'primary-action': 'Sign Up',
     'secondary-action': 'Sign In',
     'pattern': 'https://www.globalpaymentsgaming.com/hubfs/option2%20%285%29.png',
