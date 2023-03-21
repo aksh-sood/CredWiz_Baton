@@ -7,10 +7,7 @@ import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
 
 import java.util.List;
-import java.util.Optional;
 
-
-//business logic here
 public interface UserService {
 	public User saveUser(User user) throws ContactNumberAlreadyExistsException;
 

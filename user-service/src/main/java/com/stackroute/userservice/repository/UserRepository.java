@@ -14,12 +14,10 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     public Optional<User> findByContactNumberAndPassword(long contactNumber,String password);
 
-//    public Optional<User> findByUserId(long userId);
     public Optional<User> findByContactNumber(long contactNumber);
 
     public long deleteByContactNumber(long contactNumber);
 
-//    public Optional<List<User>> findByFirstNameAndLastName(String firstName,String lastName);
 
 
 

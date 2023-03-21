@@ -55,8 +55,6 @@ public class UserController {
 		} catch (EmailIdNotExistException e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
 		}
-
-
 		return entity;
 	}
 
@@ -76,8 +74,7 @@ public class UserController {
 		map.put("message","Invalid Credentials");
 		ResponseEntity<?> entity = new ResponseEntity<Map>(map, HttpStatus.BAD_REQUEST);
 		if (isValid) {
-			// entity = new ResponseEntity<String>("User Logged In Successfully",
-			// HttpStatus.OK);
+
 			String token = getToken(user.getContactNumber());
 
 			map.put("message","Login Successful");
@@ -89,7 +86,6 @@ public class UserController {
 	}
 
 	private String getToken(long contactNumber) {
-		// singWith(algorithm,key) - key- any string
 		long expiryTime = System.currentTimeMillis() + (1000 * 60 * 5);
 		String token = Jwts.builder().setSubject(String.valueOf(contactNumber)).setIssuedAt(new Date()).setExpiration(new Date(expiryTime))
 				.signWith(SignatureAlgorithm.HS256, "success").compact();
