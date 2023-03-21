@@ -23,12 +23,17 @@ const UpdateUser = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '25ch' },
-                            '& #address': { width: '50ch' }
-
+                            '& .MuiTextField-root': {m:1, width: '70%' , background: 'white' ,borderRadius: "20px", margin: "5%"  },
+                            '& #address': { width: '50ch' },
+                            backgroundColor: "#241c2c",
+                            borderRadius: "20px",
+                            textAlign:"center"
                         }}
                         noValidate
                         autoComplete="off"
+                        width= "60%"
+                        height= "100%"
+                        
                     >
                         <div>
                             <TextField id="outlined-basic" label="First Name" variant="outlined" />
@@ -55,7 +60,8 @@ const UpdateUser = () => {
                         </div>
                         <Box sx={{
                             textAlign: 'center',
-                            marginTop: '50px'
+                            marginTop: '30px',
+                            paddingBottom: '30px'
                         }}>
                             <Button
                     type="submit"

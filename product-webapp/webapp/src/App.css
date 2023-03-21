@@ -39,7 +39,7 @@
 .App {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   width: 100vw;
   /* margin-top: 20px; */
 }
