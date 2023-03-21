@@ -1,25 +1,24 @@
 import "./App.css";
-import SignIn from "./components/signIn/SignIn";
 import Footer from "./components/footer/Footer";
+import SignIn from "./components/signIn/SignIn";
 import SignUp from "./components/signUp/SignUp";
-import SignLayout from "./components/signLayout/SignLayout";
-import UpdateUser from "./components/UpdateUser/UpdateUser";
-import LandingPage from "./components/landing/LandingPage";
-import UserProfile from "./components/userProfile/UserProfile";
-import SendMoney from "./components/sendMoney/SendMoney";
-import AddMoney from "./components/addMoney/AddMoney";
-import RootLayout from "./components/rootLayout/RootLayout";
-import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
-import Dashboard from "./components/dashboard/Dashboard";
-import Transaction from "./components/history/Transaction";
+// import SignLayout from "./components/signLayout/SignLayout";
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
-  Router,
+  RouterProvider
 } from "react-router-dom";
+import AddMoney from "./components/addMoney/AddMoney";
+import Dashboard from "./components/dashboard/Dashboard";
+import Transaction from "./components/history/Transaction";
+import LandingPage from "./components/landing/LandingPage";
 import Home from "./components/mui/Home";
+import SendMoney from "./components/sendMoney/SendMoney";
+import UpdateUser from "./components/UpdateUser/UpdateUser";
+import UserProfile from "./components/userProfile/UserProfile";
+import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
+import AddBank from "./components/addBank/AddBank";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,19 +33,22 @@ const router = createBrowserRouter(
       <Route exact path="/test" element={<Home />} />
 
       <Route exact path="/updateUser" element={<UpdateUser />} />
-      <Route
+      {/* <Route
         exact
         path="/signIn"
         element={<SignLayout comp={<SignIn />} path="/signIn" />}
-      />
-      <Route
+      /> */}
+      <Route exact path="/signIn" element={<SignIn />} />
+      <Route exact path="/signUp" element={<SignUp />} />
+      {/* <Route
         exact
         path="/signUp"
         element={<SignLayout comp={<SignUp />} path="/signUp" />}
-      />
+      /> */}
       <Route exact path="/userProfile" element={<UserProfile />} />
       <Route exact path="/sendMoney" element={<SendMoney />} />
       <Route exact path="/addMoney" element={<AddMoney />} />
+      <Route exact path="/addbank" element={<AddBank></AddBank>}/>
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
     </Route>
   )
