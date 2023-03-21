@@ -10,10 +10,6 @@ const WithdrawMoney = () => {
                     fontWeight: 'bolder',
                     paddingTop: '50px'
                 }} >Withdraw Money</Typography>
-                <Typography variant="h6" sx={{
-                    fontWeight: 'bolder',
-                    paddingTop: '50px'
-                }} >Too many people spend money they earned..to buy things they don't want..to impress people that they don't like.</Typography>
                 </Box>
             <div className="withdrawbody">
                 <div className="withdrawimage"></div>
