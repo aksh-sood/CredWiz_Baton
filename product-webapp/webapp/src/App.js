@@ -20,6 +20,7 @@ import {
   Router,
 } from "react-router-dom";
 import Home from "./components/mui/Home";
+import Navbar from "./components/navbar/Navbar";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
       <Route exact path="/sendMoney" element={<SendMoney />} />
       <Route exact path="/addMoney" element={<AddMoney />} />
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
+      <Route exact path="/navbar" element={<Navbar />} />
     </Route>
   )
 );
