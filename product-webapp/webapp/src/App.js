@@ -11,7 +11,7 @@ import AddMoney from "./components/addMoney/AddMoney";
 import RootLayout from "./components/rootLayout/RootLayout";
 import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
 import Dashboard from "./components/dashboard/Dashboard";
-import Navbar from "./components/navbar/Navbar"
+import Navbar from "./components/navbar/Navbar";
 import Transaction from "./components/history/Transaction";
 import {
   createBrowserRouter,
