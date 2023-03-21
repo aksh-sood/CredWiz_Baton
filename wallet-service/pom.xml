@@ -16,6 +16,7 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-cloud.version>2020.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,11 +55,20 @@
 			<version>6.2.0.CR3</version>
 			<type>pom</type>
 		</dependency>
+
 		<dependency>
-			<groupId>com.stackroute</groupId>
-			<artifactId>api-gateway</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>jakarta.validation</groupId>
+			<artifactId>jakarta.validation-api</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
