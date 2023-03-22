@@ -19,7 +19,7 @@
 .leftinnerbody {
     height: 100%;
     width: 90%;
-    padding-left: 10%;
+    padding-left: 20%;
 }
 
 .rightbody {
@@ -62,12 +62,15 @@
     margin-left: auto;
     margin-right: auto;
 }
+.imagelogo img{
+    height: 100%;
+}
 
 
 @media (max-width: 1200px) {
     .signupbody {
         flex-direction: column;
-        height: 200vh;
+        height: auto;
         width: 100vw;
     }
     .leftbody {
