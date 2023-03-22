@@ -9,7 +9,7 @@ import com.stackroute.walletservice.repository.WalletRepository;
 import java.util.Optional;
 
 @Service
-public class WalletService implements WalletServiceInterface{
+public class WalletService{
 	@Autowired
 	private WalletRepository walletRepository;
 	
