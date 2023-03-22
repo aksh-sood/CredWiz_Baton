@@ -22,6 +22,7 @@ import {
 } from "react-router-dom";
 import Home from "./components/mui/Home";
 import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
+import Navsample from "./components/sampleNav/sampleNav";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +50,7 @@ function App() {
     <>
       <div className="App">
         {/* <Navbar/> */}
+        {/* <Navsample></Navsample> */}
         <RouterProvider router={router} />
         <Footer />
       </div>
