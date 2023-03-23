@@ -36,7 +36,7 @@ public class WalletController {
 
 	@PostMapping("/wallet/addmoney")
 	public ResponseEntity<?> addMoneyToWallet(@RequestParam Long walletId, @RequestParam Double amount) {
-		Wallet wallet = walletService.getWallet(walletId);
+		Wallet wallet = walletService.getWalletByPhoneNumber(walletId);
 		if (wallet == null) {
 			return new ResponseEntity<String>("No wallet", HttpStatus.NOT_FOUND);
 		}
