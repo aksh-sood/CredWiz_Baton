@@ -22,6 +22,26 @@ public class WalletService implements WalletServiceInterface{
 		Wallet wallet=optionalWallet.isEmpty()?null:optionalWallet.get();
 		return wallet;
 	}
+
+	public Wallet addMoney(Long walletId, Double amount){
+		Wallet wallet = getWallet(walletId);
+		if (wallet == null) {
+			return null;
+		}
+		wallet.setAmount(wallet.getAmount() + amount);
+		walletRepository.save(wallet);
+		return wallet;
+	}
+
+	public Wallet withdrawMoney(long walletId, Double amount){
+		Wallet wallet = getWallet(walletId);
+		if (wallet == null || wallet.getAmount() < amount) {
+			return null;
+		}
+		wallet.setAmount(wallet.getAmount() - amount);
+		walletRepository.save(wallet);
+		return wallet;
+	}
 }
 
 

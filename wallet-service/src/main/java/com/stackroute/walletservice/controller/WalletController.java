@@ -30,8 +30,21 @@ public class WalletController {
 			entity = new ResponseEntity<Wallet>(wallet, HttpStatus.OK);
 		}
 		return entity;
+
 	}
-	
-	
+
+	@PostMapping("/wallet/addmoney")
+	public ResponseEntity<?> addMoneyToWallet(@RequestParam Long walletId, @RequestParam Double amount) {
+		Wallet wallet = walletService.getWallet(walletId);
+		if (wallet == null) {
+			return new ResponseEntity<String>("No wallet", HttpStatus.NOT_FOUND);
+		}
+		wallet.setAmount(wallet.getAmount() + amount);
+		walletService.addWallet(wallet);
+		return new ResponseEntity<String>("Amount added successfully", HttpStatus.OK);
+	}
+
+
+
 }
 
