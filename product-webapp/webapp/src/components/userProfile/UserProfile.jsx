@@ -1,10 +1,12 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
+import Navbar from "../navbar/Navbar";
 import './UserProfile.css';
 
 const UserProfile = () => {
     return (
         <>
+        <Navbar></Navbar>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
@@ -18,38 +20,46 @@ const UserProfile = () => {
                     
                 }} >“To become wealthy, you have to be making money while you sleep”</Typography></Box>
             <div className="userprofileBody">
-                <div className="userprofileImage"></div>
+                {/* <div className="userprofileImage"></div> */}
                 <div className="userprofileForm">
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '70%', background: 'white' ,borderRadius: "20px", margin: "5%" },
+                            '& .MuiTextField-root': {m:3,width:{
+                                    xs:"20ch",
+                                    sm:"28ch",
+                                    md:"35ch",
+                                    lg:"42ch",
+                                    xl:"45ch"
+                            },
+                             background: 'white' ,borderRadius: "20px", margin: "5%" },
                             '& #address': { width: '50ch' },
                             backgroundColor: "#241c2c",
                             borderRadius: "20px",
                             paddingTop:"30px",
                             textAlign:"center",
+
                         }}
                         noValidate
                         autoComplete="off"
                         width= "60%"
                         height= "100%"
                     >
-                        <div>
-                            <TextField id="outlined-basic" label="First Name" variant="outlined" />
-                            <TextField id="outlined-basic" label="Last Name" variant="outlined" />
+                        <div> 
+                            <TextField id="outlined-basic" disabled label="First Name" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Last Name" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="DOB(MM/DD/YYYY)" variant="outlined" />
-                            <TextField id="outlined-basic" label="PAN" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="DOB(MM/DD/YYYY)" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="PAN" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Mobile Number" variant="outlined" />
-                            <TextField id="outlined-basic" label="Gender" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Mobile Number" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Gender" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Email" variant="outlined" />
-                            <TextField id="outlined-basic" label="Marital Status" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Email" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Marital Status" variant="outlined" />
                         </div>
                         
                         <Box sx={{
@@ -76,7 +86,7 @@ const UserProfile = () => {
                       },
                     }}
                   >
-                    Click Here to Update
+                    Click Here to Update Your Profile
                   </Button>
                         </Box>
                     </Box>

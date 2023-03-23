@@ -1,10 +1,13 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import './AddBank.css';
+import Navbar from "../navbar/Navbar";
+
 
 const AddBank = () => {
     return (
         <>
+        <Navbar></Navbar>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
@@ -23,16 +26,18 @@ const AddBank = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '25ch', background: 'white' ,borderRadius: "20px", margin: "5%" },
+                            '& .MuiTextField-root': {m:1, width: '70%', background: 'white' ,borderRadius: "20px", margin: "5%" },
                             '& #address': { width: '50ch' },    
                             backgroundColor: "#241c2c",
-                            borderRadius: "20px"
+                            borderRadius: "20px",
+                            textAlign:"center",
+                            paddingTop:"30px"
 
                         }}
                         noValidate
                         autoComplete="off"
                         width= "60%"
-                        height= "40%"
+                        height= "auto"
                     >
                         <div>
                             <TextField id="outlined-basic" label="PAN Card Number" variant="filled" />

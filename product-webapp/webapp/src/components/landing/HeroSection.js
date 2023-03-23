@@ -5,6 +5,10 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,12 +61,12 @@ export default function Header(props) {
     <section className={classes.section} style={{ backgroundImage: `url("${content['pattern']}")` }}>
       <Container maxWidth="md">
         <Box textAlign="center" color="common.white">
-          <Typography variant="h2" component="h2" gutterBottom={true}>
-            <Typography color="secondary" variant="h2" component="span">{content['header-p1']} </Typography>
-            <Typography variant="h2" component="span">{content['header-p2']}</Typography>
+          <Typography variant="h1" component="h1" gutterBottom={true}>
+            <Typography color="secondary" variant="h1" component="span">{content['header-p1']} </Typography>
+            <Typography variant="h1" component="span">{content['header-p2']}</Typography>
           </Typography>
           <Container maxWidth="sm">
-            <Typography variant="subtitle1" color="textSecondary" paragraph={true} className={classes.description}>{content['description']}</Typography>
+            <Typography variant="h4" color="textSecondary" paragraph={true} className={classes.description}>{content['description']}</Typography>
           </Container>
           <Box mt={3}>
             <Button variant="contained" color="secondary" className={classes.primaryAction} component={Link} to="/signup">{content['primary-action']}</Button>
