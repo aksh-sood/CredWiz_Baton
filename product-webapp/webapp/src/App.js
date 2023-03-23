@@ -13,6 +13,7 @@ import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
 import Dashboard from "./components/dashboard/Dashboard";
 import Navbar from "./components/navbar/Navbar";
 import Transaction from "./components/history/Transaction";
+import AddBank from "./components/addBank/AddBank"
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -21,6 +22,7 @@ import {
   Router,
 } from "react-router-dom";
 import Home from "./components/mui/Home";
+import TransactionStatus from "./components/transactionStatus/TransactionStatus";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,7 +33,7 @@ const router = createBrowserRouter(
 
       <Route exact path="/dashboard" element={<Dashboard />} />
       <Route exact path="/test" element={<Home />} />
-
+      <Route exact path="/addBank" element={<AddBank />} />
       <Route exact path="/updateUser" element={<UpdateUser />} />
       <Route exact path="/signIn" element={<SignIn />} />
       <Route exact path="/signUp" element={<SignUp />} />
@@ -39,7 +41,7 @@ const router = createBrowserRouter(
       <Route exact path="/sendMoney" element={<SendMoney />} />
       <Route exact path="/addMoney" element={<AddMoney />} />
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
-      <Route exact path="/navbar" element={<Navbar />} />
+      <Route exact path="/transactionStatus" element={<TransactionStatus />} />
     </Route>
   )
 );
@@ -49,8 +51,9 @@ function App() {
     <>
       <div className="App">
         {/* <Navbar/> */}
+        {/* <Navsample></Navsample> */}
         <RouterProvider router={router} />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

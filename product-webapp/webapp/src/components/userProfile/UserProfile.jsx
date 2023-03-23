@@ -1,10 +1,12 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
+import Navbar from "../navbar/Navbar";
 import './UserProfile.css';
 
 const UserProfile = () => {
     return (
         <>
+        <Navbar></Navbar>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
@@ -48,16 +50,16 @@ const UserProfile = () => {
                             <TextField id="outlined-basic" disabled label="Last Name" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" disabled label="DOB(MM/DD/YYYY)" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="PAN" variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" disabled label="Mobile Number" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Gender" variant="outlined" />
-                        </div>
-                        <div>
+                            <TextField id="outlined-basic" disabled label="Contact No:" variant="outlined" />
                             <TextField id="outlined-basic" disabled label="Email" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Marital Status" variant="outlined" />
+                        </div>
+                        <div>
+                            <TextField id="outlined-basic" disabled label="Bank Name" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Account Number" variant="outlined" />
+                        </div>
+                        <div>
+                            <TextField id="outlined-basic" disabled label="PAN No:" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Aadhar No:" variant="outlined" />
                         </div>
                         
                         <Box sx={{
@@ -84,7 +86,7 @@ const UserProfile = () => {
                       },
                     }}
                   >
-                    Click Here to Update
+                    Click Here to Update Your Profile
                   </Button>
                         </Box>
                     </Box>
