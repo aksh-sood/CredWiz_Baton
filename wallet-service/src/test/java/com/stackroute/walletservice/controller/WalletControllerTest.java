@@ -38,8 +38,11 @@ public class WalletControllerTest {
 
         mockMvc.perform(post("/wallet")
                         .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"walletId\":12}")
                         .content("{\"userName\":\"Jhon\"}")
-                        .content("{\"balance\": 100.0}"))
+                        .content("{\"phoneNumber\":\"945678\"}")
+                        .content("{\"aadhaarNumber\":\"94545f678\"}")
+                        .content("{\"amount\": 100.0}"))
                 .andExpect(status().isCreated())
                 .andExpect(content().string("Wallet created successfully"));
     }
@@ -58,7 +61,7 @@ public class WalletControllerTest {
         mockMvc.perform(get("/wallet/12"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.walletId").value(12L))
-                .andExpect(jsonPath("$.balance").value(100.0));
+                .andExpect(jsonPath("$.amount").value(100.0));
     }
 
     @Test
