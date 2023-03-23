@@ -6,6 +6,7 @@ import "./AddMoney.css"
 import InputAdornment from "@mui/material/InputAdornment"
 import React from "react"
 import { withStyles } from '@material-ui/core/styles';
+import Footer from '../footer/Footer'
 
 const styles = {
     resize: {
@@ -17,7 +18,6 @@ const AddMoney = (props) => {
     const { classes } = props;
     return (
         <>
-            {/* <Navsample></Navsample> */}
             <Navbar></Navbar>
             <Box sx={{ width: '100%', textAlign: 'center', }}>
                 <Typography variant="h2" gutterBottom sx={{
@@ -35,8 +35,8 @@ const AddMoney = (props) => {
                                 m: 2,
                                 width: "80%",
                                 backgroundColor: "white",
-                                borderRadius: "20px"
-                                // "& label": { color: "#AEAE50" }
+                                borderRadius: "20px",
+                                "& label": { color: "#AEAE50" }
 
                             },
                             width: "60%",
@@ -51,9 +51,9 @@ const AddMoney = (props) => {
                             <TextField
                                 // autoComplete="off"
                                 variant="filled"
-                                // label="Amount"
+                                label="Amount"
                                 // placeholder="Amount"
-                                type="text"
+                                type="number"
                                 name="amount"
                                 InputProps={{
                                     classes: { input: classes.resize },
@@ -65,22 +65,6 @@ const AddMoney = (props) => {
                                 }}
                             />
                         </div>
-                        {/* <div>
-                            <TextField
-                                autoComplete="off"
-                                variant="filled"
-                                placeholder="First Name"
-                                type="text"
-                                name="secondName"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <i class="fas fa-user" />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div> */}
                         <Box sx={{
                             textAlign: 'center',
                             marginTop: '30px',
@@ -113,6 +97,7 @@ const AddMoney = (props) => {
                     </Box>
                 </div>
             </div >
+            <Footer></Footer>
         </>
     )
 }

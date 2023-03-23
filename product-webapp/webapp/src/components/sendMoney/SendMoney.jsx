@@ -1,10 +1,13 @@
 import { Box, TextField, MenuItem, Button, Typography } from "@mui/material"
 import { width } from "@mui/system"
+import Navbar from "../navbar/Navbar"
 import "./SendMoney.css"
+import Footer from "../footer/Footer"
 
 const SendMoney = () => {
     return (
         <>
+            <Navbar></Navbar>
             <Box sx={{ width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
@@ -96,6 +99,7 @@ const SendMoney = () => {
                     </Box>
                 </div>
             </div>
+            <Footer></Footer>
         </>
     )
 }

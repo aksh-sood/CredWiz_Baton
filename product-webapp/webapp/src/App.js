@@ -11,7 +11,7 @@ import AddMoney from "./components/addMoney/AddMoney";
 import RootLayout from "./components/rootLayout/RootLayout";
 import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
 import Dashboard from "./components/dashboard/Dashboard";
-import Navbar from "./components/navbar/Navbar"
+import Navbar from "./components/navbar/Navbar";
 import Transaction from "./components/history/Transaction";
 import {
   createBrowserRouter,
@@ -21,8 +21,6 @@ import {
   Router,
 } from "react-router-dom";
 import Home from "./components/mui/Home";
-import NavbarBrand from "react-bootstrap/esm/NavbarBrand";
-import Navsample from "./components/sampleNav/sampleNav";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +39,7 @@ const router = createBrowserRouter(
       <Route exact path="/sendMoney" element={<SendMoney />} />
       <Route exact path="/addMoney" element={<AddMoney />} />
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
+      {/* <Route exact path="/navbar" element={<Navbar />} /> */}
     </Route>
   )
 );
@@ -52,7 +51,7 @@ function App() {
         {/* <Navbar/> */}
         {/* <Navsample></Navsample> */}
         <RouterProvider router={router} />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

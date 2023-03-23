@@ -2,6 +2,7 @@ import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import './AddBank.css';
 
+
 const AddBank = () => {
     return (
         <>
@@ -23,10 +24,12 @@ const AddBank = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '25ch', background: 'white' ,borderRadius: "20px", margin: "5%" },
+                            '& .MuiTextField-root': {m:1, width: '70%', background: 'white' ,borderRadius: "20px", margin: "5%" },
                             '& #address': { width: '50ch' },    
                             backgroundColor: "#241c2c",
-                            borderRadius: "20px"
+                            borderRadius: "20px",
+                            textAlign:"center",
+                            paddingTop:"30px"
 
                         }}
                         noValidate
