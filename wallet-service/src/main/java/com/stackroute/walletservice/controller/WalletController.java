@@ -16,14 +16,15 @@ public class WalletController {
 
 	@PostMapping("/wallet")
 	public ResponseEntity<?> createWallet(@RequestBody Wallet wallet) {
+		
 		walletService.addWallet(wallet);
 		ResponseEntity<?> entity = new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
 		return entity;
 	}
-	@GetMapping("/wallet/{walletId}")
-	public ResponseEntity<?> getWalletById(@PathVariable("walletId") Long id) {
+	@GetMapping("/wallet/{phoneNumber}")
+	public ResponseEntity<?> getWalletByPhoneNumber(@PathVariable("phoneNumber") long id) {
 		ResponseEntity<?> entity = null;
-		Wallet wallet = walletService.getWallet(id);
+		Wallet wallet = walletService.getWalletByPhoneNumber(id);
 		if (wallet == null) {
 			entity = new ResponseEntity<String>("No wallet", HttpStatus.NO_CONTENT);
 		} else {

@@ -17,7 +17,7 @@ public class WalletService implements WalletServiceInterface{
 		Wallet addWallet=walletRepository.save(wallet);
 		return addWallet;
 	}
-	public Wallet getWallet(Long id) {
+	public Wallet getWalletByPhoneNumber(long id) {
 		Optional<Wallet> optionalWallet=walletRepository.findById(id);
 		Wallet wallet=optionalWallet.isEmpty()?null:optionalWallet.get();
 		return wallet;

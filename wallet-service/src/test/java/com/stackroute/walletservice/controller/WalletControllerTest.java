@@ -28,20 +28,22 @@ public class WalletControllerTest {
     @Test
     void testCreateWallet() throws Exception {
         Wallet wallet = new Wallet();
-        wallet.setWalletId(12L);
-        wallet.setUserName("John");
-        wallet.setPhoneNumber("945678");
-        wallet.setAadhaarNumber("94545f678");
+        wallet.setPhoneNumber(1234);
+        wallet.setAadhaarNumber(1234);
+        wallet.setPanNumber("A1234");
+        wallet.setBankName("SBI");
+        wallet.setAccountNumber(1234);
         wallet.setAmount(100.0);
 
         when(walletService.addWallet(any())).thenReturn(wallet);
 
         mockMvc.perform(post("/wallet")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"walletId\":12}")
-                        .content("{\"userName\":\"Jhon\"}")
-                        .content("{\"phoneNumber\":\"945678\"}")
-                        .content("{\"aadhaarNumber\":\"94545f678\"}")
+                        .content("{\"phoneNumber\":1234}")
+                        .content("{\"aadhaarNumber\":1234}")
+                        .content("{\"panNumber\":\"1234\"}")
+                        .content("{\"bankName\":\"SBI\"}")
+                        .content("{\"accountNumber\":1234}")
                         .content("{\"amount\": 100.0}"))
                 .andExpect(status().isCreated())
                 .andExpect(content().string("Wallet created successfully"));
@@ -50,25 +52,30 @@ public class WalletControllerTest {
     @Test
     void testGetWalletById() throws Exception {
         Wallet wallet = new Wallet();
-        wallet.setWalletId(12L);
-        wallet.setUserName("John");
-        wallet.setPhoneNumber("945678");
-        wallet.setAadhaarNumber("94545f678");
+        wallet.setPhoneNumber(1234);
+        wallet.setAadhaarNumber(1234);
+        wallet.setPanNumber("A1234");
+        wallet.setBankName("SBI");
+        wallet.setAccountNumber(1234);
         wallet.setAmount(100.0);
 
-        when(walletService.getWallet(12L)).thenReturn(wallet);
+        when(walletService.getWalletByPhoneNumber(1234)).thenReturn(wallet);
 
-        mockMvc.perform(get("/wallet/12"))
+        mockMvc.perform(get("/wallet/1234"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.walletId").value(12L))
+                .andExpect(jsonPath("$.phoneNumber").value(1234))
+                .andExpect(jsonPath("$.aadhaarNumber").value(1234))
+                .andExpect(jsonPath("$.panNumber").value("A1234"))
+                .andExpect(jsonPath("$.bankName").value("SBI"))
+                .andExpect(jsonPath("$.accountNumber").value(1234))
                 .andExpect(jsonPath("$.amount").value(100.0));
     }
 
     @Test
     void testGetWalletByIdNotFound() throws Exception {
-        when(walletService.getWallet(12L)).thenReturn(null);
+        when(walletService.getWalletByPhoneNumber(1234)).thenReturn(null);
 
-        mockMvc.perform(get("/wallet/12"))
+        mockMvc.perform(get("/wallet/1234"))
                 .andExpect(status().isNoContent())
                 .andExpect(content().string("No wallet"));
     }
