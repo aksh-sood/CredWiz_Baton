@@ -5,6 +5,8 @@ import javax.validation.constraints.NotEmpty;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,22 +14,34 @@ import lombok.*;
 @Entity
 @Table(name = "wallets")
 public class Wallet {
-    @Id
+   @Id
+   @Column(length = 15)
+   private long phoneNumber;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long walletId;
+
+    @NotEmpty(message="Aadhaar number should not be empty")
+    @Column(length = 12)
     @Getter @Setter
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long walletId;
-    @NotEmpty(message="Name should not be empty")
-    @Column(length = 30)
+    private long aadhaarNumber;
+
+    @NotEmpty(message="PAN number should not be empty")
+    @Column(length = 12)
     @Getter @Setter
-    private String userName; 
-     @NotEmpty(message="Phone number should not be empty")
-     @Column(length = 15)
-     @Getter @Setter
-    private String phoneNumber;
-     @NotEmpty(message="Aadhaar number should not be empty")
-     @Column(length = 12)
-     @Getter @Setter
-    private String aadhaarNumber;
+    private String panNumber;
+
+   @NotEmpty(message="Bank Name should not be empty")
+   @Column(length = 12)
+   @Getter @Setter
+   private String bankName;
+
+    @NotEmpty(message="Account number should not be empty")
+    @Column(length = 12)
     @Getter @Setter
-     private Double amount=0.0;
+    private long accountNumber;
+
+    @Getter @Setter
+    private Double amount=0.0;
+
+//    private List<Transaction> transactions;
 }
