@@ -1,7 +1,12 @@
 package com.stackroute.userservice;
 
+import com.stackroute.userservice.filter.UserFilter;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.PathSelectors;
@@ -33,6 +38,8 @@ public class UserServiceApplication {
 		ApiInfo apiInfo=new ApiInfo("User Service Api","Deals with User data","1.0","aksh.sood@batonsystems.com","Aksh",null,null);
 		return apiInfo;
 	}
+
+
 
 
 
