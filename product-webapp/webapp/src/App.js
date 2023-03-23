@@ -1,8 +1,6 @@
 import "./App.css";
 import SignIn from "./components/signIn/SignIn";
-import Footer from "./components/footer/Footer";
 import SignUp from "./components/signUp/SignUp";
-// import SignLayout from "./components/signLayout/SignLayout";
 import UpdateUser from "./components/UpdateUser/UpdateUser";
 import LandingPage from "./components/landing/LandingPage";
 import UserProfile from "./components/userProfile/UserProfile";

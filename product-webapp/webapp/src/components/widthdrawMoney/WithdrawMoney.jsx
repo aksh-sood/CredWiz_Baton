@@ -80,8 +80,7 @@ const WithdrawMoney = () => {
                     </Box>
                 </div>
             </div>
-            <Footer>
-            </Footer>
+            <Footer></Footer>
         </>
     )
 }

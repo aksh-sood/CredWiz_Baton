@@ -2,6 +2,7 @@ import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import './UpdateUser.css';
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer"
 
 const UpdateUser = () => {
     return (
@@ -90,7 +91,7 @@ const UpdateUser = () => {
                     </Box>
                 </div>
             </div>
-           
+           <Footer></Footer>
         </>
     );
 }

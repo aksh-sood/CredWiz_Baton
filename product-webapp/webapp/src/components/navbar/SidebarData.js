@@ -7,32 +7,44 @@ import * as BiIcons from "react-icons/bi";
 export const SidebarData = [
     {
         title: 'User Profile',
-        path: '/user_profile',
+        path: '/userProfile',
+        icon: <FaIcons.FaUserAlt />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Update User',
+        path: '/updateUser',
         icon: <FaIcons.FaUserAlt />,
         cName: 'nav-text'
     },
     {
         title: 'DashBoard',
-        path: '/dash_board',
+        path: '/dashboard',
         icon: <MdIcons.MdOutlineDashboardCustomize />,
         cName: 'nav-text'
     },
     {
         title: 'Add Money',
-        path: '/add_money',
+        path: '/addmoney',
         icon: <FaIcons.FaMoneyBillAlt />,
         cName: 'nav-text'
     },
     {
-        title: 'Transactions',
-        path: '/transactions',
-        icon: <AiIcons.AiOutlineTransaction />,
+        title: 'Send Money',
+        path: '/sendMoney',
+        icon: <FaIcons.FaMoneyBillAlt />,
         cName: 'nav-text'
     },
     {
         title: 'Withdraw',
-        path: '/withdraw',
+        path: '/withdrawMoney',
         icon: <BiIcons.BiMoneyWithdraw />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Transactions',
+        path: '/transaction',
+        icon: <AiIcons.AiOutlineTransaction />,
         cName: 'nav-text'
     },
     {

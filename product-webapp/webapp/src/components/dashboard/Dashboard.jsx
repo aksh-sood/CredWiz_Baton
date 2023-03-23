@@ -7,11 +7,15 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationCard from "../notification/NotificationCard";
 import TransactionCard from "../history/TransactionCard";
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer"
+
 const Dashboard = () => {
   const isBankAdded = true;
   const isMoneyAdded = false;
   return (
-
+    <>
+    <Navbar></Navbar>
     <Box p="25px" sx={{ backgroundColor: "#E7E7E8" }}>
 
       {/* HEADER */}
@@ -138,6 +142,8 @@ const Dashboard = () => {
         </Box>
       </Box>
     </Box>
+    <Footer></Footer>
+    </>
   );
 };
 

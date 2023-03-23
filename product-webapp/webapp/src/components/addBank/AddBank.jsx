@@ -2,6 +2,7 @@ import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import './AddBank.css';
 import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer"
 
 
 const AddBank = () => {
@@ -81,7 +82,7 @@ const AddBank = () => {
                     </Box>
                 </div>
             </div>
-           
+           <Footer></Footer>
         </>
     );
 }
