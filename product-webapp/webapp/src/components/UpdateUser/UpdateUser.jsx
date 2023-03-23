@@ -47,16 +47,9 @@ const UpdateUser = () => {
                             <TextField id="outlined-basic" label="Email ID" variant="filled" />
                         </div>
                         <div >
-                            <TextField fullWidth id="address" label="Address" variant="filled" />
+                            <TextField fullWidth id="address" sx={{"#address":{width:{xs:"100%",lg:"50ch"}}}} label="Address" variant="filled" />
                         </div>
-                        <div>
-                            <TextField id="outlined-basic" label="City" variant="filled" />
-                            <TextField id="outlined-basic" label="State" variant="filled" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" label="Zip Code" variant="filled" />
-                            <TextField id="outlined-basic" label="Country" variant="filled" />
-                        </div>
+                        
                         <div>
                             <TextField id="outlined-basic" label="Password" variant="filled" />
                             <TextField id="outlined-basic" label="Confirm Password" variant="filled" />
