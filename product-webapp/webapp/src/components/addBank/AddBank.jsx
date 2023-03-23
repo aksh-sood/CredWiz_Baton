@@ -1,11 +1,14 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import './AddBank.css';
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer"
 
 
 const AddBank = () => {
     return (
         <>
+        <Navbar></Navbar>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
@@ -35,7 +38,7 @@ const AddBank = () => {
                         noValidate
                         autoComplete="off"
                         width= "60%"
-                        height= "40%"
+                        height= "auto"
                     >
                         <div>
                             <TextField id="outlined-basic" label="PAN Card Number" variant="filled" />
@@ -79,7 +82,7 @@ const AddBank = () => {
                     </Box>
                 </div>
             </div>
-           
+           <Footer></Footer>
         </>
     );
 }

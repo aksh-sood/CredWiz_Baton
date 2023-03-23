@@ -1,14 +1,19 @@
 import { Box, TextField, MenuItem, Button, Typography } from "@mui/material"
 import { width } from "@mui/system"
+import Navbar from "../navbar/Navbar"
 import "./SendMoney.css"
+import Footer from "../footer/Footer"
+import InputAdornment from "@mui/material/InputAdornment"
+
 
 const SendMoney = () => {
     return (
         <>
+            <Navbar></Navbar>
             <Box sx={{ width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
-                    paddingTop: '50px'
+                    paddingTop: '20px'
                 }} >Send Money</Typography>
                 </Box>
             <div className="sendbody">
@@ -17,13 +22,15 @@ const SendMoney = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 3, width: '35ch', backgroundColor: "#e7e7e8", borderRadius: "4px", "& label": { color: "#AEAE50" } },
-                            border: '1px solid #aaaaaa',
-                            padding: '20px',
-                            borderRadius: '10px',
-                            boxShadow: 3,
-                            width: '400px',
-                            backgroundColor: '#241C2C'
+                            '& .MuiTextField-root': { m: 2, width: '80%', backgroundColor: "white", borderRadius: "20px", "& label": { color: "#AEAE50" } },
+                            // border: '1px solid #aaaaaa',
+                            paddingTop: '20px',
+                            borderRadius: '20px',
+                            // boxShadow: 3,
+                            textAlign:"center",
+                            width: '60%',
+                            height:"auto",
+                            background: '#241C2C'
                         }}
                         noValidate
                         autoComplete="off"
@@ -33,8 +40,14 @@ const SendMoney = () => {
                                 id="outlined-basic"
                                 label="Amount"
                                 type="number"
-                                variant="outlined"
-                                required
+                                variant="filled"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-inr" />
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </div>
                         <div>
@@ -42,7 +55,7 @@ const SendMoney = () => {
                                 id="outlined-select-currency"
                                 select
                                 label="Category"
-                                variant="outlined">
+                                variant="filled">
                                 <MenuItem key={"Food"} value={"Food"}>
                                     Food
                                 </MenuItem>
@@ -60,12 +73,22 @@ const SendMoney = () => {
                                 label="Note"
                                 type="text"
                                 multiline
-                                variant="outlined"
+                                variant="filled"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-book" />
+                                            {/* <i class="fa-solid fa-files"></i> */}
+
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </div>
                         <Box sx={{
                             textAlign: 'center',
-                            marginTop: '50px'
+                            marginTop: '30px',
+                            paddingBottom:"50px"
                         }}>
                             <Button
                                 type="submit"
@@ -93,6 +116,7 @@ const SendMoney = () => {
                     </Box>
                 </div>
             </div>
+            <Footer></Footer>
         </>
     )
 }

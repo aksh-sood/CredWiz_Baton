@@ -1,10 +1,13 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import './UpdateUser.css';
+import Navbar from "../navbar/Navbar";
+import Footer from "../footer/Footer"
 
 const UpdateUser = () => {
     return (
         <>
+        <Navbar></Navbar>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
@@ -23,7 +26,7 @@ const UpdateUser = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '70%' , background: 'white' ,borderRadius: "20px", margin: "5%"  },
+                            '& .MuiTextField-root': {m:1, width: 'auto' , background: 'white' ,borderRadius: "20px", margin: "5%"  },
                             '& #address': { width: '50ch' },
                             backgroundColor: "#241c2c",
                             borderRadius: "20px",
@@ -32,31 +35,24 @@ const UpdateUser = () => {
                         noValidate
                         autoComplete="off"
                         width= "60%"
-                        height= "100%"
+                        height= "auto"
                         
                     >
                         <div>
-                            <TextField id="outlined-basic" label="First Name" variant="outlined" />
-                            <TextField id="outlined-basic" label="Last Name" variant="outlined" />
+                            <TextField id="outlined-basic" label="First Name" variant="filled" />
+                            <TextField id="outlined-basic" label="Last Name" variant="filled" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Contact No:" variant="outlined" />
-                            <TextField id="outlined-basic" label="Email ID" variant="outlined" />
+                            <TextField id="outlined-basic" label="Contact No:" variant="filled" />
+                            <TextField id="outlined-basic" label="Email ID" variant="filled" />
                         </div>
                         <div >
-                            <TextField fullWidth id="address" label="Address" variant="outlined" />
+                            <TextField fullWidth id="address" sx={{"#address":{width:{xs:"100%",lg:"50ch"}}}} label="Address" variant="filled" />
                         </div>
+                        
                         <div>
-                            <TextField id="outlined-basic" label="City" variant="outlined" />
-                            <TextField id="outlined-basic" label="State" variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" label="Zip Code" variant="outlined" />
-                            <TextField id="outlined-basic" label="Country" variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" label="Password" variant="outlined" />
-                            <TextField id="outlined-basic" label="Confirm Password" variant="outlined" />
+                            <TextField id="outlined-basic" label="Password" variant="filled" />
+                            <TextField id="outlined-basic" label="Confirm Password" variant="filled" />
                         </div>
                         <Box sx={{
                             textAlign: 'center',
@@ -88,7 +84,7 @@ const UpdateUser = () => {
                     </Box>
                 </div>
             </div>
-           
+           <Footer></Footer>
         </>
     );
 }

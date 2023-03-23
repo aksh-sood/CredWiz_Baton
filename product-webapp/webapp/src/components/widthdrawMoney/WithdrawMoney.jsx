@@ -1,14 +1,17 @@
 import { Box, TextField, MenuItem, Button, Typography } from "@mui/material"
 import { width } from "@mui/system"
+import Navbar from "../navbar/Navbar"
+import Footer from "../footer/Footer"
 import "./WithdrawMoney.css"
 
 const WithdrawMoney = () => {
     return (
         <>
+        <Navbar></Navbar>
             <Box sx={{ width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
-                    paddingTop: '50px'
+                    paddingTop: '20px'
                 }} >Withdraw Money</Typography>
                 </Box>
             <div className="withdrawbody">
@@ -17,23 +20,23 @@ const WithdrawMoney = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 3, width: '35ch', backgroundColor: "#e7e7e8", borderRadius: "4px", "& label": { color: "#AEAE50" } },
-                            border: '1px solid #aaaaaa',
-                            padding: '20px',
+                            '& .MuiTextField-root': { m: 2, width: '80%', backgroundColor: "white", borderRadius: "20px", "& label": { color: "#AEAE50" } },
+                            // border: '1px solid #aaaaaa',
+                            paddingTop: '20px',
                             borderRadius: '10px',
-                            boxShadow: 3,
-                            width: '400px',
-                            backgroundColor: '#241C2C'
+                            // boxShadow: 3,
+                            width: '60%',
+                            height: "auto",
+                            textAlign:"center",
+                            background: '#241C2C'
                         }}
-                        noValidate
-                        autoComplete="off"
                     >
                         <div>
                             <TextField
                                 id="outlined-basic"
                                 label="Account No."
                                 type="text"
-                                variant="outlined"
+                                variant="filled"
                                 required
                             />
                         </div>
@@ -43,12 +46,13 @@ const WithdrawMoney = () => {
                                 label="Amount"
                                 type="number"
                                 multiline
-                                variant="outlined"
+                                variant="filled"
                             />
                         </div>
                         <Box sx={{
                             textAlign: 'center',
-                            marginTop: '50px'
+                            marginTop: '50px',
+                            paddingBottom:"50px"
                         }}>
                             <Button
                                 type="submit"
@@ -76,6 +80,7 @@ const WithdrawMoney = () => {
                     </Box>
                 </div>
             </div>
+            <Footer></Footer>
         </>
     )
 }

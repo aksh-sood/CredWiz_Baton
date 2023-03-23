@@ -3,7 +3,6 @@
   width: 100vw;
   height: 60vh;
   margin-bottom: 100px;
-  /* position: relative; */
 }
 .addimage {
   background-image: url('../../assets/addmoney.png');
@@ -24,7 +23,7 @@
 @media (max-width:800px) {
   .addbody{
       flex-direction: column;
-      /* justify-content: center; */
+      justify-content: center;
   }
   .addform{
       width:100%;
