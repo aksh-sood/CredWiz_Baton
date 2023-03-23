@@ -24,7 +24,7 @@
     .updateBody{
         flex-direction: column;
         justify-content: center;
-        height: 100%;
+        height: auto;
         padding-top: 0px;
     }
     .updateForm{
