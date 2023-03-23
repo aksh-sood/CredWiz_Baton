@@ -1,69 +1,65 @@
 //package com.stackroute.walletservice.service;
+//import static org.junit.jupiter.api.Assertions.*;
+//import java.math.BigDecimal;
+//import java.util.Optional;
+//
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import org.mockito.InjectMocks;
+//import org.mockito.Mock;
+//import org.mockito.Mockito;
+//import org.mockito.MockitoAnnotations;
+//import org.mockito.stubbing.OngoingStubbing;
 //
 //import com.stackroute.walletservice.entity.Wallet;
 //import com.stackroute.walletservice.repository.WalletRepository;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.Mock;
-//import org.mockito.MockitoAnnotations;
 //
-//import java.util.Optional;
+//class WalletServiceTest {
 //
-//import static org.junit.jupiter.api.Assertions.assertEquals;
-//import static org.mockito.ArgumentMatchers.any;
-//import static org.mockito.Mockito.when;
-//
-//public class WalletServiceTest {
-//
-//    private WalletService walletService;
+//    @InjectMocks
+//    WalletService walletService;
 //
 //    @Mock
-//    private WalletRepository walletRepository;
+//    WalletRepository walletRepository;
 //
 //    @BeforeEach
-//    void setUp() {
-//        MockitoAnnotations.openMocks(this);
-//        walletService = new WalletService(walletRepository);
+//    void setUp() throws Exception {
+//        MockitoAnnotations.initMocks(this);
 //    }
 //
 //    @Test
 //    void testAddWallet() {
 //        Wallet wallet = new Wallet();
-//        wallet.setWalletId(1L);
-//        wallet.setUserName("John");
-//        wallet.setPhoneNumber("945678");
-//        wallet.setAadhaarNumber("94545f678");
+//        wallet.setWalletId(12L);
+//        wallet.setUserName("test");
+//        wallet.setPhoneNumber("45678899");
+//        wallet.setAadhaarNumber("4567776");
 //        wallet.setAmount(100.0);
 //
-//        when(walletRepository.save(any(Wallet.class))).thenReturn(wallet);
+//        OngoingStubbing<Wallet> stub = Mockito.when(walletRepository.save(wallet));
+//        stub.thenReturn(wallet);
 //
-//        Wallet addedWallet = walletService.addWallet(wallet);
-//
-//        assertEquals(wallet, addedWallet);
+//        Wallet result = walletService.addWallet(wallet);
+//        assertNotNull(result);
+//        assertEquals(BigDecimal.valueOf(1000), result.getAmount());
+//        assertEquals(12, result.getWalletId());
 //    }
 //
 //    @Test
-//    void testGetWalletById() {
+//    void testGetWallet() {
 //        Wallet wallet = new Wallet();
-//        wallet.setWalletId(1L);
-//        wallet.setUserName("John");
-//        wallet.setPhoneNumber("945678");
-//        wallet.setAadhaarNumber("94545f678");
+//        wallet.setWalletId(12L);
+//        wallet.setUserName("test");
+//        wallet.setPhoneNumber("45678899");
+//        wallet.setAadhaarNumber("4567776");
 //        wallet.setAmount(100.0);
 //
-//        when(walletRepository.findById(1L)).thenReturn(Optional.of(wallet));
+//        OngoingStubbing<Optional<Wallet>> stub = Mockito.when(walletRepository.findById(12L));
+//        stub.thenReturn(Optional.of(wallet));
 //
-//        Wallet retrievedWallet = walletService.getWallet(1L);
-//
-//        assertEquals(wallet, retrievedWallet);
-//    }
-//
-//    @Test
-//    void testGetWalletByIdNotFound() {
-//        when(walletRepository.findById(1L)).thenReturn(Optional.empty());
-//
-//        Wallet retrievedWallet = walletService.getWallet(1L);
-//
-//        assertEquals(null, retrievedWallet);
+//        Wallet result = walletService.getWallet(1L);
+//        assertNotNull(result);
+//        assertEquals(100.0, result.getAmount());
+//        assertEquals(12, result.getWalletId());
 //    }
 //}

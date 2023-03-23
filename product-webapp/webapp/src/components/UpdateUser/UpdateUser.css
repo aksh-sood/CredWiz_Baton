@@ -1,7 +1,8 @@
 .updateBody {
     display: flex;
+    padding-top: 80px;
     width: 100%;
-    height: 80vh;
+    height: auto;
     margin-bottom: 100px;
 }
 .updateImage {
@@ -9,7 +10,7 @@
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height:100%;
+    height:auto;
     width: 50%;
 }
 .updateForm {
@@ -24,6 +25,7 @@
         flex-direction: column;
         justify-content: center;
         height: 100%;
+        padding-top: 0px;
     }
     .updateForm{
         width:100%;
