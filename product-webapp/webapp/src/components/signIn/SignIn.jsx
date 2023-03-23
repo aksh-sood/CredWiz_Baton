@@ -143,13 +143,13 @@
 //                         margin: "1%",
 //                         fontFamily: "Poppins",
 //                       }}
-                      // InputProps={{
-                      //   startAdornment: (
-                      //     <InputAdornment position="start">
-                      //       <i class="fas fa-user" />
-                      //     </InputAdornment>
-                      //   ),
-                      // }}
+// InputProps={{
+//   startAdornment: (
+//     <InputAdornment position="start">
+//       <i class="fas fa-user" />
+//     </InputAdornment>
+//   ),
+// }}
 //                     />
 //                     <TextField
 //                       autoComplete="off"
@@ -169,13 +169,13 @@
 //                         margin: "1%",
 //                         fontFamily: "Poppins",
 //                       }}
-                      // InputProps={{
-                      //   startAdornment: (
-                      //     <InputAdornment position="start">
-                      //       <i class="fas fa-lock" />
-                      //     </InputAdornment>
-                      //   ),
-                      // }}
+// InputProps={{
+//   startAdornment: (
+//     <InputAdornment position="start">
+//       <i class="fas fa-lock" />
+//     </InputAdornment>
+//   ),
+// }}
 //                     />
 //                     <p>&nbsp;</p>
 //                     <Button
@@ -279,7 +279,7 @@
 
 
 import "./SignIn.css"
-import { Box, Button, TextField } from "@mui/material"
+import { Box, Button, TextField, Grid } from "@mui/material"
 import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { color } from "@mui/system"
@@ -291,10 +291,11 @@ const SignIn = () => {
             <div className="signinbody">
                 <div className="leftbody">
                     <div className="leftinnerbody">
+
                         <div className="leftbodylogo">
-                            {/* <Link to=""> */}
-                            <img src={Logo} alt="logo" className="imagelogo" />
-                            {/* </Link> */}
+                            <Link to="/" height="auto"  className="imagelogo">
+                                <img src={Logo} alt="logo" href="/"  />
+                            </Link>
                             <h1 style={{ color: '#AEAE50' }}>New here ?</h1>
                             <p style={{ color: '#AEAE50' }}>
                                 Join us to have the best expereince in digital wallet
@@ -305,6 +306,7 @@ const SignIn = () => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
+                                href="/signup"
                                 sx={{
                                     width: "20ch",
                                     backgroundColor: "#241C2C",
@@ -342,8 +344,8 @@ const SignIn = () => {
                                     width: "35ch",
                                     borderRadius: "20px",
                                 },
-                                width: "50%",
-                                height: "100%",
+                                width: "60%",
+                                height: "70%",
                                 background: "#241c2c",
                                 borderRadius: "20px",
                                 justifyContent: "center",
@@ -358,16 +360,16 @@ const SignIn = () => {
                                 name="email"
                                 sx={{
                                     gridColumn: "span ",
-                                    width: "100%",
+                                    width: "auto",
                                     margin: "1%",
                                     fontFamily: "Poppins",
                                 }}
                                 InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <i class="fas fa-user" />
-                                    </InputAdornment>
-                                  ),
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-user" />
+                                        </InputAdornment>
+                                    ),
                                 }}
                             />
                             <TextField
@@ -378,16 +380,16 @@ const SignIn = () => {
                                 name="password"
                                 sx={{
                                     gridColumn: "span ",
-                                    width: "100%",
+                                    width: "auto",
                                     margin: "1%",
                                     fontFamily: "Poppins",
                                 }}
                                 InputProps={{
-                                  startAdornment: (
-                                    <InputAdornment position="start">
-                                      <i class="fas fa-lock" />
-                                    </InputAdornment>
-                                  ),
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-lock" />
+                                        </InputAdornment>
+                                    ),
                                 }}
                             />
                             <p>&nbsp;</p>
