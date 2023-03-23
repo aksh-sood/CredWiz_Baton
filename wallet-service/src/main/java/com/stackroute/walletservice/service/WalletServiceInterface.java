@@ -4,7 +4,9 @@ import com.stackroute.walletservice.entity.Wallet;
 
 public interface WalletServiceInterface {
     Wallet addWallet(Wallet wallet);
-    Wallet getWallet(Long id);
+    Wallet getWalletByPhoneNumber(long id);
+
+
 
     Wallet withdrawMoney(long walletId, Double amount);
 

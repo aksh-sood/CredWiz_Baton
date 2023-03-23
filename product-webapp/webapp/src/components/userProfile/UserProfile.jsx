@@ -50,16 +50,16 @@ const UserProfile = () => {
                             <TextField id="outlined-basic" disabled label="Last Name" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" disabled label="DOB(MM/DD/YYYY)" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="PAN" variant="outlined" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" disabled label="Mobile Number" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Gender" variant="outlined" />
-                        </div>
-                        <div>
+                            <TextField id="outlined-basic" disabled label="Contact No:" variant="outlined" />
                             <TextField id="outlined-basic" disabled label="Email" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Marital Status" variant="outlined" />
+                        </div>
+                        <div>
+                            <TextField id="outlined-basic" disabled label="Bank Name" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Account Number" variant="outlined" />
+                        </div>
+                        <div>
+                            <TextField id="outlined-basic" disabled label="PAN No:" variant="outlined" />
+                            <TextField id="outlined-basic" disabled label="Aadhar No:" variant="outlined" />
                         </div>
                         
                         <Box sx={{
