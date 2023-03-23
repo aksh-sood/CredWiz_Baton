@@ -28,6 +28,7 @@ const features = [
   },
   // Add more features here...
 ];
+
 const ProductLanding = () => {
   return (
     <Container
@@ -47,6 +48,11 @@ const ProductLanding = () => {
               width: "100%",
               padding: 2,
               margin: (theme) => theme.spacing(2, 0),
+              transition: "background-color 0.3s, box-shadow 0.3s",
+              "&:hover": {
+                backgroundColor: (theme) => theme.palette.action.hover,
+                boxShadow: (theme) => theme.shadows[6],
+              },
             }}
           >
             <Grid container alignItems="center" spacing={2}>
