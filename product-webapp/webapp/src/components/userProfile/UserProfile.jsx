@@ -3,6 +3,7 @@ import { width } from "@mui/system";
 import Navbar from "../navbar/Navbar";
 import './UserProfile.css';
 import Footer from "../footer/Footer"
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
     return (
@@ -73,6 +74,7 @@ const UserProfile = () => {
                     className="btn bubble "
                     id="sign-in-btn"
                     value="Sign up"
+                    href="/updateUser"
                     // color="#241C2C"
                     sx={{
                       backgroundColor: "#241C2C",

@@ -48,10 +48,7 @@ function App() {
   return (
     <>
       <div className="App">
-        {/* <Navbar/> */}
-        {/* <Navsample></Navsample> */}
         <RouterProvider router={router} />
-        {/* <Footer /> */}
       </div>
     </>
   );

@@ -3,6 +3,8 @@ import { width } from "@mui/system"
 import Navbar from "../navbar/Navbar"
 import "./SendMoney.css"
 import Footer from "../footer/Footer"
+import InputAdornment from "@mui/material/InputAdornment"
+
 
 const SendMoney = () => {
     return (
@@ -39,7 +41,13 @@ const SendMoney = () => {
                                 label="Amount"
                                 type="number"
                                 variant="filled"
-                                required
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-inr" />
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </div>
                         <div>
@@ -66,6 +74,15 @@ const SendMoney = () => {
                                 type="text"
                                 multiline
                                 variant="filled"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-book" />
+                                            {/* <i class="fa-solid fa-files"></i> */}
+
+                                        </InputAdornment>
+                                    ),
+                                }}
                             />
                         </div>
                         <Box sx={{
