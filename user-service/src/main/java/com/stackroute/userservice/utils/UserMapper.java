@@ -1,4 +1,4 @@
-package com.stackroute.userservice.service;
+package com.stackroute.userservice.utils;
 
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserDto;
