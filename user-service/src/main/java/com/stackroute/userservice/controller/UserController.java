@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
 	@Autowired
@@ -34,7 +35,7 @@ public class UserController {
 	JwtUtils jwtTokenUtil;
 	@Autowired
 	private CustomUserService userDetailsService;
-	@GetMapping("/admin/users")
+	@GetMapping("/admin/getAll")
 	public ResponseEntity<?> getAllUser() {
 		List<User> userList = userService.getAllUser();
 		Map<String,Object>map=new HashMap<String,Object>();
@@ -58,7 +59,7 @@ public class UserController {
 
 	}
 
-	@PostMapping("/users/register")
+	@PostMapping("/register")
 	public ResponseEntity<?> registerUser(@RequestBody User user) {
 		ResponseEntity<?> entity = null;
 		try {
@@ -70,7 +71,7 @@ public class UserController {
 		return entity;
 	}
 
-	@GetMapping("/users/{email}")
+	@GetMapping("/getUser/{email}")
 	public ResponseEntity<?> getUserByEmailId(@PathVariable("email") String emailId) {
 		ResponseEntity<?> entity = null;
 		User user = null;
@@ -83,7 +84,7 @@ public class UserController {
 		return entity;
 	}
 
-	@DeleteMapping("/users/delete/{contactNumber}")
+	@DeleteMapping("/delete/{contactNumber}")
 	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") long contactNumber)
 			throws ContactNumberNotExistException {
 		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
@@ -91,7 +92,7 @@ public class UserController {
 		return entity;
 	}
 
-	@GetMapping("/users/contact/{contactNumber}")
+	@GetMapping("/contact/{contactNumber}")
 	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) {
 		User user = null;
 		ResponseEntity<?> entity ;
@@ -109,7 +110,7 @@ public class UserController {
 
 
 
-	@PutMapping("users/updateUser")
+	@PutMapping("/updateUser")
 	public ResponseEntity<?> updateUser(@RequestBody UserDto userDto){
 		User user;
 		ResponseEntity<?> entity ;

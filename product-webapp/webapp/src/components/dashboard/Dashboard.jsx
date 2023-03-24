@@ -5,9 +5,7 @@ const Dashboard = () => {
   const iswalletadded = false
   return (
     <>
-
       {
-
         iswalletadded == false ? (<CreateWallet></CreateWallet>) : (
           <Transaction />)
       }

@@ -29,23 +29,14 @@ public class User {
 	@NotEmpty(message = "Password cannot be null or empty")
 	@Pattern(regexp = "^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$",message="password does not match the constraints")
 	private String password;
-	@Column(name = "first_name", length = 30)
+	@Column(name = "user_name", length = 30)
 	@NotEmpty(message = "Name is required")
-	private String firstName;
+	private String userName;
 
-	@Column(name = "last_name", length = 30)
-	@NotEmpty(message = "Name is required")
-	private String lastName;
+
 	@Column(name="address")
 	@NotEmpty(message = "Address cannot be null or empty")
 	private String address;
-
-	@Column(name="aadhar_no")
-	@NotEmpty(message = "Aadhar number cannot be null or empty")
-	private String aadharNo;
-
-
-
 	
 
 }
