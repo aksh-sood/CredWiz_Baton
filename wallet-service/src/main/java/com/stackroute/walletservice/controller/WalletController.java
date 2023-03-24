@@ -24,9 +24,9 @@ public class WalletController {
     }
 
     @GetMapping("/wallet/{contactNumber}")
-    public ResponseEntity<?> getWalletByPhoneNumber(@PathVariable("contactNumber") long id)
+    public ResponseEntity<?> getWalletByContactNumber(@PathVariable("contactNumber") long id)
             throws WalletNotExistsException {
-        Wallet wallet = walletService.getWalletByPhoneNumber(id);
+        Wallet wallet = walletService.getWalletByContactNumber(id);
         if (wallet == null) {
             throw new WalletNotExistsException("No wallet found for contact number: " + id);
         }
@@ -36,11 +36,11 @@ public class WalletController {
     @PostMapping("/addmoney")
     public ResponseEntity<String> addMoneyToWallet(@RequestBody WalletRequest request)
             throws WalletNotExistsException {
-        Long phoneNumber = request.getPhoneNumber();
+        Long ContactNumber = request.getContactNumber();
         Double amount = request.getAmount();
-        Wallet wallet = walletService.getWalletByPhoneNumber(phoneNumber);
+        Wallet wallet = walletService.getWalletByContactNumber(ContactNumber);
         if (wallet == null) {
-            throw new WalletNotExistsException("No wallet found for phone number: " + phoneNumber);
+            throw new WalletNotExistsException("No wallet found for phone number: " + ContactNumber);
         }
         wallet.setBalance(wallet.getBalance() + amount);
         walletService.addWallet(wallet);
@@ -50,11 +50,11 @@ public class WalletController {
     @PostMapping("/withdrawmoney")
     public ResponseEntity<String> withdrawMoney(@RequestBody WalletRequest request)
             throws WalletNotExistsException, InSufficientBalanceException {
-        Wallet wallet = walletService.getWalletByPhoneNumber(request.getPhoneNumber());
+        Wallet wallet = walletService.getWalletByContactNumber(request.getContactNumber());
         if (wallet == null) {
-            throw new WalletNotExistsException("No wallet found for phone number: " + request.getPhoneNumber());
+            throw new WalletNotExistsException("No wallet found for phone number: " + request.getContactNumber());
         } else if (wallet.getBalance() < request.getAmount()) {
-            throw new InSufficientBalanceException("Insufficient balance in wallet with phone number: " + request.getPhoneNumber());
+            throw new InSufficientBalanceException("Insufficient balance in wallet with phone number: " + request.getContactNumber());
         }
         wallet.setBalance(wallet.getBalance() - request.getAmount());
         walletService.addWallet(wallet);
@@ -64,12 +64,12 @@ public class WalletController {
     @PostMapping("/sendmoney")
     public ResponseEntity<String> sendMoney(@RequestBody SendMoneyRequest sendMoneyRequest)
             throws WalletNotExistsException, InSufficientBalanceException {
-        boolean isTransactionSuccessful = walletService.sendMoney(sendMoneyRequest.getSenderPhoneNumber(),
-                sendMoneyRequest.getReceiverPhoneNumber(), sendMoneyRequest.getAmount());
+        boolean isTransactionSuccessful = walletService.sendMoney(sendMoneyRequest.getSenderContactNumber(),
+                sendMoneyRequest.getReceiverContactNumber(), sendMoneyRequest.getAmount());
         if (isTransactionSuccessful) {
             return new ResponseEntity<String>("Transaction successful", HttpStatus.OK);
         } else {
-            throw new InSufficientBalanceException("Insufficient balance in sender's wallet with phone number: " + sendMoneyRequest.getSenderPhoneNumber());
+            throw new InSufficientBalanceException("Insufficient balance in sender's wallet with phone number: " + sendMoneyRequest.getSenderContactNumber());
         }
     }
 

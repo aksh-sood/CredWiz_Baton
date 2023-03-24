@@ -44,8 +44,8 @@ public class WalletControllerTest {
 
     @Test
     public void testGetWalletByPhoneNumber() throws WalletNotExistsException {
-        when(walletService.getWalletByPhoneNumber(anyLong())).thenReturn(wallet);
-        ResponseEntity<?> responseEntity = walletController.getWalletByPhoneNumber(1234567890L);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
+        ResponseEntity<?> responseEntity = walletController.getWalletByContactNumber(1234567890L);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(((Wallet) responseEntity.getBody()).getContactNumber(), wallet.getContactNumber());
     }
@@ -53,9 +53,9 @@ public class WalletControllerTest {
     @Test
     public void testAddMoneyToWallet() throws WalletNotExistsException {
         WalletRequest request = new WalletRequest();
-        request.setPhoneNumber(1234567890L);
+        request.setContactNumber(1234567890L);
         request.setAmount(500.0);
-        when(walletService.getWalletByPhoneNumber(anyLong())).thenReturn(wallet);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
         ResponseEntity<String> responseEntity = walletController.addMoneyToWallet(request);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(wallet.getBalance(), 1000.0, 0);
@@ -64,18 +64,18 @@ public class WalletControllerTest {
     @Test(expected = WalletNotExistsException.class)
     public void testAddMoneyToWalletThrowsExceptionWhenWalletNotFound() throws WalletNotExistsException {
         WalletRequest request = new WalletRequest();
-        request.setPhoneNumber(1234567890L);
+        request.setContactNumber(1234567890L);
         request.setAmount(500.0);
-        when(walletService.getWalletByPhoneNumber(anyLong())).thenReturn(null);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(null);
         walletController.addMoneyToWallet(request);
     }
 
     @Test
     public void testWithdrawMoney() throws WalletNotExistsException, InSufficientBalanceException {
         WalletRequest request = new WalletRequest();
-        request.setPhoneNumber(1234567890L);
+        request.setContactNumber(1234567890L);
         request.setAmount(200.0);
-        when(walletService.getWalletByPhoneNumber(anyLong())).thenReturn(wallet);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
         ResponseEntity<String> responseEntity = walletController.withdrawMoney(request);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(wallet.getBalance(), 300.0, 0);
@@ -84,9 +84,9 @@ public class WalletControllerTest {
     @Test(expected = WalletNotExistsException.class)
     public void testWithdrawMoneyThrowsExceptionWhenWalletNotFound() throws WalletNotExistsException, InSufficientBalanceException {
         WalletRequest request = new WalletRequest();
-        request.setPhoneNumber(1234567890L);
+        request.setContactNumber(1234567890L);
         request.setAmount(200.0);
-        when(walletService.getWalletByPhoneNumber(anyLong())).thenReturn(null);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(null);
         walletController.withdrawMoney(request);
     }
 }

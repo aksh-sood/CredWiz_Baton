@@ -5,7 +5,7 @@ import lombok.Setter;
 
 public class WalletRequest {
     @Getter @Setter
-    private Long phoneNumber;
+    private Long contactNumber;
     @Getter @Setter
     private Double amount;
 
