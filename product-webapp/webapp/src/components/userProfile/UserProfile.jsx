@@ -6,31 +6,25 @@ import Footer from "../footer/Footer"
 import { Link } from "react-router-dom";
 import NavbarWallet from "../createWallet/NavbarWallet";
 
-const iswalletadded=true
-
+const iswalletadded = false
 
 const UserProfile = () => {
-
-
     return (
         <> {
-            iswalletadded== true ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
-            }
+            iswalletadded == true ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
+        }
 
             <Box sx={{ marginTop: "50px", width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
-
                 }} >User Profile</Typography></Box>
             <Box sx={{ paddingTop: "50px", width: '100%', textAlign: 'center' }}>
                 <Typography variant="h4" gutterBottom sx={{
                     fontWeight: 'normal',
                     fontStyle: 'italic',
                     color: 'GrayText'
-
                 }} >“To become wealthy, you have to be making money while you sleep”</Typography></Box>
             <div className="userprofileBody">
-                {/* <div className="userprofileImage"></div> */}
                 <div className="userprofileForm">
                     <Box
                         component="form"
@@ -50,7 +44,6 @@ const UserProfile = () => {
                             borderRadius: "20px",
                             paddingTop: "30px",
                             textAlign: "center",
-
                         }}
                         noValidate
                         autoComplete="off"
