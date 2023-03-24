@@ -29,12 +29,12 @@ public class WalletServiceTest {
     @BeforeEach
     public void setUp() {
         wallet = new Wallet();
-        wallet.setPhoneNumber(1234567890L);
+        wallet.setContactNumber(1234567890L);
         wallet.setAadhaarNumber(123456789012L);
         wallet.setPanNumber("ABCDE1234F");
         wallet.setBankName("SBI");
         wallet.setAccountNumber(123456789012L);
-        wallet.setAmount(500.0);
+        wallet.setBalance(500.0);
     }
 
     @Test
@@ -46,8 +46,8 @@ public class WalletServiceTest {
 
     @Test
     public void testGetWalletByPhoneNumber() {
-        when(walletRepository.findById(wallet.getPhoneNumber())).thenReturn(Optional.of(wallet));
-        Wallet foundWallet = walletService.getWalletByPhoneNumber(wallet.getPhoneNumber());
+        when(walletRepository.findById(wallet.getContactNumber())).thenReturn(Optional.of(wallet));
+        Wallet foundWallet = walletService.getWalletByContactNumber(wallet.getContactNumber());
         assertEquals(wallet, foundWallet);
     }
 }
