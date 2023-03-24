@@ -1,26 +1,26 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
-import './AddBank.css';
-import Navbar from "../navbar/Navbar";
+import './CreateWallet.css';
+import NavbarWallet from "./NavbarWallet"
 import Footer from "../footer/Footer"
 
 
-const AddBank = () => {
+const CreateWallet = (props) => {
     return (
         <>
-        <Navbar></Navbar>
+        <NavbarWallet iswalletadded={props.iswalletadded}></NavbarWallet>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',
                     
-                }} >Add Bank</Typography></Box>
+                }} >Create Wallet</Typography></Box>
                 <Box sx={{ paddingTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h4" gutterBottom sx={{
                     fontWeight:'normal',
                     fontStyle: 'italic',
                     color:'GrayText'
                     
-                }} >“To become wealthy, you have to be making money while you sleep”</Typography></Box>
+                }} >Create Wallet to avail our service</Typography></Box>
             <div className="addbankBody">
                 <div className="addbankImage"></div>
                 <div className="addbankForm">
@@ -41,12 +41,12 @@ const AddBank = () => {
                         height= "auto"
                     >
                         <div>
-                            <TextField id="outlined-basic" label="PAN Card Number" variant="filled" />
-                            <TextField id="outlined-basic" label="IFSC Code" variant="filled" />
+                            <TextField id="outlined-basic" label="Bank Name" variant="filled" />
+                            <TextField id="outlined-basic" label="Account Number" variant="filled" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Account Number" variant="filled" />
-                            <TextField id="outlined-basic" label="Net Banking ID" variant="filled" />
+                            <TextField id="outlined-basic" label="IFSC Code" variant="filled" />
+                            <TextField id="outlined-basic" label="Amount" variant="filled" />
                         </div>
                         
                        
@@ -86,4 +86,4 @@ const AddBank = () => {
         </>
     );
 }
-export default AddBank;
+export default CreateWallet;

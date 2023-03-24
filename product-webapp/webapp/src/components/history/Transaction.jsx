@@ -24,12 +24,14 @@ export default function Transaction() {
       >
         {/* ROW 1 */}
         <Box
-          gridColumn={{ xs: '1', sm: 'span 3' }}
+          gridColumn={{ xs: '3', sm: 'span 3' }}
            backgroundColor="white"
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
+          
+          
           <StatBox
             subtitle="12,361"
             title="Balance"
