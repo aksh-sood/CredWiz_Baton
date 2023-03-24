@@ -343,6 +343,7 @@ const SignIn = () => {
                                     backgroundColor: "white",
                                     width: "35ch",
                                     borderRadius: "20px",
+                                    "& label": { color: "#AEAE50" }
                                 },
                                 width: "60%",
                                 height: "70%",

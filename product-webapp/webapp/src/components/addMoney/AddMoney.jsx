@@ -1,7 +1,6 @@
 import { Box, TextField, MenuItem, Button, Typography, LinearProgress } from "@mui/material"
 import { width } from "@mui/system"
 import Navbar from "../navbar/Navbar"
-// import Navsample from "../sampleNav/sampleNav"
 import "./AddMoney.css"
 import InputAdornment from "@mui/material/InputAdornment"
 import React from "react"
@@ -25,7 +24,7 @@ const AddMoney = (props) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const path = RedCross; 
+    const moneystatus = true;
 
 
 
@@ -126,13 +125,30 @@ const AddMoney = (props) => {
                                     boxShadow: 24,
                                     p: 4,
                                 }}>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    {
+                                        moneystatus == true ? (<>
+                                        <Typography id="modal-modal-title" variant="h6" component="h2">
                                         Money Added Successfully
-                                    </Typography>
-                                    
-                                    <div className='tstatus'>
-                                        <img src={path} height="180vh" width="180vh" />
-                                    </div>
+                                        </Typography> 
+                                        <div className='tstatus'>
+                                        <img src={GreenCheck} height="180vh" width="180vh" />
+                                        </div>
+                                        </>
+                                        ) : (
+                                        <>
+                                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        Money Is Not Added
+                                        </Typography> 
+                                        <div className='tstatus'>
+                                        <img src={RedCross} height="180vh" width="180vh" />
+                                        </div>
+                                        </>
+                                        )
+                                    }
+                                    <Button onClick={handleClose} sx={{
+                                        width: '100%',
+                                        textAlign: 'center'
+                                    }}>Close</Button>
                                 </Box>
                             </Modal>
 

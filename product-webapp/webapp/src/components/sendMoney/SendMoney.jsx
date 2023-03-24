@@ -1,12 +1,31 @@
+import React from "react"
 import { Box, TextField, MenuItem, Button, Typography } from "@mui/material"
 import { width } from "@mui/system"
 import Navbar from "../navbar/Navbar"
 import "./SendMoney.css"
 import Footer from "../footer/Footer"
+import { withStyles } from '@material-ui/core/styles';
+
 import InputAdornment from "@mui/material/InputAdornment"
+import Modal from '@mui/material/Modal'
+import GreenCheck from "../../assets/green_checkmark.svg"
+import RedCross from "../../assets/red-x-icon.svg"
+
+const styles = {
+    resize: {
+        fontSize: 50
+    }
+}
+
+const SendMoney = (props) => {
+
+    const { classes } = props;  
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const moneystatus = true;
 
 
-const SendMoney = () => {
     return (
         <>
             <Navbar></Navbar>
@@ -15,7 +34,7 @@ const SendMoney = () => {
                     fontWeight: 'bolder',
                     paddingTop: '20px'
                 }} >Send Money</Typography>
-                </Box>
+            </Box>
             <div className="sendbody">
                 <div className="sendimage"></div>
                 <div className="sendform">
@@ -27,9 +46,9 @@ const SendMoney = () => {
                             paddingTop: '20px',
                             borderRadius: '20px',
                             // boxShadow: 3,
-                            textAlign:"center",
+                            textAlign: "center",
                             width: '60%',
-                            height:"auto",
+                            height: "auto",
                             background: '#241C2C'
                         }}
                         noValidate
@@ -42,6 +61,7 @@ const SendMoney = () => {
                                 type="number"
                                 variant="filled"
                                 InputProps={{
+                                    classes: { input: classes.resize },
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <i class="fas fa-inr" />
@@ -52,20 +72,18 @@ const SendMoney = () => {
                         </div>
                         <div>
                             <TextField
-                                id="outlined-select-currency"
-                                select
-                                label="Category"
-                                variant="filled">
-                                <MenuItem key={"Food"} value={"Food"}>
-                                    Food
-                                </MenuItem>
-                                <MenuItem key={"House"} value={"House"}>
-                                    House
-                                </MenuItem>
-                                <MenuItem key={"Medical"} value={"Medical"}>
-                                    Medical
-                                </MenuItem>
-                            </TextField>
+                                id="outlined-basic"
+                                label="Recipient Phone Number"
+                                type="number"
+                                variant="filled"
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                            <i class="fas fa-phone" />
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
                         </div>
                         <div>
                             <TextField
@@ -88,14 +106,14 @@ const SendMoney = () => {
                         <Box sx={{
                             textAlign: 'center',
                             marginTop: '30px',
-                            paddingBottom:"50px"
+                            paddingBottom: "50px"
                         }}>
                             <Button
                                 type="submit"
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
-                                // color="#241C2C"
+                                onClick={handleOpen}
                                 sx={{
                                     backgroundColor: "#241C2C",
                                     color: "#AEAE50",
@@ -111,6 +129,52 @@ const SendMoney = () => {
                             >
                                 SEND
                             </Button>
+
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    height: 'auto',
+                                    width: 'auto',
+                                    transform: 'translate(-50%, -50%)',
+                                    bgcolor: 'background.paper',
+                                    border: '2px solid #000',
+                                    boxShadow: 24,
+                                    p: 4,
+                                }}>
+                                    {
+                                        moneystatus == true ? (<>
+                                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                                Money Send Successfully
+                                            </Typography>
+                                            <div className='tstatus'>
+                                                <img src={GreenCheck} height="180vh" width="180vh" />
+                                            </div>
+                                        </>
+                                        ) : (
+                                            <>
+                                                <Typography id="modal-modal-title" variant="h6" component="h2">
+                                                    Money Not Send
+                                                </Typography>
+                                                <div className='tstatus'>
+                                                    <img src={RedCross} height="180vh" width="180vh" />
+                                                </div>
+                                            </>
+                                        )
+                                    }
+                                    <Button onClick={handleClose} sx={{
+                                        width: '100%',
+                                        textAlign: 'center'
+                                    }}>Close</Button>
+                                </Box>
+                            </Modal>
+
                         </Box>
 
                     </Box>
@@ -120,4 +184,4 @@ const SendMoney = () => {
         </>
     )
 }
-export default SendMoney
+export default withStyles(styles)(SendMoney)
