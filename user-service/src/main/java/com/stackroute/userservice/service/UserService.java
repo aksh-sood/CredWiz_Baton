@@ -5,6 +5,7 @@ import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 import com.stackroute.userservice.exceptions.EmailIdAlreadyExistsException;
 import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
+import com.stackroute.userservice.payload.UserDto;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface UserService {
 	public User getUserByContactNumber(long contactNumber) throws ContactNumberNotExistException;
 
 
+	public User updateUser(UserDto userDto) throws Exception;
 }

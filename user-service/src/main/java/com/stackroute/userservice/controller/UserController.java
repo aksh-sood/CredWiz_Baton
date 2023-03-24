@@ -4,15 +4,20 @@ import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
+import com.stackroute.userservice.payload.UserAuthenticateRequest;
+import com.stackroute.userservice.payload.UserAuthenticateResponse;
+import com.stackroute.userservice.payload.UserDto;
+import com.stackroute.userservice.service.CustomUserService;
 import com.stackroute.userservice.service.UserService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.stackroute.userservice.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,9 +27,14 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AuthenticationManager authenticationManager;
 
-
-	@GetMapping("/users")
+	@Autowired
+	JwtUtils jwtTokenUtil;
+	@Autowired
+	private CustomUserService userDetailsService;
+	@GetMapping("/admin/users")
 	public ResponseEntity<?> getAllUser() {
 		List<User> userList = userService.getAllUser();
 		Map<String,Object>map=new HashMap<String,Object>();
@@ -34,7 +44,21 @@ public class UserController {
 		return entity;
 	}
 
-	@PostMapping("/users")
+	@PostMapping("/login")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
+	try{authenticationManager.authenticate(
+			new UsernamePasswordAuthenticationToken(String.valueOf(authenticationRequest.getContactNumber()),authenticationRequest.getPassword()));
+	}catch(BadCredentialsException e){
+		throw new Exception("Incorrect contact Number or password"+e);
+	}
+
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(authenticationRequest.getContactNumber()));
+		final String jwt=jwtTokenUtil.generateToken(userDetails);
+		return ResponseEntity.ok(new UserAuthenticateResponse(jwt));
+
+	}
+
+	@PostMapping("/users/register")
 	public ResponseEntity<?> registerUser(@RequestBody User user) {
 		ResponseEntity<?> entity = null;
 		try {
@@ -55,10 +79,11 @@ public class UserController {
 		} catch (EmailIdNotExistException e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
 		}
+		entity = new ResponseEntity<User>(user, HttpStatus.OK);
 		return entity;
 	}
 
-	@DeleteMapping("/users/{contactNumber}")
+	@DeleteMapping("/users/delete/{contactNumber}")
 	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") long contactNumber)
 			throws ContactNumberNotExistException {
 		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
@@ -66,37 +91,10 @@ public class UserController {
 		return entity;
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<?> validateUser(@RequestBody User user) {
-		boolean isValid = userService.validateUser(user);
-
-		Map<String, Object> map=new HashMap<String,Object>();
-		map.put("message","Invalid Credentials");
-		ResponseEntity<?> entity = new ResponseEntity<Map>(map, HttpStatus.BAD_REQUEST);
-		if (isValid) {
-
-			String token = getToken(user.getContactNumber());
-
-			map.put("message","Login Successful");
-			map.put("token",token);
-
-			entity = new ResponseEntity<Map>(map, HttpStatus.OK);
-		}
-		return entity;
-	}
-
-	private String getToken(long contactNumber) {
-		long expiryTime = System.currentTimeMillis() + (1000 * 60 * 5);
-		String token = Jwts.builder().setSubject(String.valueOf(contactNumber)).setIssuedAt(new Date()).setExpiration(new Date(expiryTime))
-				.signWith(SignatureAlgorithm.HS256, "success").compact();
-
-		return token;
-	}
-
-	@GetMapping("/users/mobile/{contactNumber}")
-	public ResponseEntity<?> getUserByMobileNumber(@PathVariable("contactNumber") long contactNumber) {
+	@GetMapping("/users/contact/{contactNumber}")
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) {
 		User user = null;
-		ResponseEntity<?> entity = null;
+		ResponseEntity<?> entity ;
 
 		try {
 			user= userService.getUserByContactNumber(contactNumber);
@@ -104,6 +102,27 @@ public class UserController {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
 		}
 		 entity = new ResponseEntity<User>(user, HttpStatus.OK);
+		return entity;
+	}
+
+
+
+
+
+	@PutMapping("users/updateUser")
+	public ResponseEntity<?> updateUser(@RequestBody UserDto userDto){
+		User user;
+		ResponseEntity<?> entity ;
+		try{
+			user= userService.updateUser(userDto);
+			entity=new ResponseEntity<User>(user, HttpStatus.CREATED);
+
+		}catch (Exception e){
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
+		}
+
+
+
 		return entity;
 	}
 

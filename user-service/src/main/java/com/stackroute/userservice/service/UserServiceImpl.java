@@ -5,7 +5,10 @@ import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 import com.stackroute.userservice.exceptions.EmailIdAlreadyExistsException;
 import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
+import com.stackroute.userservice.payload.UserDto;
 import com.stackroute.userservice.repository.UserRepository;
+import com.stackroute.userservice.utils.UserMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,9 @@ public class UserServiceImpl implements  UserService{
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserMapper userMapper;
 
 
     public User saveUser(User user) throws ContactNumberAlreadyExistsException{
@@ -42,16 +48,7 @@ public class UserServiceImpl implements  UserService{
 
     }
 
-//    public boolean deleteUserByEmailId(String emailId) throws EmailIdNotExistException {
-//        Optional<User> optionalUser = userRepository.findById(emailId);
-//        User user = optionalUser.isEmpty() ? null : optionalUser.get();
-//
-//        if (user == null) {
-//            throw new EmailIdNotExistException("Email Id Not Exist");
-//        }
-//        userRepository.deleteById(emailId);
-//        return true;
-//    }
+
 
     public boolean deleteUserByContactNumber(long contactNumber)throws ContactNumberNotExistException {
         Optional<User> optionalUser = userRepository.findByContactNumber(contactNumber);
@@ -80,6 +77,14 @@ public class UserServiceImpl implements  UserService{
         return user;
     }
 
+    @Override
+    public User updateUser(UserDto userDto) throws Exception {
+
+        User user=getUserByContactNumber(userDto.getContactNumber());
+        userMapper.updateUserFromDto(userDto,user);
+        return userRepository.save(user);
+
+    }
 
 
 

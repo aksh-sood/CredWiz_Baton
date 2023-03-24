@@ -527,7 +527,7 @@ const SignIn = () => {
         <div className="rightbody">
           <div className="rightinnerbody">
             <Box>
-              <h1>Start your j  ourney with us</h1>
+              <h1>Start your journey with us</h1>
             </Box>
             <Box
               sx={{
@@ -536,6 +536,7 @@ const SignIn = () => {
                   backgroundColor: "white",
                   // width: "35ch",
                   borderRadius: "20px",
+                  "& label": { color: "#AEAE50" }
                   // fontFamily: "Poppins",
                   // fontSize: "10px",
                 },
@@ -554,7 +555,7 @@ const SignIn = () => {
                 <TextField
                   autoComplete="off"
                   variant="filled"
-                  placeholder="First Name"
+                  label="First Name"
                   type="text"
                   name="firstName"
                   sx={{
@@ -574,7 +575,7 @@ const SignIn = () => {
                 <TextField
                   autoComplete="off"
                   variant="filled"
-                  placeholder="Last Name"
+                  label="Last Name"
                   type="text"
                   name="lastName"
                   sx={{
@@ -597,7 +598,7 @@ const SignIn = () => {
                   autoComplete="off"
                   variant="filled"
                   // id="filled-basic"
-                  placeholder="Email"
+                  label="Email"
                   type="email"
                   // label="Email"
                   name="userEmail"
@@ -618,7 +619,7 @@ const SignIn = () => {
                 <TextField
                   autoComplete="off"
                   variant="filled"
-                  placeholder="Contact Number"
+                  label="Contact Number"
                   type="text"
                   name="phoneNumber"
                   sx={{
@@ -641,7 +642,7 @@ const SignIn = () => {
                   variant="filled"
                   // type={showPassword ? "text" : "password"}
                   // label="Password"
-                  placeholder="Enter your Password"
+                  label="Password"
                   name="password"
                   sx={{
                     gridColumn: "span ",
@@ -661,7 +662,7 @@ const SignIn = () => {
                   autoComplete="off"
                   variant="filled"
                   // type={showPassword ? "text" : "password"}
-                  placeholder="Confirm Password"
+                  label="Conform Password"
                   name="cPassword"
                   sx={{
                     gridColumn: "span ",
@@ -682,7 +683,7 @@ const SignIn = () => {
                 <TextField
                   autoComplete="off"
                   variant="filled"
-                  placeholder="Address Line 1"
+                  label="Address Line 1"
                   name="address1"
                   sx={{
                     gridColumn: "span ",
@@ -701,7 +702,7 @@ const SignIn = () => {
                 <TextField
                   autoComplete="off"
                   variant="filled"
-                  placeholder="Address Line 2"
+                  label="Address Line 2"
                   name="address2"
                   sx={{
                     gridColumn: "span ",
@@ -721,7 +722,7 @@ const SignIn = () => {
               <TextField
                 autoComplete="off"
                 variant="filled"
-                placeholder="PAN Card Number"
+                label="PAN Card Number"
                 name="panNumber"
                 sx={{
                   gridColumn: "span ",
@@ -740,7 +741,7 @@ const SignIn = () => {
               <TextField
                 autoComplete="off"
                 variant="filled"
-                placeholder="Aadhar Card Number"
+                label="Aadhar Card Number"
                 name="aadharNumber"
                 sx={{
                   gridColumn: "span ",
