@@ -1,31 +1,14 @@
 package com.stackroute.walletservice.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class SendMoneyRequest {
-    private Long senderPhoneNumber;
-    private Long receiverPhoneNumber;
+    @Getter @Setter
+    private Long senderContactNumber;
+    @Getter @Setter
+    private Long receiverContactNumber;
+    @Getter @Setter
     private Double amount;
 
-    public Long getSenderPhoneNumber() {
-        return senderPhoneNumber;
-    }
-
-    public void setSenderPhoneNumber(Long senderPhoneNumber) {
-        this.senderPhoneNumber = senderPhoneNumber;
-    }
-
-    public Long getReceiverPhoneNumber() {
-        return receiverPhoneNumber;
-    }
-
-    public void setReceiverPhoneNumber(Long receiverPhoneNumber) {
-        this.receiverPhoneNumber = receiverPhoneNumber;
-    }
-
-    public Double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
 }

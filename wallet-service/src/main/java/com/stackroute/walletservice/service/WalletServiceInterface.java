@@ -5,13 +5,13 @@ import com.stackroute.walletservice.exception.InSufficientBalanceException;
 
 public interface WalletServiceInterface {
     Wallet addWallet(Wallet wallet);
-    Wallet getWalletByPhoneNumber(long id);
 
+    Wallet getWalletByContactNumber(long id);
 
+    Wallet withdrawMoney(long contactNumber, Double amount);
 
-    Wallet withdrawMoney(long phoneNumber, Double amount);
+    Wallet addMoney(long contactNumber, Double amount);
 
-    Wallet addMoney(long phoneNumber, Double amount);
-    public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InSufficientBalanceException;
+    boolean sendMoney(long senderContactNumber, long receiverContactNumber, Double amount)
+            throws InSufficientBalanceException;
 }
-

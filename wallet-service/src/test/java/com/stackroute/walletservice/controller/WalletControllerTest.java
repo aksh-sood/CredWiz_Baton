@@ -1,82 +1,92 @@
 package com.stackroute.walletservice.controller;
+
 import com.stackroute.walletservice.entity.Wallet;
+import com.stackroute.walletservice.entity.WalletRequest;
+import com.stackroute.walletservice.exception.InSufficientBalanceException;
+import com.stackroute.walletservice.exception.WalletNotExistsException;
 import com.stackroute.walletservice.service.WalletService;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import org.springframework.test.web.servlet.MockMvc;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringJUnitConfig
-@WebMvcTest(WalletController.class)
+@RunWith(MockitoJUnitRunner.class)
 public class WalletControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
+    @Mock
     private WalletService walletService;
 
-    @Test
-    void testCreateWallet() throws Exception {
-        Wallet wallet = new Wallet();
-        wallet.setPhoneNumber(1234);
-        wallet.setAadhaarNumber(1234);
-        wallet.setPanNumber("A1234");
-        wallet.setBankName("SBI");
-        wallet.setAccountNumber(1234);
-        wallet.setAmount(100.0);
+    @InjectMocks
+    private WalletController walletController;
 
-        when(walletService.addWallet(any())).thenReturn(wallet);
+    private Wallet wallet;
 
-        mockMvc.perform(post("/wallet")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"phoneNumber\":1234}")
-                        .content("{\"aadhaarNumber\":1234}")
-                        .content("{\"panNumber\":\"1234\"}")
-                        .content("{\"bankName\":\"SBI\"}")
-                        .content("{\"accountNumber\":1234}")
-                        .content("{\"amount\": 100.0}"))
-                .andExpect(status().isCreated())
-                .andExpect(content().string("Wallet created successfully"));
+    @Before
+    public void setUp() {
+        wallet = new Wallet();
+        wallet.setContactNumber(1234567890L);
+        wallet.setBalance(500.0);
     }
 
     @Test
-    void testGetWalletById() throws Exception {
-        Wallet wallet = new Wallet();
-        wallet.setPhoneNumber(1234);
-        wallet.setAadhaarNumber(1234);
-        wallet.setPanNumber("A1234");
-        wallet.setBankName("SBI");
-        wallet.setAccountNumber(1234);
-        wallet.setAmount(100.0);
-
-        when(walletService.getWalletByPhoneNumber(1234)).thenReturn(wallet);
-
-        mockMvc.perform(get("/wallet/1234"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.phoneNumber").value(1234))
-                .andExpect(jsonPath("$.aadhaarNumber").value(1234))
-                .andExpect(jsonPath("$.panNumber").value("A1234"))
-                .andExpect(jsonPath("$.bankName").value("SBI"))
-                .andExpect(jsonPath("$.accountNumber").value(1234))
-                .andExpect(jsonPath("$.amount").value(100.0));
+    public void testCreateWallet() {
+        when(walletService.addWallet(wallet)).thenReturn(wallet);
+        ResponseEntity<String> responseEntity = walletController.createWallet(wallet);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.CREATED);
     }
 
     @Test
-    void testGetWalletByIdNotFound() throws Exception {
-        when(walletService.getWalletByPhoneNumber(1234)).thenReturn(null);
+    public void testGetWalletByPhoneNumber() throws WalletNotExistsException {
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
+        ResponseEntity<?> responseEntity = walletController.getWalletByContactNumber(1234567890L);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        assertEquals(((Wallet) responseEntity.getBody()).getContactNumber(), wallet.getContactNumber());
+    }
 
-        mockMvc.perform(get("/wallet/1234"))
-                .andExpect(status().isNoContent())
-                .andExpect(content().string("No wallet"));
+    @Test
+    public void testAddMoneyToWallet() throws WalletNotExistsException {
+        WalletRequest request = new WalletRequest();
+        request.setContactNumber(1234567890L);
+        request.setAmount(500.0);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
+        ResponseEntity<String> responseEntity = walletController.addMoneyToWallet(request);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        assertEquals(wallet.getBalance(), 1000.0, 0);
+    }
+
+    @Test(expected = WalletNotExistsException.class)
+    public void testAddMoneyToWalletThrowsExceptionWhenWalletNotFound() throws WalletNotExistsException {
+        WalletRequest request = new WalletRequest();
+        request.setContactNumber(1234567890L);
+        request.setAmount(500.0);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(null);
+        walletController.addMoneyToWallet(request);
+    }
+
+    @Test
+    public void testWithdrawMoney() throws WalletNotExistsException, InSufficientBalanceException {
+        WalletRequest request = new WalletRequest();
+        request.setContactNumber(1234567890L);
+        request.setAmount(200.0);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
+        ResponseEntity<String> responseEntity = walletController.withdrawMoney(request);
+        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+        assertEquals(wallet.getBalance(), 300.0, 0);
+    }
+
+    @Test(expected = WalletNotExistsException.class)
+    public void testWithdrawMoneyThrowsExceptionWhenWalletNotFound() throws WalletNotExistsException, InSufficientBalanceException {
+        WalletRequest request = new WalletRequest();
+        request.setContactNumber(1234567890L);
+        request.setAmount(200.0);
+        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(null);
+        walletController.withdrawMoney(request);
     }
 }
