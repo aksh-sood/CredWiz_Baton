@@ -14,7 +14,7 @@ import lombok.*;
 public class Wallet {
    @Id
    @Column(length = 15)
-   private long phoneNumber;
+   private long contactNumber;
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long walletId;
 
@@ -39,7 +39,7 @@ public class Wallet {
     private long accountNumber;
 
     @Getter @Setter
-    private Double amount=0.0;
+    private Double balance=0.0;
 
 //    private List<Transaction> transactions;
 }

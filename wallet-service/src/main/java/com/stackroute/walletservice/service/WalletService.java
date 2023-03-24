@@ -1,5 +1,6 @@
 package com.stackroute.walletservice.service;
 
+import com.stackroute.walletservice.exception.InSufficientBalanceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +28,10 @@ public class WalletService implements WalletServiceInterface{
 
 	public Wallet withdrawMoney(long phoneNumber, Double amount){
 		Wallet wallet = getWalletByPhoneNumber(phoneNumber);
-		if (wallet == null || wallet.getAmount() < amount) {
+		if (wallet == null || wallet.getBalance() < amount) {
 			return null;
 		}
-		wallet.setAmount(wallet.getAmount() - amount);
+		wallet.setBalance(wallet.getBalance() - amount);
 		walletRepository.save(wallet);
 		return wallet;
 	}
@@ -41,12 +42,12 @@ public class WalletService implements WalletServiceInterface{
 		if (wallet == null) {
 			return null;
 		}
-		wallet.setAmount(wallet.getAmount() + amount);
+		wallet.setBalance(wallet.getBalance() + amount);
 		walletRepository.save(wallet);
 		return wallet;
 	}
 
-	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InsufficientBalanceException {
+	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InSufficientBalanceException {
 		Wallet senderWallet = getWalletByPhoneNumber(senderPhoneNumber);
 		Wallet receiverWallet = getWalletByPhoneNumber(receiverPhoneNumber);
 
@@ -54,12 +55,12 @@ public class WalletService implements WalletServiceInterface{
 			return false;
 		}
 
-		if (senderWallet.getAmount() < amount) {
-			throw new InsufficientBalanceException("Sender does not have sufficient balance");
+		if (senderWallet.getBalance() < amount) {
+			throw new InSufficientBalanceException("Sender does not have sufficient balance");
 		}
 
-		senderWallet.setAmount(senderWallet.getAmount() - amount);
-		receiverWallet.setAmount(receiverWallet.getAmount() + amount);
+		senderWallet.setBalance(senderWallet.getBalance() - amount);
+		receiverWallet.setBalance(receiverWallet.getBalance() + amount);
 
 		walletRepository.save(senderWallet);
 		walletRepository.save(receiverWallet);
