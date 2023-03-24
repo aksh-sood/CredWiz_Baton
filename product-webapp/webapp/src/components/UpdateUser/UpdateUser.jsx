@@ -1,9 +1,9 @@
-import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
-import { width } from "@mui/system";
-import './UpdateUser.css';
+import { Box, Button, TextField, Typography } from "@mui/material";
+import InputAdornment from "@mui/material/InputAdornment";
 import Navbar from "../navbar/Navbar";
 import NavbarWallet from "../createWallet/NavbarWallet";
 import Footer from "../footer/Footer"
+import './UpdateUser.css';
 
 const iswalletadded = false
 
@@ -31,7 +31,7 @@ const UpdateUser = () => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 1, width: 'auto', background: 'white', borderRadius: "20px", margin: "5%" },
+                            '& .MuiTextField-root': { width: 'auto' , background: 'white' ,borderRadius: "20px", margin: "2%"  },
                             '& #address': { width: '50ch' },
                             backgroundColor: "#241c2c",
                             borderRadius: "20px",
@@ -44,20 +44,62 @@ const UpdateUser = () => {
 
                     >
                         <div>
-                            <TextField id="outlined-basic" label="First Name" variant="filled" />
-                            <TextField id="outlined-basic" label="Last Name" variant="filled" />
+                            <TextField id="outlined-basic" label="First Name" variant="filled"   InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-user" />
+                      </InputAdornment>
+                    ),
+                  }}/>
+                            <TextField id="outlined-basic" label="Last Name" variant="filled"  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-user" />
+                      </InputAdornment>
+                    ),
+                  }}/>
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Contact No:" variant="filled" />
-                            <TextField id="outlined-basic" label="Email ID" variant="filled" />
+                            <TextField id="outlined-basic" label="Contact No:" variant="filled" InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-phone" />
+                      </InputAdornment>
+                    ),
+                  }}/>
+                            <TextField id="outlined-basic" label="Email ID" variant="filled" InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-envelope" />
+                      </InputAdornment>
+                    ),
+                  }} />
                         </div>
                         <div >
-                            <TextField fullWidth id="address" sx={{ "#address": { width: { xs: "100%", lg: "50ch" } } }} label="Address" variant="filled" />
+                            <TextField fullWidth id="address" sx={{"#address":{width:{xs:"100%",lg:"50ch"}},marginLeft:"0%"}} label="Address" variant="filled"  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-house" />
+                      </InputAdornment>
+                    ),
+                  }}/>
                         </div>
 
                         <div>
-                            <TextField id="outlined-basic" label="Password" variant="filled" />
-                            <TextField id="outlined-basic" label="Confirm Password" variant="filled" />
+                            <TextField id="outlined-basic" label="Password" variant="filled"  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-lock" />
+                      </InputAdornment>
+                    ),
+                  }}/>
+                            <TextField id="outlined-basic" label="Confirm Password" variant="filled" InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <i class="fas fa-lock" />
+                      </InputAdornment>
+                    ),
+                  }}/>
                         </div>
                         <Box sx={{
                             textAlign: 'center',

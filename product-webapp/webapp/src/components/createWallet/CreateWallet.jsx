@@ -27,7 +27,7 @@ const CreateWallet = (props) => {
                     <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': {m:1, width: '70%', background: 'white' ,borderRadius: "20px", margin: "5%" },
+                            '& .MuiTextField-root': {m:1, width: '70%', background: 'white' ,borderRadius: "20px", margin: "15px" },
                             '& #address': { width: '50ch' },    
                             backgroundColor: "#241c2c",
                             borderRadius: "20px",
