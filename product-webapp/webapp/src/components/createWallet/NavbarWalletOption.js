@@ -18,5 +18,11 @@ export const NavbarWalletOption = [
         path: '/updateUser',
         icon: <FaIcons.FaUserAlt />,
         cName: 'nav-text',
+    },
+    {
+        title: 'About Us',
+        path: '/about_us',
+        icon: <AiIcons.AiFillInfoCircle />,
+        cName: 'nav-text'
     }
 ]
