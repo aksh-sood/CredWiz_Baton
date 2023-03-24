@@ -10,19 +10,20 @@ import com.stackroute.walletservice.repository.WalletRepository;
 import java.util.Optional;
 
 @Service
-public class WalletService implements WalletServiceInterface{
-	@Autowired
-	private WalletRepository walletRepository;
-	
-	public Wallet addWallet(Wallet wallet) {
-		Wallet addWallet=walletRepository.save(wallet);
-		return addWallet;
-	}
-	public Wallet getWalletByPhoneNumber(long id) {
-		Optional<Wallet> optionalWallet=walletRepository.findById(id);
-		Wallet wallet=optionalWallet.isEmpty()?null:optionalWallet.get();
-		return wallet;
-	}
+public class WalletService implements WalletServiceInterface {
+    @Autowired
+    private WalletRepository walletRepository;
+
+    public Wallet addWallet(Wallet wallet) {
+        Wallet addWallet = walletRepository.save(wallet);
+        return addWallet;
+    }
+
+    public Wallet getWalletByPhoneNumber(long id) {
+        Optional<Wallet> optionalWallet = walletRepository.findById(id);
+        Wallet wallet = optionalWallet.isEmpty() ? null : optionalWallet.get();
+        return wallet;
+    }
 
 
 
@@ -51,9 +52,9 @@ public class WalletService implements WalletServiceInterface{
 		Wallet senderWallet = getWalletByPhoneNumber(senderPhoneNumber);
 		Wallet receiverWallet = getWalletByPhoneNumber(receiverPhoneNumber);
 
-		if (senderWallet == null || receiverWallet == null) {
-			return false;
-		}
+        if (senderWallet == null || receiverWallet == null) {
+            return false;
+        }
 
 		if (senderWallet.getBalance() < amount) {
 			throw new InSufficientBalanceException("Sender does not have sufficient balance");
@@ -62,11 +63,11 @@ public class WalletService implements WalletServiceInterface{
 		senderWallet.setBalance(senderWallet.getBalance() - amount);
 		receiverWallet.setBalance(receiverWallet.getBalance() + amount);
 
-		walletRepository.save(senderWallet);
-		walletRepository.save(receiverWallet);
+        walletRepository.save(senderWallet);
+        walletRepository.save(receiverWallet);
 
-		return true;
-	}
+        return true;
+    }
 
 }
 
