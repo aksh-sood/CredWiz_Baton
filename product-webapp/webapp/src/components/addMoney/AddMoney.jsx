@@ -7,6 +7,10 @@ import InputAdornment from "@mui/material/InputAdornment"
 import React from "react"
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../footer/Footer'
+import Modal from '@mui/material/Modal';
+import GreenCheck from "../../assets/green_checkmark.svg";
+import RedCross from "../../assets/red-x-icon.svg"
+
 
 const styles = {
     resize: {
@@ -15,7 +19,16 @@ const styles = {
 }
 
 const AddMoney = (props) => {
+
+
     const { classes } = props;
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const path = RedCross; 
+
+
+
     return (
         <>
             <Navbar></Navbar>
@@ -75,6 +88,7 @@ const AddMoney = (props) => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
+                                onClick={handleOpen}
                                 // color="#241C2C"
                                 sx={{
                                     width: "150px",
@@ -92,6 +106,37 @@ const AddMoney = (props) => {
                             >
                                 ADD
                             </Button>
+
+
+                            <Modal
+                                open={open}
+                                onClose={handleClose}
+                                aria-labelledby="modal-modal-title"
+                                aria-describedby="modal-modal-description"
+                            >
+                                <Box sx={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: '50%',
+                                    height: 'auto',
+                                    width: 'auto',
+                                    transform: 'translate(-50%, -50%)',
+                                    bgcolor: 'background.paper',
+                                    border: '2px solid #000',
+                                    boxShadow: 24,
+                                    p: 4,
+                                }}>
+                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        Money Added Successfully
+                                    </Typography>
+                                    
+                                    <div className='tstatus'>
+                                        <img src={path} height="180vh" width="180vh" />
+                                    </div>
+                                </Box>
+                            </Modal>
+
+
                         </Box>
 
                     </Box>

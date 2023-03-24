@@ -1,5 +1,5 @@
 import { mockTransactions } from "../../data/mockData";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import StatBox from "../statebox/StatBox";
 import TransactionBar from "../history/TransactionBar";
@@ -22,14 +22,35 @@ export default function Transaction() {
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
         <Box
-          gridColumn={{ xs: '1', sm: 'span 3' }}
+          gridColumn={{ xs: '3', sm: 'span 3' }}
            backgroundColor="white"
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
+          
+          
+          <StatBox
+            subtitle="Austin George"
+            title="User Name"
+            icon={
+              <AccountBalanceIcon
+                sx={{ color:"black", fontSize: { xs: '20px', sm: '28px' } }}
+              />
+            }
+          />
+        </Box>
+        {/* ROW 1 */}
+        <Box
+          gridColumn={{ xs: '3', sm: 'span 3' }}
+           backgroundColor="white"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          
+          
           <StatBox
             subtitle="12,361"
             title="Balance"
@@ -39,6 +60,16 @@ export default function Transaction() {
               />
             }
           />
+        </Box>
+
+        <Box
+          gridColumn={{ xs: '3', sm: 'span 3' }}
+           backgroundColor="white"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Button>Add Money</Button>
         </Box>
       </Box>
 

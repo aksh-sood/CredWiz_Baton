@@ -15,9 +15,14 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactionId;
+    @NotEmpty()
+    @Column(length=15)
+    @Getter
+    @Setter
+    private long phoneNumber;
 
     @NotEmpty()
-    @Column(length = 12)
+    @Column
     @Getter
     @Setter
     private Date date;
