@@ -2,27 +2,31 @@ package com.stackroute.userservice.service;
 
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
-import com.stackroute.userservice.exceptions.EmailIdAlreadyExistsException;
 import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserDto;
 import com.stackroute.userservice.repository.UserRepository;
-import com.stackroute.userservice.utils.UserMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements  UserService{
 
     @Autowired
     private UserRepository userRepository;
 
+//    @Autowired
+//    private UserMapper userMapper;
+
     @Autowired
-    private UserMapper userMapper;
+    private ModelMapper modelMapper;
 
 
     public User saveUser(User user) throws ContactNumberAlreadyExistsException{
@@ -80,8 +84,10 @@ public class UserServiceImpl implements  UserService{
     @Override
     public User updateUser(UserDto userDto) throws Exception {
 
-        User user=getUserByContactNumber(userDto.getContactNumber());
-        userMapper.updateUserFromDto(userDto,user);
+//        User user=getUserByContactNumber(userDto.getContactNumber());
+        User user=this.modelMapper.map(userDto,User.class);
+
+//        userMapper.updateUserFromDto(userDto,user);
         return userRepository.save(user);
 
     }

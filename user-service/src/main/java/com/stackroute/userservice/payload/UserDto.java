@@ -19,8 +19,7 @@ public class UserDto {
   private long contactNumber;
   private String emailId;
   private String password;
-  private String firstName;
-  private String lastName;
+  private String userName;
   private String address;
-  private String aadharNo;
+
 }

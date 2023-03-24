@@ -1,4 +1,4 @@
-package com.stackroute.userservice.utils;
+package com.stackroute.userservice.service;
 
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserDto;
@@ -10,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    @Bean
+//    @Bean
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateUserFromDto(UserDto userDto, @MappingTarget User entity);
 
-    @Bean
+//    @Bean
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void updateDtoFromUser(User user, @MappingTarget UserDto userDto);
 
