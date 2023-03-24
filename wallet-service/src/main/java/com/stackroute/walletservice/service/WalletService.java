@@ -23,8 +23,21 @@ public class WalletService implements WalletServiceInterface{
 		return wallet;
 	}
 
-	public Wallet addMoney(Long walletId, Double amount){
-		Wallet wallet = getWallet(walletId);
+
+
+	public Wallet withdrawMoney(long phoneNumber, Double amount){
+		Wallet wallet = getWalletByPhoneNumber(phoneNumber);
+		if (wallet == null || wallet.getAmount() < amount) {
+			return null;
+		}
+		wallet.setAmount(wallet.getAmount() - amount);
+		walletRepository.save(wallet);
+		return wallet;
+	}
+
+
+	public Wallet addMoney(long phoneNumber, Double amount) {
+		Wallet wallet = getWalletByPhoneNumber(phoneNumber);
 		if (wallet == null) {
 			return null;
 		}
@@ -33,15 +46,27 @@ public class WalletService implements WalletServiceInterface{
 		return wallet;
 	}
 
-	public Wallet withdrawMoney(long walletId, Double amount){
-		Wallet wallet = getWallet(walletId);
-		if (wallet == null || wallet.getAmount() < amount) {
-			return null;
+	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InsufficientBalanceException {
+		Wallet senderWallet = getWalletByPhoneNumber(senderPhoneNumber);
+		Wallet receiverWallet = getWalletByPhoneNumber(receiverPhoneNumber);
+
+		if (senderWallet == null || receiverWallet == null) {
+			return false;
 		}
-		wallet.setAmount(wallet.getAmount() - amount);
-		walletRepository.save(wallet);
-		return wallet;
+
+		if (senderWallet.getAmount() < amount) {
+			throw new InsufficientBalanceException("Sender does not have sufficient balance");
+		}
+
+		senderWallet.setAmount(senderWallet.getAmount() - amount);
+		receiverWallet.setAmount(receiverWallet.getAmount() + amount);
+
+		walletRepository.save(senderWallet);
+		walletRepository.save(receiverWallet);
+
+		return true;
 	}
+
 }
 
 
