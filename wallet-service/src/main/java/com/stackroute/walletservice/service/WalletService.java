@@ -1,5 +1,6 @@
 package com.stackroute.walletservice.service;
 
+import com.stackroute.walletservice.exception.InSufficientBalanceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,7 @@ public class WalletService implements WalletServiceInterface{
 		return wallet;
 	}
 
-	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InsufficientBalanceException {
+	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InSufficientBalanceException {
 		Wallet senderWallet = getWalletByPhoneNumber(senderPhoneNumber);
 		Wallet receiverWallet = getWalletByPhoneNumber(receiverPhoneNumber);
 
@@ -55,7 +56,7 @@ public class WalletService implements WalletServiceInterface{
 		}
 
 		if (senderWallet.getAmount() < amount) {
-			throw new InsufficientBalanceException("Sender does not have sufficient balance");
+			throw new InSufficientBalanceException("Sender does not have sufficient balance");
 		}
 
 		senderWallet.setAmount(senderWallet.getAmount() - amount);
