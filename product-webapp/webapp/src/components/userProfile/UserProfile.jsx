@@ -5,6 +5,8 @@ import './UserProfile.css';
 import Footer from "../footer/Footer"
 import { Link } from "react-router-dom";
 import NavbarWallet from "../createWallet/NavbarWallet";
+import { shadows } from '@mui/system';
+
 
 const iswalletadded=true
 
@@ -32,7 +34,7 @@ const UserProfile = () => {
             <div className="userprofileBody">
                 {/* <div className="userprofileImage"></div> */}
                 <div className="userprofileForm">
-                    <Box
+                    <Box 
                         component="form"
                         sx={{
                             '& .MuiTextField-root': {
@@ -43,12 +45,13 @@ const UserProfile = () => {
                                     lg: "42ch",
                                     xl: "45ch"
                                 },
-                                background: 'white', borderRadius: "20px", margin: "2%"
+                                boxShadow: 3,
+                                background: 'white', borderRadius: "20px", margin: "1%"
                             },
                             '& #address': { width: '50ch' },
                             backgroundColor: "#241c2c",
                             borderRadius: "20px",
-                            paddingTop: "30px",
+                            paddingTop: "40px",
                             textAlign: "center",
 
                         }}
@@ -58,8 +61,8 @@ const UserProfile = () => {
                         height="100%"
                     >
                         <div>
-                            <TextField id="outlined-basic" disabled label="First Name" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Last Name" variant="outlined" />
+                            <TextField id="outlined-basic" multiline disabled label="User Name" variant="outlined" />
+                             <TextField id="outlined-basic" multiline  maxRows={4} label="Address" variant="outlined" />
                         </div>
                         <div>
                             <TextField id="outlined-basic" disabled label="Contact No:" variant="outlined" />
@@ -101,6 +104,36 @@ const UserProfile = () => {
                             >
                                 Click Here to Update Your Profile
                             </Button>
+                            
+                        </Box>
+                        <Box sx={{
+                            textAlign: 'center',
+                            marginTop: '30px',
+                            marginBottom: "30px"
+                        }}>
+                            <Button
+                                type="submit"
+                                className="btn bubble "
+                                id="sign-in-btn"
+                                value="Sign up"
+                                href="/updateUser"
+                                // color="#241C2C"
+                                sx={{
+                                    backgroundColor: "#241C2C",
+                                    color: "#AEAE50",
+                                    border: "2px solid #AEAE50",
+                                    borderRadius: "20px",
+                                    "&:hover": {
+                                        boxShadow: "none",
+                                        backgroundColor: "#AEAE50",
+                                        color: "#241C2C",
+                                        border: "2px solid #241C2C",
+                                    },
+                                }}
+                            >
+                                Delete Profile                          
+                                 </Button>
+                            
                         </Box>
                     </Box>
                 </div>
