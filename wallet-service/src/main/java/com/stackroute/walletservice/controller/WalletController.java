@@ -1,5 +1,6 @@
 package com.stackroute.walletservice.controller;
 
+import com.stackroute.walletservice.exception.WalletNotExistsException;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,18 +16,19 @@ public class WalletController {
 	private WalletService walletService;
 
 	@PostMapping("/wallet")
-	public ResponseEntity<?> createWallet(@RequestBody Wallet wallet) {
+	public ResponseEntity<?> createWallet(@RequestBody Wallet wallet)  {
 		
 		walletService.addWallet(wallet);
 		ResponseEntity<?> entity = new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
 		return entity;
 	}
 	@GetMapping("/wallet/{phoneNumber}")
-	public ResponseEntity<?> getWalletByPhoneNumber(@PathVariable("phoneNumber") long id) {
+	public ResponseEntity<?> getWalletByPhoneNumber(@PathVariable("phoneNumber") long id) throws WalletNotExistsException {
 		ResponseEntity<?> entity = null;
 		Wallet wallet = walletService.getWalletByPhoneNumber(id);
 		if (wallet == null) {
 			entity = new ResponseEntity<String>("No wallet", HttpStatus.NO_CONTENT);
+			throw new WalletNotExistsException("No wallet Exist");
 		} else {
 			entity = new ResponseEntity<Wallet>(wallet, HttpStatus.OK);
 		}

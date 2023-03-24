@@ -9,7 +9,7 @@ import com.stackroute.walletservice.repository.WalletRepository;
 import java.util.Optional;
 
 @Service
-public class WalletService{
+public class WalletService implements WalletServiceInterface{
 	@Autowired
 	private WalletRepository walletRepository;
 	
@@ -23,15 +23,6 @@ public class WalletService{
 		return wallet;
 	}
 
-	public Wallet addMoney(Long walletId, Double amount){
-		Wallet wallet = getWalletByPhoneNumber(walletId);
-		if (wallet == null) {
-			return null;
-		}
-		wallet.setAmount(wallet.getAmount() + amount);
-		walletRepository.save(wallet);
-		return wallet;
-	}
 
 	public Wallet withdrawMoney(long walletId, Double amount){
 		Wallet wallet = getWalletByPhoneNumber(walletId);
@@ -39,6 +30,17 @@ public class WalletService{
 			return null;
 		}
 		wallet.setAmount(wallet.getAmount() - amount);
+		walletRepository.save(wallet);
+		return wallet;
+	}
+
+	@Override
+	public Wallet addMoney(long phoneNumber, Double amount) {
+		Wallet wallet = getWalletByPhoneNumber(phoneNumber);
+		if (wallet == null) {
+			return null;
+		}
+		wallet.setAmount(wallet.getAmount() + amount);
 		walletRepository.save(wallet);
 		return wallet;
 	}

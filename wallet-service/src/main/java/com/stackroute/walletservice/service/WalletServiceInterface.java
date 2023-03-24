@@ -8,8 +8,8 @@ public interface WalletServiceInterface {
 
 
 
-    Wallet withdrawMoney(long walletId, Double amount);
+    Wallet withdrawMoney(long phoneNumber, Double amount);
 
-    Wallet addMoney(long walletId, Double amount);
+    Wallet addMoney(long phoneNumber, Double amount);
 }
 

@@ -5,8 +5,6 @@ import javax.validation.constraints.NotEmpty;
 
 import lombok.*;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
