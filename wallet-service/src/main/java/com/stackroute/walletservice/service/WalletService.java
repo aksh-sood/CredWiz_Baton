@@ -11,31 +11,29 @@ import java.util.Optional;
 
 @Service
 public class WalletService implements WalletServiceInterface {
-    @Autowired
-    private WalletRepository walletRepository;
+	@Autowired
+	private WalletRepository walletRepository;
 
-    public Wallet addWallet(Wallet wallet) {
-        Wallet addWallet = walletRepository.save(wallet);
-        return addWallet;
-    }
+	public Wallet addWallet(Wallet wallet) {
+		Wallet addWallet = walletRepository.save(wallet);
+		return addWallet;
+	}
 
-    public Wallet getWalletByContactNumber(long id) {
-        Optional<Wallet> optionalWallet = walletRepository.findById(id);
-        Wallet wallet = optionalWallet.isEmpty() ? null : optionalWallet.get();
-        return wallet;
-    }
+	public Wallet getWalletByContactNumber(long id) {
+		Optional<Wallet> optionalWallet = walletRepository.findById(id);
+		Wallet wallet = optionalWallet.isEmpty() ? null : optionalWallet.get();
+		return wallet;
+	}
 
-
-    public Wallet withdrawMoney(long phoneNumber, Double amount) {
-        Wallet wallet = getWalletByContactNumber(phoneNumber);
-        if (wallet == null || wallet.getBalance() < amount) {
-            return null;
-        }
-        wallet.setBalance(wallet.getBalance() - amount);
-        walletRepository.save(wallet);
-        return wallet;
-    }
-
+	public Wallet withdrawMoney(long phoneNumber, Double amount) {
+		Wallet wallet = getWalletByContactNumber(phoneNumber);
+		if (wallet == null || wallet.getBalance() < amount) {
+			return null;
+		}
+		wallet.setBalance(wallet.getBalance() - amount);
+		walletRepository.save(wallet);
+		return wallet;
+	}
 
     public Wallet addMoney(long phoneNumber, Double amount) {
         Wallet wallet = getWalletByContactNumber(phoneNumber);
@@ -47,13 +45,14 @@ public class WalletService implements WalletServiceInterface {
         return wallet;
     }
 
-    public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InSufficientBalanceException {
-        Wallet senderWallet = getWalletByContactNumber(senderPhoneNumber);
-        Wallet receiverWallet = getWalletByContactNumber(receiverPhoneNumber);
+	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount)
+			throws InSufficientBalanceException {
+		Wallet senderWallet = getWalletByContactNumber(senderPhoneNumber);
+		Wallet receiverWallet = getWalletByContactNumber(receiverPhoneNumber);
 
-        if (senderWallet == null || receiverWallet == null) {
-            return false;
-        }
+		if (senderWallet == null || receiverWallet == null) {
+			return false;
+		}
 
         if (senderWallet.getBalance() < amount) {
             throw new InSufficientBalanceException("Sender does not have sufficient balance");
@@ -62,13 +61,10 @@ public class WalletService implements WalletServiceInterface {
         senderWallet.setBalance(senderWallet.getBalance() - amount);
         receiverWallet.setBalance(receiverWallet.getBalance() + amount);
 
-        walletRepository.save(senderWallet);
-        walletRepository.save(receiverWallet);
+		walletRepository.save(senderWallet);
+		walletRepository.save(receiverWallet);
 
-        return true;
-    }
+		return true;
+	}
 
 }
-
-
-

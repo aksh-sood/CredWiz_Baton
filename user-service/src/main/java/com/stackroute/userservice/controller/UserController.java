@@ -47,16 +47,19 @@ public class UserController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
-	try{authenticationManager.authenticate(
+
+		ResponseEntity<?> entity = null;
+		try{authenticationManager.authenticate(
 			new UsernamePasswordAuthenticationToken(String.valueOf(authenticationRequest.getContactNumber()),authenticationRequest.getPassword()));
 	}catch(BadCredentialsException e){
-		throw new Exception("Incorrect contact Number or password"+e);
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(authenticationRequest.getContactNumber()));
 		final String jwt=jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new UserAuthenticateResponse(jwt));
-
+		entity=
+		 ResponseEntity.ok(new UserAuthenticateResponse(jwt));
+return entity;
 	}
 
 	@PostMapping("/register")
