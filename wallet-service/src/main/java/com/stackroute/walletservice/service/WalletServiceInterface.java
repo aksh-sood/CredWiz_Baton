@@ -8,7 +8,7 @@ public interface WalletServiceInterface {
 
     Wallet getWalletByContactNumber(long id);
 
-    Wallet withdrawMoney(long contactNumber, Double amount);
+    Wallet withdrawMoney(long contactNumber, Double amount) throws InSufficientBalanceException;
 
     Wallet addMoney(long contactNumber, Double amount);
 

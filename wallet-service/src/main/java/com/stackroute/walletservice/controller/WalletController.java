@@ -13,12 +13,11 @@ import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.service.WalletService;
 
 @RestController
-@RequestMapping("/wallet")
 public class WalletController {
     @Autowired
     private WalletService walletService;
 
-    @PostMapping("/wal")
+    @PostMapping("/wallet")
     public ResponseEntity<String> createWallet(@RequestBody Wallet wallet) {
         walletService.addWallet(wallet);
         return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
@@ -55,8 +54,7 @@ public class WalletController {
         if (wallet == null) {
             throw new WalletNotExistsException("No wallet found for phone number: " + request.getContactNumber());
         } else if (wallet.getBalance() < request.getAmount()) {
-            throw new InSufficientBalanceException(
-                    "Insufficient balance in wallet with phone number: " + request.getContactNumber());
+            throw new InSufficientBalanceException("Insufficient balance in wallet with phone number: " + request.getContactNumber());
         }
         wallet.setBalance(wallet.getBalance() - request.getAmount());
         walletService.addWallet(wallet);
@@ -71,8 +69,7 @@ public class WalletController {
         if (isTransactionSuccessful) {
             return new ResponseEntity<String>("Transaction successful", HttpStatus.OK);
         } else {
-            throw new InSufficientBalanceException("Insufficient balance in sender's wallet with phone number: "
-                    + sendMoneyRequest.getSenderContactNumber());
+            throw new InSufficientBalanceException("Insufficient balance in sender's wallet with phone number: " + sendMoneyRequest.getSenderContactNumber());
         }
     }
 
