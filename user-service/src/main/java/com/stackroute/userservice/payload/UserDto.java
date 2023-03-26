@@ -13,13 +13,25 @@ import javax.validation.constraints.Pattern;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "build")
 @Builder
 public class UserDto {
-  private long contactNumber;
+
+
+  @NotEmpty(message = "Email cannot be null or empty")
+  @Email(message = "Invalid email id")
   private String emailId;
+
+  @NotEmpty(message = "Password cannot be null or empty")
+  @Pattern(regexp = "^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$",message="password does not match the constraints")
   private String password;
+
+  @NotEmpty(message = "Name is required")
   private String userName;
+
+
+
+  @NotEmpty(message = "Address cannot be null or empty")
   private String address;
 
 }

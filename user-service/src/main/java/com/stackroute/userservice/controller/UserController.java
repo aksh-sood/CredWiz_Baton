@@ -2,7 +2,7 @@ package com.stackroute.userservice.controller;
 
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
-import com.stackroute.userservice.exceptions.EmailIdNotExistException;
+
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserAuthenticateRequest;
 import com.stackroute.userservice.payload.UserAuthenticateResponse;
@@ -17,13 +17,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@Validated
 public class UserController {
 
 	@Autowired
@@ -45,6 +49,18 @@ public class UserController {
 		return entity;
 	}
 
+	@PostMapping("/register")
+	public ResponseEntity<?> registerUser(@RequestBody @Valid User user) {
+		ResponseEntity<?> entity = null;
+		try {
+			userService.saveUser(user);
+			entity = new ResponseEntity<String>("User Registered Successfully...", HttpStatus.CREATED);
+		} catch (ContactNumberAlreadyExistsException e) {
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+
 	@PostMapping("/login")
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
 
@@ -62,49 +78,27 @@ public class UserController {
 return entity;
 	}
 
-	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody User user) {
-		ResponseEntity<?> entity = null;
-		try {
-			userService.saveUser(user);
-			entity = new ResponseEntity<String>("User Registered Successfully...", HttpStatus.CREATED);
-		} catch (ContactNumberAlreadyExistsException e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
 
-	@GetMapping("/getUser/{email}")
-	public ResponseEntity<?> getUserByEmailId(@PathVariable("email") String emailId) {
-		ResponseEntity<?> entity = null;
-		User user = null;
-		try {
-			user = userService.getUserByEmail(emailId);
-		} catch (EmailIdNotExistException e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
-		entity = new ResponseEntity<User>(user, HttpStatus.OK);
-		return entity;
-	}
+
+
 
 	@DeleteMapping("/delete/{contactNumber}")
 	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") long contactNumber)
 			throws ContactNumberNotExistException {
+
 		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
 		ResponseEntity<?> entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);
 		return entity;
 	}
 
 	@GetMapping("/contact/{contactNumber}")
-	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) {
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) throws  ContactNumberNotExistException{
 		User user = null;
 		ResponseEntity<?> entity ;
 
-		try {
+
 			user= userService.getUserByContactNumber(contactNumber);
-		} catch (ContactNumberNotExistException e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
+
 		 entity = new ResponseEntity<User>(user, HttpStatus.OK);
 		return entity;
 	}
@@ -130,11 +124,6 @@ return entity;
 		return entity;
 	}
 
-	@ExceptionHandler(EmailIdNotExistException.class)
-	public ResponseEntity<?> noEmailIdHandlerException(Exception e) {
-		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		return entity;
-	}
 
 	@ExceptionHandler(ContactNumberNotExistException.class)
 	public ResponseEntity<?> noContactNumberExceptionHandler(Exception e) {

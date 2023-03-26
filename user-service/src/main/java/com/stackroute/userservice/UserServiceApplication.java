@@ -40,7 +40,7 @@ public class UserServiceApplication {
 	}
 
 	@Bean
-	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+//	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
