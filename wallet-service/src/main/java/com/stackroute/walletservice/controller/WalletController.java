@@ -13,17 +13,18 @@ import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.service.WalletService;
 
 @RestController
+@RequestMapping("/wallet")
 public class WalletController {
     @Autowired
     private WalletService walletService;
 
-    @PostMapping("/wallet")
+    @PostMapping("/createWallet")
     public ResponseEntity<String> createWallet(@RequestBody Wallet wallet) {
         walletService.addWallet(wallet);
         return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
     }
 
-    @GetMapping("/wallet/{contactNumber}")
+    @GetMapping("/getWallet/{contactNumber}")
     public ResponseEntity<?> getWalletByContactNumber(@PathVariable("contactNumber") long id)
             throws WalletNotExistsException {
         Wallet wallet = walletService.getWalletByContactNumber(id);
