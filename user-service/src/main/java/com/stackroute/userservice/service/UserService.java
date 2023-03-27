@@ -12,8 +12,6 @@ public interface UserService {
 
 	List<User> getAllUser();
 
-	User getUserByEmail(String emailId) throws EmailIdNotExistException;
-
 	boolean deleteUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 	boolean validateUser(User user);
@@ -21,5 +19,5 @@ public interface UserService {
 	User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 
-	User updateUser(User userDto) throws CustomException, ConstraintViolationException;
+	User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException, ContactNumberNotExistException;
 }

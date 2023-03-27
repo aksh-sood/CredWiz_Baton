@@ -103,38 +103,7 @@ public class UserController {
 
     @PutMapping("/updateUser")
     public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) throws CustomException, ConstraintViolationException, ContactNumberNotExistException {
-
-        User user = userService.getUserByContactNumber(userDto.getContactNumber());
-
-        if (user == null) {
-            throw new CustomException("User does not exist.");
-        }
-
-        if (userDto.getEmailId() != null) {
-            // Check email validation
-            if (!userDto.getEmailId().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
-                throw new CustomException("Invalid email format.");
-            }
-            user.setEmailId(userDto.getEmailId());
-        }
-
-        if (userDto.getPassword() != null) {
-            // Check password validation
-            if (userDto.getPassword().length() < 8 || userDto.getPassword().length() > 20) {
-                throw new CustomException("Password must be between 8 and 20 characters.");
-            }
-            user.setPassword(userDto.getPassword());
-        }
-
-        if (userDto.getUserName() != null) {
-            user.setUserName(userDto.getUserName());
-        }
-
-        if (userDto.getAddress() != null) {
-            user.setAddress(userDto.getAddress());
-        }
-
-        User updatedUser = userService.updateUser(user);
+        User updatedUser = userService.updateUser(userDto);
         return ResponseEntity.ok(updatedUser);
     }
 
