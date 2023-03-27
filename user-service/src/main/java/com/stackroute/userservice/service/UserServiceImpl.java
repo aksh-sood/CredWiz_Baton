@@ -103,7 +103,7 @@ public class UserServiceImpl implements  UserService{
 //            userDto.setEmailId(oldUser.getEmailId());
 //        }
         try{
-        this.modelMapper.map(userDto,oldUser);}catch(ConstraintViolationException e){
+        modelMapper.map(userDto,oldUser);}catch(ConstraintViolationException e){
             System.out.print("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrooooooooooooooooooooorrrrrrrrrrrrrrrrrrrrrrrroooooo");
         }
         return userRepository.save(oldUser);
