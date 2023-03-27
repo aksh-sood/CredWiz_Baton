@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-@Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
 	@Autowired
