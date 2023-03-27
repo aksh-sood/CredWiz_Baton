@@ -29,11 +29,11 @@ public class WalletServiceTest {
     @BeforeEach
     public void setUp() {
         wallet = new Wallet();
-        wallet.setContactNumber(1234567890L);
-        wallet.setAadhaarNumber(123456789012L);
+        wallet.setContactNumber("1234567890");
+        wallet.setAadhaarNumber("123456789012");
         wallet.setPanNumber("ABCDE1234F");
         wallet.setBankName("SBI");
-        wallet.setAccountNumber(123456789012L);
+        wallet.setAccountNumber("123456789012");
         wallet.setBalance(500.0);
     }
 

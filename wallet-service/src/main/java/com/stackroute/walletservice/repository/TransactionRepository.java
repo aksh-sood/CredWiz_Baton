@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import com.stackroute.walletservice.entity.Transaction;
 
 @Repository
-public interface TransactionRepository extends JpaRepository<Transaction, Long> {
+public interface TransactionRepository extends JpaRepository<Transaction, String> {
 }
 
