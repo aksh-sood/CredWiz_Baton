@@ -21,6 +21,7 @@ import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/wallet")
@@ -43,18 +44,16 @@ public class WalletController {
             if (existingWallet != null) {
                 throw new WalletAlreadyExistsException("Wallet already exists for contact number: " + contactNumber);
             }
-            try {
-                walletService.addWallet(wallet);
-                return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
-            }
-            catch (ConstraintViolationException e){
-                return new ResponseEntity<String>("Error values.Constraint are violated :\n"+e.getMessage(), HttpStatus.BAD_REQUEST);
-            }
-            catch (Exception e){
-                return new ResponseEntity<String>("Error while creating wallet :\n"+e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+            walletService.addWallet(wallet);
+            return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
+
+
         } catch (WalletAlreadyExistsException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (ConstraintViolationException e) {
+            return new ResponseEntity<String>("Error values.Constraint are violated :\n" + e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception e) {
+            return new ResponseEntity<String>("Error while creating wallet :\n" + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
