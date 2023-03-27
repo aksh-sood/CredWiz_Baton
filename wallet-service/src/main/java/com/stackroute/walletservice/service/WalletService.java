@@ -10,6 +10,7 @@ import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.repository.WalletRepository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -86,6 +87,9 @@ public class WalletService implements WalletServiceInterface {
 		transaction.setAmount(amount);
 		transaction.setDate(new Date());
 		transactionRepository.save(transaction);
+	}
+	public List<Transaction> getTransactionsByContactNumber(String contactNumber) {
+		return transactionRepository.findByContactNumber(contactNumber);
 	}
 
 }
