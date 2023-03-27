@@ -2,7 +2,7 @@ package com.stackroute.userservice.controller;
 
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
-import com.stackroute.userservice.exceptions.EmailIdNotExistException;
+
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserAuthenticateRequest;
 import com.stackroute.userservice.payload.UserAuthenticateResponse;
@@ -17,13 +17,17 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
+@Validated
 public class UserController {
 
 	@Autowired
@@ -45,22 +49,8 @@ public class UserController {
 		return entity;
 	}
 
-	@PostMapping("/login")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
-	try{authenticationManager.authenticate(
-			new UsernamePasswordAuthenticationToken(String.valueOf(authenticationRequest.getContactNumber()),authenticationRequest.getPassword()));
-	}catch(BadCredentialsException e){
-		throw new Exception("Incorrect contact Number or password"+e);
-	}
-
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(authenticationRequest.getContactNumber()));
-		final String jwt=jwtTokenUtil.generateToken(userDetails);
-		return ResponseEntity.ok(new UserAuthenticateResponse(jwt));
-
-	}
-
 	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody User user) {
+	public ResponseEntity<?> registerUser(@RequestBody @Valid User user) {
 		ResponseEntity<?> entity = null;
 		try {
 			userService.saveUser(user);
@@ -71,37 +61,44 @@ public class UserController {
 		return entity;
 	}
 
-	@GetMapping("/getUser/{email}")
-	public ResponseEntity<?> getUserByEmailId(@PathVariable("email") String emailId) {
+	@PostMapping("/login")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
+
 		ResponseEntity<?> entity = null;
-		User user = null;
-		try {
-			user = userService.getUserByEmail(emailId);
-		} catch (EmailIdNotExistException e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
-		entity = new ResponseEntity<User>(user, HttpStatus.OK);
-		return entity;
+		try{authenticationManager.authenticate(
+			new UsernamePasswordAuthenticationToken(String.valueOf(authenticationRequest.getContactNumber()),authenticationRequest.getPassword()));
+	}catch(BadCredentialsException e){
+			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 	}
+
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(authenticationRequest.getContactNumber()));
+		final String jwt=jwtTokenUtil.generateToken(userDetails);
+		entity=
+		 ResponseEntity.ok(new UserAuthenticateResponse(jwt));
+return entity;
+	}
+
+
+
+
 
 	@DeleteMapping("/delete/{contactNumber}")
 	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") long contactNumber)
 			throws ContactNumberNotExistException {
+
 		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
 		ResponseEntity<?> entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);
 		return entity;
 	}
 
 	@GetMapping("/contact/{contactNumber}")
-	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) {
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) throws  ContactNumberNotExistException{
 		User user = null;
 		ResponseEntity<?> entity ;
 
-		try {
+
 			user= userService.getUserByContactNumber(contactNumber);
-		} catch (ContactNumberNotExistException e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
+
 		 entity = new ResponseEntity<User>(user, HttpStatus.OK);
 		return entity;
 	}
@@ -127,11 +124,6 @@ public class UserController {
 		return entity;
 	}
 
-	@ExceptionHandler(EmailIdNotExistException.class)
-	public ResponseEntity<?> noEmailIdHandlerException(Exception e) {
-		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		return entity;
-	}
 
 	@ExceptionHandler(ContactNumberNotExistException.class)
 	public ResponseEntity<?> noContactNumberExceptionHandler(Exception e) {

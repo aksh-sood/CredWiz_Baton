@@ -10,35 +10,36 @@ import com.stackroute.walletservice.repository.WalletRepository;
 import java.util.Optional;
 
 @Service
-public class WalletService implements WalletServiceInterface{
+public class WalletService implements WalletServiceInterface {
 	@Autowired
 	private WalletRepository walletRepository;
-	
+
 	public Wallet addWallet(Wallet wallet) {
-		Wallet addWallet=walletRepository.save(wallet);
+		Wallet addWallet = walletRepository.save(wallet);
 		return addWallet;
 	}
-	public Wallet getWalletByPhoneNumber(long id) {
-		Optional<Wallet> optionalWallet=walletRepository.findById(id);
-		Wallet wallet=optionalWallet.isEmpty()?null:optionalWallet.get();
+
+	public Wallet getWalletByContactNumber(long id) {
+		Optional<Wallet> optionalWallet = walletRepository.findById(id);
+		Wallet wallet = optionalWallet.isEmpty() ? null : optionalWallet.get();
 		return wallet;
 	}
 
-
-
-	public Wallet withdrawMoney(long phoneNumber, Double amount){
-		Wallet wallet = getWalletByPhoneNumber(phoneNumber);
-		if (wallet == null || wallet.getBalance() < amount) {
+	public Wallet withdrawMoney(long phoneNumber, Double amount) throws InSufficientBalanceException {
+		Wallet wallet = getWalletByContactNumber(phoneNumber);
+		if (wallet == null) {
 			return null;
+		}
+		if (wallet.getBalance() < amount) {
+			throw new InSufficientBalanceException("Insufficient balance in wallet with phone number: " + phoneNumber);
 		}
 		wallet.setBalance(wallet.getBalance() - amount);
 		walletRepository.save(wallet);
 		return wallet;
 	}
 
-
 	public Wallet addMoney(long phoneNumber, Double amount) {
-		Wallet wallet = getWalletByPhoneNumber(phoneNumber);
+		Wallet wallet = getWalletByContactNumber(phoneNumber);
 		if (wallet == null) {
 			return null;
 		}
@@ -48,8 +49,8 @@ public class WalletService implements WalletServiceInterface{
 	}
 
 	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InSufficientBalanceException {
-		Wallet senderWallet = getWalletByPhoneNumber(senderPhoneNumber);
-		Wallet receiverWallet = getWalletByPhoneNumber(receiverPhoneNumber);
+		Wallet senderWallet = getWalletByContactNumber(senderPhoneNumber);
+		Wallet receiverWallet = getWalletByContactNumber(receiverPhoneNumber);
 
 		if (senderWallet == null || receiverWallet == null) {
 			return false;
@@ -67,8 +68,4 @@ public class WalletService implements WalletServiceInterface{
 
 		return true;
 	}
-
 }
-
-
-
