@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.service.WalletService;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +46,9 @@ public class WalletController {
             try {
                 walletService.addWallet(wallet);
                 return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
+            }
+            catch (ConstraintViolationException e){
+                return new ResponseEntity<String>("Error values.Constraint are violated :\n"+e.getMessage(), HttpStatus.BAD_REQUEST);
             }
             catch (Exception e){
                 return new ResponseEntity<String>("Error while creating wallet :\n"+e.getMessage(), HttpStatus.BAD_REQUEST);
