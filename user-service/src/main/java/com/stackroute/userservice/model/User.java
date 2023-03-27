@@ -2,6 +2,7 @@ package com.stackroute.userservice.model;
 
 
 import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -12,10 +13,11 @@ import javax.validation.constraints.*;
 @Builder
 public class User {
 	@Id
-//	@NotEmpty(message = "Contact number cannot be null or empty")
-//	@NotBlank(message = "Contact number cannot be null or empty")
-//	@Pattern(regexp = "^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$",message="phone number does not match the constraints")
-	private long contactNumber;
+	@Column(name="contact_number")
+	@NotEmpty(message = "Contact number cannot be null or empty")
+	@NotBlank(message = "Contact number cannot be null or empty")
+	@Pattern(regexp = "^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}$",message="phone number does not match the constraints")
+	private String contactNumber;
 
 	@Column(name = "email_id", length = 40)
 	@NotEmpty(message = "Email Id Required")

@@ -54,7 +54,7 @@ public class UserServiceImpl implements  UserService{
 
 
 
-    public boolean deleteUserByContactNumber(long contactNumber)throws ContactNumberNotExistException {
+    public boolean deleteUserByContactNumber(String contactNumber)throws ContactNumberNotExistException {
         Optional<User> optionalUser = userRepository.findByContactNumber(contactNumber);
         User user=optionalUser.isEmpty()?null:optionalUser.get();
         if(user==null){
@@ -72,7 +72,7 @@ public class UserServiceImpl implements  UserService{
 
     }
 
-    public User getUserByContactNumber(long contactNumber) throws ContactNumberNotExistException{
+    public User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException{
         Optional<User> optionalUser= userRepository.findByContactNumber(contactNumber);
         User user=optionalUser.isEmpty()?null:optionalUser.get();
         if(user==null){

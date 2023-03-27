@@ -16,11 +16,11 @@ public interface UserService {
 
 	public User getUserByEmail(String emailId) throws EmailIdNotExistException;
 
-	public boolean deleteUserByContactNumber(long contactNumber) throws ContactNumberNotExistException;
+	public boolean deleteUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 	public boolean validateUser(User user);
 
-	public User getUserByContactNumber(long contactNumber) throws ContactNumberNotExistException;
+	public User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 
 	public User updateUser(UserDto userDto) throws Exception;

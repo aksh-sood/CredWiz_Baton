@@ -1,6 +1,5 @@
 package com.stackroute.userservice.utils;
 
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -19,7 +18,6 @@ public class JwtUtils {
     public String extractUserName(String token) {
         return extractClaim(token, Claims::getSubject);
     }
-
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -40,12 +38,11 @@ public class JwtUtils {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    //generate token
+    // generate token
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<>();
-        return createToken(claims, String.valueOf(userDetails.getUsername()));
+        return createToken(claims, userDetails.getUsername());
     }
-
 
     // create token
 
@@ -55,12 +52,10 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
-
     // validate token
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String userName = extractUserName(token);
         return (userName.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
 
 }
