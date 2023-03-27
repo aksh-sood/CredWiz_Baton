@@ -498,9 +498,7 @@ const SignUp = () => {
         cPassword:yup.string().oneOf([yup.ref('password'),null],"password must match"),
         phoneNumber:yup.string().matches(phoneRegExp, 'Phone number is not valid').min(10,"too short").max(10,"too long").required("phone number is required"),
         address1:yup.string("should be string").required("address is required"),
-        address2:yup.string("should be string").required("address is required"),
-        panNumber:yup.string("should be string").matches(/[A-Z]{5}[0-9]{4}[A-Z]{1}/,"enter valid pan card id").required("pan number is required"),
-        aadharNumber:yup.number("aadharNumber should be number only").min(12,"aadharNumber should be of 12 digits").max(12,"aadhar is only of 12 digits").required("aadharNumber is required").positive("aadharNumber should be positive").integer("aadharNumber should be without decimal")
+        address2:yup.string("should be string").required("address is required")
     }
   );
   const userFormik = useFormik({
@@ -512,9 +510,7 @@ const SignUp = () => {
       cPassword:"",
       phoneNumber:0,
       address1:"",
-      address2:"",
-      panNumber:"",
-      aadharNumber:0
+      address2:""
     },
     validationSchema:userSchema,
     onSubmit: (values) => {
@@ -791,53 +787,6 @@ const SignUp = () => {
                   }}
                 />
               </div>
-              <TextField
-                autoComplete="off"
-                variant="filled"
-                label="PAN Card Number"
-                onChange={userFormik.handleChange}
-                value={userFormik.values.panNumber}
-                error={userFormik.touched.panNumber && Boolean(userFormik.errors.panNumber)}
-                helperText={userFormik.touched.panNumber?userFormik.errors.panNumber:""}
-                name="panNumber"
-                sx={{
-                  gridColumn: "span ",
-                  width: "auto",
-                  margin: "1%",
-                  fontFamily: "Poppins",
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <i class="fas fa-passport" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                autoComplete="off"
-                variant="filled"
-                onChange={userFormik.handleChange}
-                label="Aadhar Card Number"
-                name="aadharNumber"
-                value={userFormik.values.aadharNumber}
-                error={userFormik.touched.aadharNumber && Boolean(userFormik.errors.aadharNumber)}
-                helperText={userFormik.touched.aadharNumber?userFormik.errors.aadharNumber:""}
-                type="number"
-                sx={{
-                  gridColumn: "span ",
-                  width: "auto",
-                  margin: "1%",
-                  fontFamily: "Poppins",
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <i class="fas fa-id-card" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
               <p>&nbsp;</p>
               <Button
                 // onSubmit={handleFormSubmit}
