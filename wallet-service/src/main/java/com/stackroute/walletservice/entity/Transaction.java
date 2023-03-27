@@ -55,4 +55,6 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "wallet_contact_number", referencedColumnName = "contactNumber")
     private Wallet wallet;
+
+
 }

@@ -169,20 +169,25 @@ public class WalletController {
         }
     }
 
-    @GetMapping("/transactionHistory/{contactNumber}")
-    public ResponseEntity<?> getTransactionHistory(@PathVariable("contactNumber") String contactNumber) {
-        Wallet wallet = walletService.getWalletByContactNumber(contactNumber);
-        if (wallet == null) {
-            return new ResponseEntity<String>("Wallet not found for contact number: " + contactNumber, HttpStatus.NOT_FOUND);
+    @GetMapping("/getTransactions/{contactNumber}")
+    public ResponseEntity<?> getTransactionsByContactNumber(@PathVariable("contactNumber") String contactNumber)
+            throws WalletNotExistsException {
+        try {
+            List<Transaction> transactions = walletService.getTransactionsByContactNumber(contactNumber);
+            if (transactions.isEmpty()) {
+                throw new WalletNotExistsException("No transactions found for contact number: " + contactNumber);
+            }
+            return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
+        } catch (WalletNotExistsException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        List<Transaction> transactions = wallet.getTransactions();
-        return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
     }
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
-        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
-    }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+//        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+//    }
 
 }
