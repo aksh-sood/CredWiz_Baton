@@ -10,6 +10,6 @@ import javax.transaction.Transactional;
 
 @Repository
 @Transactional
-public interface WalletRepository extends JpaRepository<Wallet, Long> {
+public interface WalletRepository extends JpaRepository<Wallet, String> {
 	
 }

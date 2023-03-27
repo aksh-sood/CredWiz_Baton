@@ -21,7 +21,7 @@ public class Transaction {
     @Column(length=15)
     @Getter
     @Setter
-    private long contactNumber;
+    private String contactNumber;
 
     @NotNull
     @Column
@@ -55,4 +55,6 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "wallet_contact_number", referencedColumnName = "contactNumber")
     private Wallet wallet;
+
+
 }

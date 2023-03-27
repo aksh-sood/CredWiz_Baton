@@ -4,22 +4,27 @@ import com.stackroute.walletservice.entity.SendMoneyRequest;
 import com.stackroute.walletservice.entity.Transaction;
 import com.stackroute.walletservice.entity.WalletRequest;
 import com.stackroute.walletservice.exception.*;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.service.WalletService;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/wallet")
+@Validated
 public class WalletController {
     @Autowired
     private WalletService walletService;
@@ -33,13 +38,21 @@ public class WalletController {
         }
 
         try {
-            Long contactNumber = wallet.getContactNumber();
+            String contactNumber = wallet.getContactNumber();
             Wallet existingWallet = walletService.getWalletByContactNumber(contactNumber);
             if (existingWallet != null) {
                 throw new WalletAlreadyExistsException("Wallet already exists for contact number: " + contactNumber);
             }
-            walletService.addWallet(wallet);
-            return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
+            try {
+                walletService.addWallet(wallet);
+                return new ResponseEntity<String>("Wallet created successfully", HttpStatus.CREATED);
+            }
+            catch (ConstraintViolationException e){
+                return new ResponseEntity<String>("Error values.Constraint are violated :\n"+e.getMessage(), HttpStatus.BAD_REQUEST);
+            }
+            catch (Exception e){
+                return new ResponseEntity<String>("Error while creating wallet :\n"+e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         } catch (WalletAlreadyExistsException e) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -47,7 +60,7 @@ public class WalletController {
 
 
     @GetMapping("/getWallet/{contactNumber}")
-    public ResponseEntity<?> getWalletByContactNumber(@PathVariable("contactNumber") long id)
+    public ResponseEntity<?> getWalletByContactNumber(@PathVariable("contactNumber") String id)
             throws WalletNotExistsException {
         try {
             Wallet wallet = walletService.getWalletByContactNumber(id);
@@ -64,7 +77,7 @@ public class WalletController {
     public ResponseEntity<String> addMoneyToWallet(@RequestBody WalletRequest request)
             throws WalletNotExistsException {
         try {
-            Long ContactNumber = request.getContactNumber();
+            String ContactNumber = request.getContactNumber();
             Double amount = request.getAmount();
             Wallet wallet = walletService.getWalletByContactNumber(ContactNumber);
             if (wallet == null) {
@@ -74,12 +87,12 @@ public class WalletController {
             walletService.addWallet(wallet);
             Long transactionAmount = request.getAmount().longValue();
             walletService.saveTransaction(request.getContactNumber(),
-                    "Credit", "Successful", "Added money to wallet", null, transactionAmount);
+                    "Credit", "Successful", "Added_money_to_wallet", null, transactionAmount);
 
             return new ResponseEntity<String>("Amount added successfully", HttpStatus.OK);
         } catch (WalletNotExistsException e) {
             walletService.saveTransaction(request.getContactNumber(),
-                    "Credit", "Failed", "No wallet found for phone number", null, request.getAmount().longValue());
+                    "Credit", "Failed", "No_wallet_found_for_phone_number", null, request.getAmount().longValue());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
@@ -97,17 +110,17 @@ public class WalletController {
             wallet.setBalance(wallet.getBalance() - request.getAmount());
             walletService.addWallet(wallet);
             Long transactionAmount = request.getAmount().longValue();
-            walletService.saveTransaction(request.getContactNumber(), "Withdraw Money",
-                    "Successful", "Withdrawn money from wallet", null, transactionAmount);
+            walletService.saveTransaction(request.getContactNumber(), "Debit",
+                    "Successful", "Withdrawn_money_from_wallet", null, transactionAmount);
 
             return new ResponseEntity<String>("Amount withdrawn successfully", HttpStatus.OK);
         } catch (WalletNotExistsException e) {
             walletService.saveTransaction(request.getContactNumber(),
-                    "Debit", "Failed", "No wallet found for phone number", null, request.getAmount().longValue());
+                    "Debit", "Failed", "No_wallet_found_for_phone_number", null, request.getAmount().longValue());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (InSufficientBalanceException e) {
             walletService.saveTransaction(request.getContactNumber(),
-                    "Debit", "Failed", "Insufficient balance in wallet", null, request.getAmount().longValue());
+                    "Debit", "Failed", "Insufficient_balance_in_wallet", null, request.getAmount().longValue());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
@@ -116,8 +129,8 @@ public class WalletController {
     public ResponseEntity<String> sendMoney(@RequestBody SendMoneyRequest sendMoneyRequest)
             throws InSufficientBalanceException, WalletNotExistsException {
         try {
-            Long senderContactNumber = sendMoneyRequest.getSenderContactNumber();
-            Long receiverContactNumber = sendMoneyRequest.getReceiverContactNumber();
+            String senderContactNumber = sendMoneyRequest.getSenderContactNumber();
+            String receiverContactNumber = sendMoneyRequest.getReceiverContactNumber();
 
             Wallet senderWallet = walletService.getWalletByContactNumber(senderContactNumber);
             if (senderWallet == null) {
@@ -155,18 +168,30 @@ public class WalletController {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         } catch (WalletNotExistsException e) {
             walletService.saveTransaction(sendMoneyRequest.getSenderContactNumber(),
-                    "Debit", "Failed", "Sender wallet not found", null, sendMoneyRequest.getAmount().longValue());
+                    "Debit", "Failed", "Sender_wallet_not_found", null, sendMoneyRequest.getAmount().longValue());
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping("/transactionHistory/{contactNumber}")
-    public ResponseEntity<?> getTransactionHistory(@PathVariable("contactNumber") long contactNumber) {
-        Wallet wallet = walletService.getWalletByContactNumber(contactNumber);
-        if (wallet == null) {
-            return new ResponseEntity<String>("Wallet not found for contact number: " + contactNumber, HttpStatus.NOT_FOUND);
+    @GetMapping("/getTransactions/{contactNumber}")
+    public ResponseEntity<?> getTransactionsByContactNumber(@PathVariable("contactNumber") String contactNumber)
+            throws WalletNotExistsException {
+        try {
+            List<Transaction> transactions = walletService.getTransactionsByContactNumber(contactNumber);
+            if (transactions.isEmpty()) {
+                throw new WalletNotExistsException("No transactions found for contact number: " + contactNumber);
+            }
+            return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
+        } catch (WalletNotExistsException e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
-        List<Transaction> transactions = wallet.getTransactions();
-        return new ResponseEntity<List<Transaction>>(transactions, HttpStatus.OK);
     }
+
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<Object> handleValidationExceptions(MethodArgumentNotValidException ex) {
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+//        return new ResponseEntity<Object>(errors, HttpStatus.BAD_REQUEST);
+//    }
+
 }

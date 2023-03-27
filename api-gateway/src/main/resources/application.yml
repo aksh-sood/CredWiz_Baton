@@ -6,8 +6,19 @@ eureka:
     fetch-registry: true
 
 server:
-  port: 8086
+  port: 8080
 
 spring:
   application:
     name: "api-gateway"
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: USER-SERVICE
+#        uri: http://localhost:8090
+#        predicates:
+#          - Path=/user/**
+#      - id: WALLET-SERVICE
+#        uri: http://localhost:9092
+#        predicates:
+#          - Path=/wallet/**
