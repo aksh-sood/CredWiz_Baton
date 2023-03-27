@@ -3,6 +3,7 @@ package com.stackroute.userservice.controller;
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 
+import com.stackroute.userservice.exceptions.CustomException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserAuthenticateRequest;
 import com.stackroute.userservice.payload.UserAuthenticateResponse;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-//@Validated
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
 	@Autowired
@@ -39,12 +41,13 @@ public class UserController {
 	JwtUtils jwtTokenUtil;
 	@Autowired
 	private CustomUserService userDetailsService;
+
 	@GetMapping("/admin/getAll")
 	public ResponseEntity<?> getAllUser() {
 		List<User> userList = userService.getAllUser();
-		Map<String,Object>map=new HashMap<String,Object>();
-		map.put("count",userList.size());
-		map.put("list",userList);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("count", userList.size());
+		map.put("list", userList);
 		ResponseEntity<?> entity = new ResponseEntity<Map>(map, HttpStatus.OK);
 		return entity;
 	}
@@ -62,28 +65,26 @@ public class UserController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody @Valid UserAuthenticateRequest authenticationRequest)
+			throws Exception {
 
 		ResponseEntity<?> entity = null;
-		try{authenticationManager.authenticate(
-			new UsernamePasswordAuthenticationToken(String.valueOf(authenticationRequest.getContactNumber()),authenticationRequest.getPassword()));
-	}catch(BadCredentialsException e){
+		try {
+			authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(authenticationRequest.getContactNumber(),
+							authenticationRequest.getPassword()));
+		} catch (BadCredentialsException e) {
 			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+
+		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getContactNumber());
+		final String jwt = jwtTokenUtil.generateToken(userDetails);
+		entity = ResponseEntity.ok(new UserAuthenticateResponse(jwt));
+		return entity;
 	}
-
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(authenticationRequest.getContactNumber()));
-		final String jwt=jwtTokenUtil.generateToken(userDetails);
-		entity=
-		 ResponseEntity.ok(new UserAuthenticateResponse(jwt));
-return entity;
-	}
-
-
-
-
 
 	@DeleteMapping("/delete/{contactNumber}")
-	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") long contactNumber)
+	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") String contactNumber)
 			throws ContactNumberNotExistException {
 
 		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
@@ -92,47 +93,48 @@ return entity;
 	}
 
 	@GetMapping("/contact/{contactNumber}")
-	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) throws  ContactNumberNotExistException{
+	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") String contactNumber)
+			throws ContactNumberNotExistException {
 		User user = null;
-		ResponseEntity<?> entity ;
+		ResponseEntity<?> entity;
 
+		user = userService.getUserByContactNumber(contactNumber);
 
-			user= userService.getUserByContactNumber(contactNumber);
-
-		 entity = new ResponseEntity<User>(user, HttpStatus.OK);
+		entity = new ResponseEntity<User>(user, HttpStatus.OK);
 		return entity;
 	}
-
-
-
-
 
 	@PutMapping("/updateUser")
-	public ResponseEntity<?> updateUser(@RequestBody UserDto userDto){
+	public ResponseEntity<?> updateUser(@RequestBody UserDto userDto)throws CustomException , ConstraintViolationException {
 		User user;
-		ResponseEntity<?> entity ;
-		try{
-			user= userService.updateUser(userDto);
-			entity=new ResponseEntity<User>(user, HttpStatus.CREATED);
+		ResponseEntity<?> entity;
 
-		}catch (Exception e){
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
+System.out.println(userDto);
+
+
+
+	user = userService.updateUser(userDto);
+	entity = new ResponseEntity<User>(user, HttpStatus.CREATED);
 
 
 
 		return entity;
 	}
-
 
 	@ExceptionHandler(ContactNumberNotExistException.class)
 	public ResponseEntity<?> noContactNumberExceptionHandler(Exception e) {
 		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		return entity;
 	}
-
-
-
-
+	@ExceptionHandler(CustomException.class)
+	public ResponseEntity<?> customExceptionHandler(Exception e) {
+		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		return entity;
+	}
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<?> constraintViolationExceptionHandler(Exception e) {
+		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		return entity;
+	}
 
 }

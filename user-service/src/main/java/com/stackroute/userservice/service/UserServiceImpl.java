@@ -2,16 +2,17 @@ package com.stackroute.userservice.service;
 
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
+import com.stackroute.userservice.exceptions.CustomException;
 import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserDto;
 import com.stackroute.userservice.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +22,6 @@ public class UserServiceImpl implements  UserService{
 
     @Autowired
     private UserRepository userRepository;
-
-//    @Autowired
-//    private UserMapper userMapper;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -54,7 +52,7 @@ public class UserServiceImpl implements  UserService{
 
 
 
-    public boolean deleteUserByContactNumber(long contactNumber)throws ContactNumberNotExistException {
+    public boolean deleteUserByContactNumber(String contactNumber)throws ContactNumberNotExistException {
         Optional<User> optionalUser = userRepository.findByContactNumber(contactNumber);
         User user=optionalUser.isEmpty()?null:optionalUser.get();
         if(user==null){
@@ -72,7 +70,7 @@ public class UserServiceImpl implements  UserService{
 
     }
 
-    public User getUserByContactNumber(long contactNumber) throws ContactNumberNotExistException{
+    public User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException{
         Optional<User> optionalUser= userRepository.findByContactNumber(contactNumber);
         User user=optionalUser.isEmpty()?null:optionalUser.get();
         if(user==null){
@@ -82,13 +80,33 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public User updateUser(UserDto userDto) throws Exception {
+    public User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException {
 
-//        User user=getUserByContactNumber(userDto.getContactNumber());
-        User user=this.modelMapper.map(userDto,User.class);
+        Optional<User> optionalUser= userRepository.findByContactNumber(userDto.getContactNumber());
 
-//        userMapper.updateUserFromDto(userDto,user);
-        return userRepository.save(user);
+        User oldUser=optionalUser.isEmpty()?null:optionalUser.get();
+        if(oldUser==null){
+            throw new CustomException("Contact Number Does Not Exist");
+        }
+
+
+//        if(userDto.getAddress().isEmpty() || userDto.getAddress().isBlank()){
+//           userDto.setAddress(oldUser.getAddress());
+//        }
+//        if(userDto.getUserName().isBlank()||userDto.getUserName().isEmpty()){
+//            userDto.setUserName(oldUser.getUserName());
+//        }
+//        if(userDto.getPassword().isBlank()||userDto.getPassword().isEmpty()){
+//            userDto.setPassword(oldUser.getPassword());
+//        }
+//        if(userDto.getEmailId().isBlank()||userDto.getEmailId().isEmpty()){
+//            userDto.setEmailId(oldUser.getEmailId());
+//        }
+        try{
+        this.modelMapper.map(userDto,oldUser);}catch(ConstraintViolationException e){
+            System.out.print("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrooooooooooooooooooooorrrrrrrrrrrrrrrrrrrrrrrroooooo");
+        }
+        return userRepository.save(oldUser);
 
     }
 
