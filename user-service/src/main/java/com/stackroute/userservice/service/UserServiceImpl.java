@@ -65,7 +65,8 @@ public class UserServiceImpl implements  UserService{
     public boolean validateUser(User user) {
 
         Optional<User> optionalUser = userRepository.findByContactNumberAndPassword(user.getContactNumber(), user.getPassword());
-        boolean isValid = optionalUser.isEmpty() ? false : true;
+//        boolean isValid = optionalUser.isEmpty() ? false : true;
+        boolean isValid = optionalUser.isEmpty() || false;
         return isValid;
 
     }
@@ -80,7 +81,7 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException {
+    public User updateUser(User userDto) throws CustomException, ConstraintViolationException {
 
         Optional<User> optionalUser= userRepository.findByContactNumber(userDto.getContactNumber());
 

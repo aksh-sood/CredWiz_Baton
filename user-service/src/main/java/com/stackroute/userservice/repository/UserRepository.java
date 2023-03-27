@@ -11,11 +11,11 @@ import java.util.Optional;
 @Transactional
 public interface UserRepository extends JpaRepository<User, String> {
 
-    public Optional<User> findByContactNumberAndPassword(String contactNumber,String password);
+    Optional<User> findByContactNumberAndPassword(String contactNumber,String password);
 
-    public Optional<User> findByContactNumber(String contactNumber);
+    Optional<User> findByContactNumber(String contactNumber);
 
-    public long deleteByContactNumber(String contactNumber);
+    long deleteByContactNumber(String contactNumber);
 
 
 

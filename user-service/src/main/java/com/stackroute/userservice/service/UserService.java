@@ -8,18 +8,18 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public interface UserService {
-	public User saveUser(User user) throws ContactNumberAlreadyExistsException;
+	User saveUser(User user) throws ContactNumberAlreadyExistsException;
 
-	public List<User> getAllUser();
+	List<User> getAllUser();
 
-	public User getUserByEmail(String emailId) throws EmailIdNotExistException;
+	User getUserByEmail(String emailId) throws EmailIdNotExistException;
 
-	public boolean deleteUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
+	boolean deleteUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
-	public boolean validateUser(User user);
+	boolean validateUser(User user);
 
-	public User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
+	User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 
-	public User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException;
+	User updateUser(User userDto) throws CustomException, ConstraintViolationException;
 }
