@@ -45,8 +45,8 @@ const CreateWallet = (props) => {
                             <TextField id="outlined-basic" label="Account Number" variant="filled" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="IFSC Code" variant="filled" />
-                            <TextField id="outlined-basic" label="Amount" variant="filled" />
+                            <TextField id="outlined-basic" label="Aadhar Number" variant="filled" />
+                            <TextField id="outlined-basic" label="PAN Card Number" variant="filled" />
                         </div>
                         
                        
@@ -76,7 +76,7 @@ const CreateWallet = (props) => {
                       },
                     }}
                   >
-                        Add Bank
+                        Create Wallet
                   </Button>
                         </Box>
                     </Box>
