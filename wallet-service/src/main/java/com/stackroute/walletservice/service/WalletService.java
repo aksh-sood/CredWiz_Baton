@@ -26,13 +26,13 @@ public class WalletService implements WalletServiceInterface {
 		return addWallet;
 	}
 
-	public Wallet getWalletByContactNumber(long id) {
+	public Wallet getWalletByContactNumber(String id) {
 		Optional<Wallet> optionalWallet = walletRepository.findById(id);
 		Wallet wallet = optionalWallet.isEmpty() ? null : optionalWallet.get();
 		return wallet;
 	}
 
-	public Wallet withdrawMoney(long phoneNumber, Double amount) throws InSufficientBalanceException {
+	public Wallet withdrawMoney(String phoneNumber, Double amount) throws InSufficientBalanceException {
 		Wallet wallet = getWalletByContactNumber(phoneNumber);
 		if (wallet == null) {
 			return null;
@@ -45,7 +45,7 @@ public class WalletService implements WalletServiceInterface {
 		return wallet;
 	}
 
-	public Wallet addMoney(long phoneNumber, Double amount) {
+	public Wallet addMoney(String phoneNumber, Double amount) {
 		Wallet wallet = getWalletByContactNumber(phoneNumber);
 		if (wallet == null) {
 			return null;
@@ -55,7 +55,7 @@ public class WalletService implements WalletServiceInterface {
 		return wallet;
 	}
 
-	public boolean sendMoney(long senderPhoneNumber, long receiverPhoneNumber, Double amount) throws InSufficientBalanceException {
+	public boolean sendMoney(String senderPhoneNumber, String receiverPhoneNumber, Double amount) throws InSufficientBalanceException {
 		Wallet senderWallet = getWalletByContactNumber(senderPhoneNumber);
 		Wallet receiverWallet = getWalletByContactNumber(receiverPhoneNumber);
 
@@ -76,7 +76,7 @@ public class WalletService implements WalletServiceInterface {
 		return true;
 	}
 
-	public void saveTransaction(long contactNumber, String transactionType, String transactionStatus, String remarks, String receiverName, Long amount) {
+	public void saveTransaction(String contactNumber, String transactionType, String transactionStatus, String remarks, String receiverName, Long amount) {
 		Transaction transaction = new Transaction();
 		transaction.setContactNumber(contactNumber);
 		transaction.setTransactionType(transactionType);

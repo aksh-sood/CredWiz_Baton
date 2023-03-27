@@ -21,7 +21,7 @@ public class Transaction {
     @Column(length=15)
     @Getter
     @Setter
-    private long contactNumber;
+    private String contactNumber;
 
     @NotNull
     @Column

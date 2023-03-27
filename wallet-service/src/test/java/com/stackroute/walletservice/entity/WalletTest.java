@@ -12,11 +12,11 @@ public class WalletTest {
     public void testWalletClass() {
         Wallet wallet = new Wallet();
         assertNotNull(wallet);
-        wallet.setContactNumber(1234567890L);
-        wallet.setAadhaarNumber(123456789012L);
+        wallet.setContactNumber("1234567890");
+        wallet.setAadhaarNumber("123456789012");
         wallet.setPanNumber("ABCDE1234F");
         wallet.setBankName("HDFC");
-        wallet.setAccountNumber(123456789012L);
+        wallet.setAccountNumber("123456789012");
         wallet.setBalance(100.0);
 //        assertNull(wallet.getTransactions());
     }
@@ -24,11 +24,11 @@ public class WalletTest {
     @Test
     public void testWalletValidation() {
         Wallet wallet = new Wallet();
-        wallet.setContactNumber(1234567890L);
-        wallet.setAadhaarNumber(0L);
+        wallet.setContactNumber("1234567890");
+        wallet.setAadhaarNumber("0");
         wallet.setPanNumber("");
         wallet.setBankName("");
-        wallet.setAccountNumber(0L);
+        wallet.setAccountNumber("0");
         wallet.setBalance(-1.0);
         assertNotNull(wallet.getContactNumber());
         assertNotNull(wallet.getAadhaarNumber());

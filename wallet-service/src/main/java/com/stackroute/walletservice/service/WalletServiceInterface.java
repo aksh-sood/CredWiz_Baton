@@ -7,12 +7,12 @@ import com.stackroute.walletservice.exception.WalletAlreadyExistsException;
 public interface WalletServiceInterface {
     Wallet addWallet(Wallet wallet);
 
-    Wallet getWalletByContactNumber(long id);
+    Wallet getWalletByContactNumber(String id);
 
-    Wallet withdrawMoney(long contactNumber, Double amount) throws InSufficientBalanceException;
+    Wallet withdrawMoney(String contactNumber, Double amount) throws InSufficientBalanceException;
 
-    Wallet addMoney(long contactNumber, Double amount);
+    Wallet addMoney(String contactNumber, Double amount);
 
-    boolean sendMoney(long senderContactNumber, long receiverContactNumber, Double amount)
+    boolean sendMoney(String senderContactNumber, String receiverContactNumber, Double amount)
             throws InSufficientBalanceException;
 }
