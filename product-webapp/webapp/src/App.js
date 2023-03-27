@@ -23,23 +23,25 @@ import TransactionStatus from "./components/transactionStatus/TransactionStatus"
 
 
 
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<LandingPage />} />
-
-      <Route exact path="/transaction" element={<Transaction />} />
-
+      <Route exact path="/signIn" element={<SignIn />} />
+      <Route exact path="/signUp" element={<SignUp />} />
+    
+    
       <Route exact path="/dashboard" element={<Dashboard />} />
       <Route exact path="/test" element={<Home />} />
       <Route exact path="/updateUser" element={<UpdateUser />} />
-      <Route exact path="/signIn" element={<SignIn />} />
-      <Route exact path="/signUp" element={<SignUp />} />
       <Route exact path="/userProfile" element={<UserProfile />} />
       <Route exact path="/sendMoney" element={<SendMoney />} />
       <Route exact path="/addMoney" element={<AddMoney />} />
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
       <Route exact path="/transactionStatus" element={<TransactionStatus />} />
+      <Route exact path="/transaction" element={<Transaction />} />
     </Route>
   )
 );

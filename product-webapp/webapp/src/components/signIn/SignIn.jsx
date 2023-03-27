@@ -1,17 +1,20 @@
 import "./SignIn.css"
 import { Box, Button, TextField } from "@mui/material"
 import Logo from "../../assets/logo.png"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import InputAdornment from "@mui/material/InputAdornment"
 import * as yup from "yup"
 import { useFormik } from "formik"
+import axios from "axios"
 
 
 const SignIn = () => {
 
+    const navigate = useNavigate()
+
     const signinSchema = yup.object(
         {
-            email: yup.string("Invalid Email").email("Invalid Email").required("Enter the Registered mail"),
+            contactNumber: yup.number("Invalid Email").required("Enter the Registered contact number"),
             password: yup.string().required("Enter Password")
         }
     )
@@ -19,11 +22,23 @@ const SignIn = () => {
     const signinFormik = useFormik(
         {
             initialValues: {
-                email: "",
+                contactNumber: "",
                 password: "",
             },
-            validationSchema: signinSchema
-            // onSubmit:
+            validationSchema: signinSchema,
+            onSubmit: (values) => {
+                console.log(values)
+                axios.post("http://localhost:8090/user/login", values)
+                    .then((res) => {
+                        console.log(res)
+                        localStorage.setItem("jwt_auth",res.data.jwt)     
+                        console.log(localStorage.getItem("jwt_auth"))
+                        navigate("/dashboard")
+                    })
+                    .catch((res) => {
+                        alert("wrong input")
+                    })
+            }
         }
     )
 
@@ -95,15 +110,15 @@ const SignIn = () => {
                         >
                             <p>&nbsp;</p>
                             <TextField
-                                label="Email"
+                                label="Mobile number"
                                 autoComplete="off"
                                 variant="filled"
-                                type="email"
-                                name="email"
+                                type="tel"
+                                name="contactNumber"
                                 onChange={signinFormik.handleChange}
-                                value={signinFormik.values.email}
-                                error={signinFormik.touched.email && Boolean(signinFormik.errors.email)}
-                                helperText={signinFormik.touched.email ? signinFormik.errors.email : ""}
+                                value={signinFormik.values.contactNumber}
+                                error={signinFormik.touched.contactNumber && Boolean(signinFormik.errors.contactNumber)}
+                                helperText={signinFormik.touched.contactNumber ? signinFormik.errors.contactNumber : ""}
                                 sx={{
                                     gridColumn: "span ",
                                     width: "auto",

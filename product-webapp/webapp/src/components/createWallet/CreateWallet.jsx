@@ -40,14 +40,11 @@ const CreateWallet = (props) => {
                         width= "60%"
                         height= "auto"
                     >
-                        <div>
-                            <TextField id="outlined-basic" label="Bank Name" variant="filled" />
+                            <TextField id="outlined-basic" label="Contact Number" variant="filled" />
+                            <TextField id="outlined-basic" label="PAN Number" variant="filled" />
+                            <TextField id="outlined-basic" label="Aadhaar Number" variant="filled" />
                             <TextField id="outlined-basic" label="Account Number" variant="filled" />
-                        </div>
-                        <div>
-                            <TextField id="outlined-basic" label="IFSC Code" variant="filled" />
-                            <TextField id="outlined-basic" label="Amount" variant="filled" />
-                        </div>
+                            <TextField id="outlined-basic" label="Bank Name" variant="filled" />
                         
                        
                         

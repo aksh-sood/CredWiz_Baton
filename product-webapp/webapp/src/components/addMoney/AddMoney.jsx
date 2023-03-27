@@ -107,8 +107,8 @@ const AddMoney = (props) => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
-                                onClick={addmoneyFormik.handleSubmit}
-                                // color="#241C2C"
+                                // onClick={addmoneyFormik.handleSubmit}
+                                onClick={handleOpen}
                                 sx={{
                                     width: "150px",
                                     backgroundColor: "#241C2C",
@@ -129,7 +129,6 @@ const AddMoney = (props) => {
 
                             <Modal
                                 open={open}
-                                onClose={handleClose}
                                 aria-labelledby="modal-modal-title"
                                 aria-describedby="modal-modal-description"
                             >
