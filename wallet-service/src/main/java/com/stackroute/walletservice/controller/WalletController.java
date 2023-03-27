@@ -45,6 +45,7 @@ public class WalletController {
         }
     }
 
+
     @GetMapping("/getWallet/{contactNumber}")
     public ResponseEntity<?> getWalletByContactNumber(@PathVariable("contactNumber") long id)
             throws WalletNotExistsException {
