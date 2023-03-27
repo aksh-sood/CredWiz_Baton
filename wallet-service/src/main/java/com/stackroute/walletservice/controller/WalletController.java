@@ -2,19 +2,18 @@ package com.stackroute.walletservice.controller;
 
 import com.stackroute.walletservice.entity.SendMoneyRequest;
 import com.stackroute.walletservice.entity.Transaction;
+import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.entity.WalletRequest;
-import com.stackroute.walletservice.exception.*;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import com.stackroute.walletservice.exception.InSufficientBalanceException;
+import com.stackroute.walletservice.exception.WalletAlreadyExistsException;
+import com.stackroute.walletservice.exception.WalletNotExistsException;
+import com.stackroute.walletservice.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-
-import com.stackroute.walletservice.entity.Wallet;
-import com.stackroute.walletservice.service.WalletService;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;

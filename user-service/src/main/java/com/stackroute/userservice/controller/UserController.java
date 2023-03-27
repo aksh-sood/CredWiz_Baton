@@ -2,7 +2,6 @@ package com.stackroute.userservice.controller;
 
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
-
 import com.stackroute.userservice.exceptions.CustomException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserAuthenticateRequest;
@@ -18,7 +17,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
@@ -87,7 +85,7 @@ public class UserController {
 	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") String contactNumber)
 			throws ContactNumberNotExistException {
 
-		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
+//		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
 		ResponseEntity<?> entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);
 		return entity;
 	}

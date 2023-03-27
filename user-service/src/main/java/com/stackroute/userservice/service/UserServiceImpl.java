@@ -65,7 +65,8 @@ public class UserServiceImpl implements  UserService{
     public boolean validateUser(User user) {
 
         Optional<User> optionalUser = userRepository.findByContactNumberAndPassword(user.getContactNumber(), user.getPassword());
-        boolean isValid = optionalUser.isEmpty() ? false : true;
+//        boolean isValid = optionalUser.isEmpty() ? false : true;
+        boolean isValid = optionalUser.isEmpty() || false;
         return isValid;
 
     }

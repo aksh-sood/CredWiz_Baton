@@ -1,8 +1,6 @@
 package com.stackroute.userservice.service;
 
-import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 import com.stackroute.userservice.model.User;
-//import com.stackroute.userservice.repository.OtpRepository;
 import com.stackroute.userservice.repository.UserRepository;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
