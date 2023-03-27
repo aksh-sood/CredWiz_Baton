@@ -1,18 +1,25 @@
 package com.stackroute.walletservice.service;
 
+import com.stackroute.walletservice.entity.Transaction;
 import com.stackroute.walletservice.exception.InSufficientBalanceException;
+import com.stackroute.walletservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stackroute.walletservice.entity.Wallet;
 import com.stackroute.walletservice.repository.WalletRepository;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
 public class WalletService implements WalletServiceInterface {
 	@Autowired
 	private WalletRepository walletRepository;
+
+	@Autowired
+	private TransactionRepository transactionRepository;
+
 
 	public Wallet addWallet(Wallet wallet) {
 		Wallet addWallet = walletRepository.save(wallet);
@@ -68,4 +75,17 @@ public class WalletService implements WalletServiceInterface {
 
 		return true;
 	}
+
+	public void saveTransaction(long contactNumber, String transactionType, String transactionStatus, String remarks, String receiverName, Long amount) {
+		Transaction transaction = new Transaction();
+		transaction.setContactNumber(contactNumber);
+		transaction.setTransactionType(transactionType);
+		transaction.setTransactionStatus(transactionStatus);
+		transaction.setRemarks(remarks);
+		transaction.setReceiverName(receiverName);
+		transaction.setAmount(amount);
+		transaction.setDate(new Date());
+		transactionRepository.save(transaction);
+	}
+
 }
