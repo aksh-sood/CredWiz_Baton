@@ -81,7 +81,7 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException {
+    public User updateUser(User userDto) throws CustomException, ConstraintViolationException {
 
         Optional<User> optionalUser= userRepository.findByContactNumber(userDto.getContactNumber());
 

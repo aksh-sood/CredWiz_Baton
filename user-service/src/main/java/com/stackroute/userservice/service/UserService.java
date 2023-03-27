@@ -21,5 +21,5 @@ public interface UserService {
 	User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 
-	User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException;
+	User updateUser(User userDto) throws CustomException, ConstraintViolationException;
 }
