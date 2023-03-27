@@ -3,6 +3,7 @@ package com.stackroute.userservice.controller;
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 
+import com.stackroute.userservice.exceptions.CustomException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserAuthenticateRequest;
 import com.stackroute.userservice.payload.UserAuthenticateResponse;
@@ -20,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -103,22 +105,34 @@ public class UserController {
 	}
 
 	@PutMapping("/updateUser")
-	public ResponseEntity<?> updateUser(@RequestBody @Valid UserDto userDto) {
+	public ResponseEntity<?> updateUser(@RequestBody UserDto userDto)throws CustomException , ConstraintViolationException {
 		User user;
 		ResponseEntity<?> entity;
-		try {
-			user = userService.updateUser(userDto);
-			entity = new ResponseEntity<User>(user, HttpStatus.CREATED);
 
-		} catch (Exception e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
+System.out.println(userDto);
+
+
+
+	user = userService.updateUser(userDto);
+	entity = new ResponseEntity<User>(user, HttpStatus.CREATED);
+
+
 
 		return entity;
 	}
 
 	@ExceptionHandler(ContactNumberNotExistException.class)
 	public ResponseEntity<?> noContactNumberExceptionHandler(Exception e) {
+		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		return entity;
+	}
+	@ExceptionHandler(CustomException.class)
+	public ResponseEntity<?> customExceptionHandler(Exception e) {
+		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		return entity;
+	}
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<?> constraintViolationExceptionHandler(Exception e) {
 		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		return entity;
 	}

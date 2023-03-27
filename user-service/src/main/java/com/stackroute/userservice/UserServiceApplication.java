@@ -20,24 +20,12 @@ public class UserServiceApplication {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
 
-//	@Bean
-//	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-//	public ModelMapper modelMapper(){
-//		return new ModelMapper();
-//	}
-//	public UserMapper userMapper(){
-//		return new UserMapper() {
-//			@Override
-//			public void updateUserFromDto(UserDto userDto, User entity) {
-//				User user =new ModelMapper().map(userDto,User.class);
-//			}
-//
-//			@Override
-//			public void updateDtoFromUser(User user, UserDto userDto) {
-//
-//			}
-//		}
-//	}
+	@Bean
+	@BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+	public ModelMapper modelMapper(){
+		return new ModelMapper();
+	}
+
 
 
 }

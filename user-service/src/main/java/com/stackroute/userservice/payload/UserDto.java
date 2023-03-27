@@ -18,7 +18,7 @@ import javax.validation.constraints.Pattern;
 public class UserDto {
 
 
-
+  private String contactNumber;
   private String emailId;
 
 
