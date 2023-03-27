@@ -9,6 +9,8 @@ import Footer from '../footer/Footer'
 import Modal from '@mui/material/Modal';
 import GreenCheck from "../../assets/green_checkmark.svg";
 import RedCross from "../../assets/red-x-icon.svg"
+import * as yup from "yup"
+import { useFormik } from "formik"
 
 
 const styles = {
@@ -18,6 +20,20 @@ const styles = {
 }
 
 const AddMoney = (props) => {
+
+    const addmoneySchema = yup.object(
+        {
+            amount: yup.number().positive("Invalid Input").required("Enter the amount")
+        }
+    )
+    const addmoneyFormik = useFormik(
+        {
+            initialValues: {
+                amount:""
+            },
+            validationSchema: addmoneySchema
+        }
+    )
 
 
     const { classes } = props;
@@ -61,12 +77,16 @@ const AddMoney = (props) => {
                     >
                         <div>
                             <TextField
-                                // autoComplete="off"
+                                autoComplete="off"
                                 variant="filled"
                                 label="Amount"
                                 // placeholder="Amount"
                                 type="number"
                                 name="amount"
+                                onChange={addmoneyFormik.handleChange}
+                                value={addmoneyFormik.values.amount}
+                                error={addmoneyFormik.touched.amount && Boolean(addmoneyFormik.errors.amount)}
+                                helperText={addmoneyFormik.touched.amount ? addmoneyFormik.errors.amount : ""}
                                 InputProps={{
                                     classes: { input: classes.resize },
                                     startAdornment: (
@@ -87,7 +107,7 @@ const AddMoney = (props) => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
-                                onClick={handleOpen}
+                                onClick={addmoneyFormik.handleSubmit}
                                 // color="#241C2C"
                                 sx={{
                                     width: "150px",
@@ -130,7 +150,7 @@ const AddMoney = (props) => {
                                         <Typography id="modal-modal-title" variant="h6" component="h2">
                                         Money Added Successfully
                                         </Typography> 
-                                        <div className='tstatus'>
+                                        <div className='addstatus'>
                                         <img src={GreenCheck} height="180vh" width="180vh" />
                                         </div>
                                         </>
@@ -139,7 +159,7 @@ const AddMoney = (props) => {
                                         <Typography id="modal-modal-title" variant="h6" component="h2">
                                         Money Is Not Added
                                         </Typography> 
-                                        <div className='tstatus'>
+                                        <div className='addstatus'>
                                         <img src={RedCross} height="180vh" width="180vh" />
                                         </div>
                                         </>

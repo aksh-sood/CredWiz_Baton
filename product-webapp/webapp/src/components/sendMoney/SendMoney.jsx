@@ -1,15 +1,15 @@
 import React from "react"
-import { Box, TextField, MenuItem, Button, Typography } from "@mui/material"
-import { width } from "@mui/system"
+import { Box, TextField, Button, Typography } from "@mui/material"
 import Navbar from "../navbar/Navbar"
 import "./SendMoney.css"
 import Footer from "../footer/Footer"
 import { withStyles } from '@material-ui/core/styles';
-
 import InputAdornment from "@mui/material/InputAdornment"
 import Modal from '@mui/material/Modal'
 import GreenCheck from "../../assets/green_checkmark.svg"
 import RedCross from "../../assets/red-x-icon.svg"
+import { useFormik } from "formik"
+import * as yup from "yup"
 
 const styles = {
     resize: {
@@ -19,7 +19,24 @@ const styles = {
 
 const SendMoney = (props) => {
 
-    const { classes } = props;  
+    const sendmoneySchema = yup.object(
+        {
+            amount: yup.number().positive("Invalid Input").required("Enter the amount"),
+            recipientphonenumber: yup.number().required("Enter phone number")
+        }
+    )
+
+    const sendmoneyFormik = useFormik(
+        {
+            initialValues: {
+                amount: "",
+                recipientphonenumber: ""
+            },
+            validationSchema: sendmoneySchema
+        }
+    )
+
+    const { classes } = props;
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -60,6 +77,11 @@ const SendMoney = (props) => {
                                 label="Amount"
                                 type="number"
                                 variant="filled"
+                                name="amount"
+                                onChange={sendmoneyFormik.handleChange}
+                                value={sendmoneyFormik.values.amount}
+                                error={sendmoneyFormik.touched.amount && Boolean(sendmoneyFormik.errors.amount)}
+                                helperText={sendmoneyFormik.touched.amount ? sendmoneyFormik.errors.amount : ""}
                                 InputProps={{
                                     classes: { input: classes.resize },
                                     startAdornment: (
@@ -76,28 +98,15 @@ const SendMoney = (props) => {
                                 label="Recipient Phone Number"
                                 type="number"
                                 variant="filled"
+                                name="recipientphonenumber"
+                                onChange={sendmoneyFormik.handleChange}
+                                value={sendmoneyFormik.values.recipientphonenumber}
+                                error={sendmoneyFormik.touched.recipientphonenumber && Boolean(sendmoneyFormik.errors.recipientphonenumber)}
+                                helperText={sendmoneyFormik.touched.recipientphonenumber ? sendmoneyFormik.errors.recipientphonenumber : ""}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
                                             <i class="fas fa-phone" />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                        </div>
-                        <div>
-                            <TextField
-                                id="outlined-basic"
-                                label="Note"
-                                type="text"
-                                multiline
-                                variant="filled"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <i class="fas fa-book" />
-                                            {/* <i class="fa-solid fa-files"></i> */}
-
                                         </InputAdornment>
                                     ),
                                 }}
@@ -113,7 +122,8 @@ const SendMoney = (props) => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
-                                onClick={handleOpen}
+                                onClick={sendmoneyFormik.handleSubmit}
+                                // onClick={handleOpen}
                                 sx={{
                                     backgroundColor: "#241C2C",
                                     color: "#AEAE50",
@@ -149,20 +159,20 @@ const SendMoney = (props) => {
                                     p: 4,
                                 }}>
                                     {
-                                        moneystatus == true ? (<>
+                                        moneystatus === true ? (<>
                                             <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                Money Send Successfully
+                                                Money sent Successfully
                                             </Typography>
-                                            <div className='tstatus'>
+                                            <div className='sendstatus'>
                                                 <img src={GreenCheck} height="180vh" width="180vh" />
                                             </div>
                                         </>
                                         ) : (
                                             <>
                                                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                    Money Not Send
+                                                    Money is not send
                                                 </Typography>
-                                                <div className='tstatus'>
+                                                <div className='sendstatus'>
                                                     <img src={RedCross} height="180vh" width="180vh" />
                                                 </div>
                                             </>
@@ -174,6 +184,7 @@ const SendMoney = (props) => {
                                     }}>Close</Button>
                                 </Box>
                             </Modal>
+
 
                         </Box>
 
