@@ -27,7 +27,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-@Validated
+//@Validated
 public class UserController {
 
 	@Autowired
