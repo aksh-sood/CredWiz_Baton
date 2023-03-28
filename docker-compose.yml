@@ -1,63 +1,87 @@
 version: "3"
 services:
   eureka-server:
+    image: eureka-server:1.0
     build: eureka-server/
     container_name: eureka-server
-    restart: always
-    network_mode: "host"
-    hostname: localhost
     ports:
-      - 8076:8076
+      - 8761:8761
+
   api-gateway:
+    image: api-gateway:1.0
     build: api-gateway/
     container_name: api-gateway
-    depends_on:
-      - eureka-server
-    restart: always
-    network_mode: "host"
-    hostname: localhost
     ports:
-      - 8086:8086
+      - 9090:9090
+    links:
+      - eureka-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+
+
+  credwizmysqldb:
+    image: mysql:latest
+    container_name: "credwizmysqldb"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_PASSWORD=root
+    ports:
+      - 3306:3306
+
   product-webapp:
     build: product-webapp/
     image: product-webapp
-    depends_on:
-      - eureka-server
-      - api-gateway
     restart: always
     container_name: product-webapp
-    network_mode: "host"
-    hostname: localhost
     ports:
-      - 8099:8099
-  user-service:
-    image: user-image:latest
-    build: UserServiceApplication/
-    restart: always
-    depends_on:
+      - 4200:4200
+    links:
       - eureka-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+    depends_on:
       - api-gateway
-      - credWizUser
-    network_mode: host
+
+  user-service:
+    image: user-service
+    build: user-service/
     container_name: user-service
     ports:
       - 8090:8090
-    healthcheck:
-      test: "exit 0"
-  wallet-service:
-    image: wallet-service:latest
-    build: WalletServiceApplication/
-    restart: always
-    depends_on:
+    links:
       - eureka-server
-      - api-gateway
-      - credWizWallet
-    network_mode: host
-    container_name: wallet-service
-    ports:
-      - 9092:9092
-    healthcheck:
-      test: "exit 0"
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+    depends_on:
+      - credwizmysqldb
+#  user-service:
+#    image: user-image:latest
+#    build: UserServiceApplication/
+#    restart: always
+#    depends_on:
+#      - eureka-server
+#      - api-gateway
+#      - credWizUser
+#    network_mode: host
+#    container_name: user-service
+#    ports:
+#      - 8090:8090
+#    healthcheck:
+#      test: "exit 0"
+#  wallet-service:
+#    image: wallet-service:latest
+#    build: WalletServiceApplication/
+#    restart: always
+#    depends_on:
+#      - eureka-server
+#      - api-gateway
+#      - credWizWallet
+#    network_mode: host
+#    container_name: wallet-service
+#    ports:
+#      - 9092:9092
+#    healthcheck:
+#      test: "exit 0"
 
 
 
