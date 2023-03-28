@@ -1,0 +1,7 @@
+FROM openjdk
+WORKDIR usr/src
+ENV MYSQL_USERNAME=userroot
+ENV MYSQL_PASSWORD=root123
+ENV MYSQL_URL=jdbc:mysql://localhost:3300/credWizWallet?useSSl=false
+ADD ./target/WalletServiceApplication-0.0.1-SNAPSHOT.jar usr/src/WalletServiceApplication-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java", "-jar", "usr/src/WalletServiceApplication-0.0.1-SNAPSHOT.jar"]
