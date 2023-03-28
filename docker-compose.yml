@@ -56,7 +56,7 @@ services:
     depends_on:
       - credwizmysqldb
       - api-gateway
-      - eureka-server
+
 
 #  wallet-service:
 #    image: wallet-service

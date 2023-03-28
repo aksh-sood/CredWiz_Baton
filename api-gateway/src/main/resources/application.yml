@@ -1,7 +1,8 @@
 eureka:
   client:
     service-url:
-      defaultZone: http://eureka-server:8761/eureka
+            defaultZone: http://eureka-server:8761/eureka
+#      defaultZone: http://localhost:8761/eureka
     register-with-eureka: true
     fetch-registry: true
 
@@ -17,20 +18,41 @@ spring:
     compatibility-verifier:
       enabled: false
     gateway:
-      globalcors:
+            routes:
+            - id: USER-SERVICE
+              uri: http://user-service:8090
+#              uri: http://localhost:8090
+              predicates:
+                - Path=/user/**
+            - id: WALLET-SERVICE
+              uri: http://wallet-service:9092
+#              uri: http://localhost:9092
+              predicates:
+                - Path=/wallet/**
+      global-cors:
         corsConfigurations:
           '[/**]':
             allowedOrigins: "*"
             allowedMethods: "*"
             allowedHeaders: "*"
             exposedHeaders: "*"
-      routes:
+        add-to-simple-url-handler-mapping: true
+  main:
+    web-application-type: reactive
 
-        - id: USER-SERVICE
-          uri: http://user-service:8090/
-          predicates:
-            - Path=/user/**
+
+
+
+#  cloud:
+#    gateway:
+#      routes:
+#      - id: USER-SERVICE
+#        uri: http://user-service:8090
+#        uri: http://localhost:8090
+#        predicates:
+#          - Path=/user/**
 #      - id: WALLET-SERVICE
+#        uri: http://wallet-service:9092
 #        uri: http://localhost:9092
 #        predicates:
 #          - Path=/wallet/**
