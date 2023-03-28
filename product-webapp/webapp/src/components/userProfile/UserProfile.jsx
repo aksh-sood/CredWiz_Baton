@@ -14,7 +14,6 @@ const UserProfile = () => {
     fetch(`localhost:8090/user/contact/${localStorage.getItem("contactNumber")}`)
         .then(response => response.json())
         .then(user => {
-            // Update the user profile HTML elements with the user details
             document.getElementById('userName').textContent = user.userName;
             document.getElementById('address').textContent = user.address;
             document.getElementById('email').textContent = user.emailId;
@@ -24,7 +23,6 @@ const UserProfile = () => {
     fetch(`localhost:9092/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
         .then(response => response.json())
         .then(user => {
-            // Update the user profile HTML elements with the user details
             document.getElementById('aadharNumber').textContent = user.aadhaarNumber;
             document.getElementById('panNumber').textContent = user.panNumber;
             document.getElementById('bankName').textContent = user.bankName;
