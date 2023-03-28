@@ -2,11 +2,10 @@ import CreateWallet from "../createWallet/CreateWallet";
 import Transaction from "../history/Transaction";
 
 const Dashboard = () => {
-  const iswalletadded = false
   return (
     <>
       {
-        iswalletadded == false ? (<CreateWallet></CreateWallet>) : (
+        localStorage.getItem("iswalletadded") ? (<CreateWallet></CreateWallet>) : (
           <Transaction />)
       }
     </>

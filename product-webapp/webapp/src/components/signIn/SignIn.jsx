@@ -1,11 +1,11 @@
-import "./SignIn.css"
 import { Box, Button, TextField } from "@mui/material"
-import Logo from "../../assets/logo.png"
-import { Link, Navigate, useNavigate } from "react-router-dom"
 import InputAdornment from "@mui/material/InputAdornment"
-import * as yup from "yup"
-import { useFormik } from "formik"
 import axios from "axios"
+import { useFormik } from "formik"
+import { Link, useNavigate } from "react-router-dom"
+import * as yup from "yup"
+import Logo from "../../assets/logo.png"
+import "./SignIn.css"
 
 
 const SignIn = () => {
@@ -33,6 +33,8 @@ const SignIn = () => {
                         console.log(res)
                         localStorage.setItem("jwt_auth",res.data.jwt)     
                         console.log(localStorage.getItem("jwt_auth"))
+                        localStorage.setItem("contactNumber",values.contactNumber)
+                        localStorage.setItem("isloggedin",true)
                         navigate("/dashboard")
                     })
                     .catch((res) => {

@@ -482,8 +482,42 @@ import Logo from "../../assets/logo.png"
 import { Link } from "react-router-dom"
 import { color } from "@mui/system"
 import InputAdornment from "@mui/material/InputAdornment"
+import {useState} from 'react'
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import {register} from '../../Services/services'
 
-const SignIn = () => {
+const SignUp = () => {
+  const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+  const userSchema=yup.object(
+    {
+        firstName:yup.string("Should be String").matches(/^[a-zA-Z]+$/,'only alphabets').required("First name is required"),
+        lastName:yup.string("Should be String").matches(/^[a-zA-Z]+$/,'only alphabets').required("Last name is required"),
+        email:yup.string("Should be string").email("must be valid email").required("Email is required"),
+        password:yup.string().required("password is required").min(8,"Required"),
+        cPassword:yup.string().oneOf([yup.ref('password'),null],"password must match"),
+        phoneNumber:yup.string().matches(phoneRegExp, 'Phone number is not valid').min(10,"too short").max(10,"too long").required("phone number is required"),
+        address1:yup.string("should be string").required("address is required"),
+        address2:yup.string("should be string").required("address is required")
+    }
+  );
+  const userFormik = useFormik({
+    initialValues: {
+      firstName:"",
+      lastName:"",
+      email: "",
+      password: "",
+      cPassword:"",
+      phoneNumber:0,
+      address1:"",
+      address2:""
+    },
+    validationSchema:userSchema,
+    onSubmit: (values) => {
+      console.log(values);
+      register(values)
+    },
+  });
   return (
     <>
       <div className="signupbody">
@@ -558,6 +592,10 @@ const SignIn = () => {
                   label="First Name"
                   type="text"
                   name="firstName"
+                  onChange={userFormik.handleChange}
+                  values={userFormik.values.firstName}
+                  error={userFormik.touched.firstName && Boolean(userFormik.errors.firstName)}
+                  helperText={userFormik.touched.firstName ? userFormik.errors.firstName:""}
                   sx={{
                     gridColumn: "span ",
                     width: "auto",
@@ -577,6 +615,10 @@ const SignIn = () => {
                   variant="filled"
                   label="Last Name"
                   type="text"
+                  onChange={userFormik.handleChange}
+                  value={userFormik.values.lastName}
+                  error={userFormik.touched.lastName && Boolean(userFormik.errors.lastName)}
+                  helperText={userFormik.touched.lastName? userFormik.errors.lastName:""}
                   name="lastName"
                   sx={{
                     gridColumn: "span ",
@@ -601,7 +643,11 @@ const SignIn = () => {
                   label="Email"
                   type="email"
                   // label="Email"
-                  name="userEmail"
+                  name="email"
+                  value={userFormik.values.email}
+                  onChange={userFormik.handleChange}
+                  helperText={userFormik.touched.email ? userFormik.errors.email:""}
+                  error={userFormik.touched.email && Boolean(userFormik.errors.email)}
                   sx={{
                     // gridColumn: "span ",
                     width: "auto",
@@ -620,8 +666,12 @@ const SignIn = () => {
                   autoComplete="off"
                   variant="filled"
                   label="Contact Number"
-                  type="text"
+                  onChange={userFormik.handleChange}
+                  type="number"
                   name="phoneNumber"
+                  value={userFormik.values.phoneNumber}
+                  error={userFormik.touched.phoneNumber && Boolean(userFormik.errors.phoneNumber)}
+                  helperText={userFormik.touched.phoneNumber ? userFormik.errors.phoneNumber:""}
                   sx={{
                     width: "auto",
                     margin: "1%",
@@ -642,7 +692,12 @@ const SignIn = () => {
                   variant="filled"
                   // type={showPassword ? "text" : "password"}
                   // label="Password"
+                  type="password"
                   label="Password"
+                  onChange={userFormik.handleChange}
+                  value={userFormik.values.password}
+                  error={userFormik.touched.password && Boolean(userFormik.errors.password)}
+                  helperText={userFormik.touched.password ?userFormik.errors.password:""}
                   name="password"
                   sx={{
                     gridColumn: "span ",
@@ -662,7 +717,12 @@ const SignIn = () => {
                   autoComplete="off"
                   variant="filled"
                   // type={showPassword ? "text" : "password"}
-                  label="Conform Password"
+                  type="password"
+                  onChange={userFormik.handleChange}
+                  value={userFormik.values.cPassword}
+                  error={userFormik.touched.cPassword && Boolean(userFormik.errors.cPassword)}
+                  helperText={userFormik.touched.cPassword ? userFormik.errors.cPassword:""}
+                  label="Confirm Password"
                   name="cPassword"
                   sx={{
                     gridColumn: "span ",
@@ -685,6 +745,10 @@ const SignIn = () => {
                   variant="filled"
                   label="Address Line 1"
                   name="address1"
+                  onChange={userFormik.handleChange}
+                  value={userFormik.values.address1}
+                  error={userFormik.touched.address1 && Boolean(userFormik.errors.address1)}
+                  helperText={userFormik.touched.address1?userFormik.errors.address1:""}
                   sx={{
                     gridColumn: "span ",
                     width: "auto",
@@ -704,6 +768,10 @@ const SignIn = () => {
                   variant="filled"
                   label="Address Line 2"
                   name="address2"
+                  onChange={userFormik.handleChange}
+                  value={userFormik.values.address2}
+                  error={userFormik.touched.address2 && Boolean(userFormik.errors.address2)}
+                  helperText={userFormik.touched.address2?userFormik.errors.address2:""}
                   sx={{
                     gridColumn: "span ",
                     width: "auto",
@@ -719,50 +787,13 @@ const SignIn = () => {
                   }}
                 />
               </div>
-              <TextField
-                autoComplete="off"
-                variant="filled"
-                label="PAN Card Number"
-                name="panNumber"
-                sx={{
-                  gridColumn: "span ",
-                  width: "auto",
-                  margin: "1%",
-                  fontFamily: "Poppins",
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <i class="fas fa-passport" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <TextField
-                autoComplete="off"
-                variant="filled"
-                label="Aadhar Card Number"
-                name="aadharNumber"
-                sx={{
-                  gridColumn: "span ",
-                  width: "auto",
-                  margin: "1%",
-                  fontFamily: "Poppins",
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <i class="fas fa-id-card" />
-                    </InputAdornment>
-                  ),
-                }}
-              />
               <p>&nbsp;</p>
               <Button
                 // onSubmit={handleFormSubmit}
                 type="submit"
                 className="btn bubble "
                 id="sign-in-btn"
+                onClick={userFormik.handleSubmit}
                 value="Sign up"
                 sx={{
                   borderRadius: "20px",
@@ -788,4 +819,4 @@ const SignIn = () => {
     </>
   )
 }
-export default SignIn
+export default SignUp;

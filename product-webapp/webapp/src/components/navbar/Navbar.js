@@ -1,16 +1,20 @@
-import React, { useState } from 'react'
-import * as FaIcons from "react-icons/fa";
-import * as AiIcons from "react-icons/ai";
-import { Link } from 'react-router-dom';
-import { SidebarData } from './SidebarData';
-import './Navbar.css';
-import { IconContext } from 'react-icons';
-import Logo from "../../assets/logo.png";
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { Box, TextField, MenuItem, Button, Typography, LinearProgress } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material";
 import Modal from '@mui/material/Modal';
+import React, { useEffect, useState } from 'react';
+import { IconContext } from 'react-icons';
+import * as AiIcons from "react-icons/ai";
+import * as FaIcons from "react-icons/fa";
+import { Link, useNavigate } from 'react-router-dom';
+import Logo from "../../assets/logo.png";
+import './Navbar.css';
+import { SidebarData } from './SidebarData';
+
+
+
 
 function Navbar() {
+
 
     const [sidebar, setSidebar] = useState(false)
     const showSidebar = () => setSidebar(!sidebar)
@@ -20,18 +24,20 @@ function Navbar() {
     const handleClose = () => setOpen(false);
     const moneystatus = true;
 
+    
+    const navigate = useNavigate();
+    
+
     return (
         <>
             <IconContext.Provider value={{ color: '#fff' }}>
                 <div className='navbar'>
-                    <Link to="#" className='menu-bars'>
-                        <FaIcons.FaBars onClick={showSidebar} />
-                    </Link>
+                    <FaIcons.FaBars className='menu-bars' onClick={showSidebar} />
                     <div className='logontitle'>
                         <img clasName='logo' src={Logo} height="40vh" width="40vh" />
                         <h2 className='title'>CREDWIZ</h2>
                     </div>
-                    <PowerSettingsNewIcon onClick={handleOpen}/>
+                    <PowerSettingsNewIcon onClick={handleOpen} sx={{ color: "white", height: "40px", width: "40px" }} />
                 </div>
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className='nav-menu-items' onClick={showSidebar}>
@@ -57,7 +63,6 @@ function Navbar() {
 
             <Modal
                 open={open}
-                onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -76,7 +81,11 @@ function Navbar() {
                     <Typography id="modal-modal-title" variant="h6" component="h2" textAlign="center">
                         Quit?
                     </Typography>
-                    <Button href="/" sx={{
+                    <Button onClick={() => {
+                        localStorage.setItem("isloggedin", false)
+                        localStorage.setItem("iswalletadded", false)
+                        navigate("/")
+                    }} sx={{
                         width: '100%',
                         textAlign: 'center'
                     }}>Yes</Button>

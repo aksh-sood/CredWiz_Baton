@@ -5,9 +5,9 @@ import lombok.Setter;
 
 public class SendMoneyRequest {
     @Getter @Setter
-    private Long senderContactNumber;
+    private String senderContactNumber;
     @Getter @Setter
-    private Long receiverContactNumber;
+    private String receiverContactNumber;
     @Getter @Setter
     private Double amount;
 

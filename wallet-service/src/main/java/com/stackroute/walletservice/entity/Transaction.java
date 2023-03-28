@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,24 +17,24 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long transactionId;
-    @NotEmpty()
+    @NotNull
     @Column(length=15)
     @Getter
     @Setter
-    private long phoneNumber;
+    private String contactNumber;
 
-    @NotEmpty()
+    @NotNull
     @Column
     @Getter
     @Setter
     private Date date;
 
-    @NotEmpty()
-    @Column(length = 6)
+    @NotEmpty
+    @Column(length = 30)
     @Getter @Setter
     private String transactionType;
 
-    @NotEmpty()
+    @NotEmpty
     @Column(length = 12)
     @Getter @Setter
     private String transactionStatus;
@@ -40,5 +42,19 @@ public class Transaction {
     @Column(length = 30)
     @Getter @Setter
     private String remarks;
+
+    @Column(length = 20)
+    @Getter @Setter
+    private String receiverName;
+
+    @NotNull
+    @Column
+    @Getter @Setter
+    private Long amount;
+
+    @ManyToOne
+    @JoinColumn(name = "wallet_contact_number", referencedColumnName = "contactNumber")
+    private Wallet wallet;
+
 
 }

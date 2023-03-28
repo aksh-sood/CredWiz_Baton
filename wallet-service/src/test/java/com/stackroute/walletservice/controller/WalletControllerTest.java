@@ -22,6 +22,7 @@ import javax.validation.Valid;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -37,10 +38,10 @@ public class WalletControllerTest {
     @Before
     public void setUp() {
         wallet = new Wallet();
-        wallet.setContactNumber(1234567890L);
-        wallet.setAadhaarNumber(123456789123L);
+        wallet.setContactNumber("1234567890");
+        wallet.setAadhaarNumber("123456789123");
         wallet.setPanNumber("ABC123456789");
-        wallet.setAccountNumber(123455);
+        wallet.setAccountNumber("123455");
         wallet.setBankName("Test");
         wallet.setBalance(500.0);
     }
@@ -55,8 +56,8 @@ public class WalletControllerTest {
 
     @Test
     public void testGetWalletByPhoneNumber() throws WalletNotExistsException {
-        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
-        ResponseEntity<?> responseEntity = walletController.getWalletByContactNumber(1234567890L);
+        when(walletService.getWalletByContactNumber(anyString())).thenReturn(wallet);
+        ResponseEntity<?> responseEntity = walletController.getWalletByContactNumber("1234567890");
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(((Wallet) responseEntity.getBody()).getContactNumber(), wallet.getContactNumber());
     }
@@ -64,9 +65,9 @@ public class WalletControllerTest {
     @Test
     public void testAddMoneyToWallet() throws WalletNotExistsException {
         WalletRequest request = new WalletRequest();
-        request.setContactNumber(1234567890L);
+        request.setContactNumber("1234567890");
         request.setAmount(500.0);
-        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
+        when(walletService.getWalletByContactNumber(anyString())).thenReturn(wallet);
         ResponseEntity<?> responseEntity = walletController.addMoneyToWallet(request);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(wallet.getBalance(), 1000.0, 0);
@@ -84,9 +85,9 @@ public class WalletControllerTest {
     @Test
     public void testWithdrawMoney() throws WalletNotExistsException, InSufficientBalanceException {
         WalletRequest request = new WalletRequest();
-        request.setContactNumber(1234567890L);
+        request.setContactNumber("1234567890");
         request.setAmount(200.0);
-        when(walletService.getWalletByContactNumber(anyLong())).thenReturn(wallet);
+        when(walletService.getWalletByContactNumber(anyString())).thenReturn(wallet);
         ResponseEntity<?> responseEntity = walletController.withdrawMoney(request);
         assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
         assertEquals(wallet.getBalance(), 300.0, 0);

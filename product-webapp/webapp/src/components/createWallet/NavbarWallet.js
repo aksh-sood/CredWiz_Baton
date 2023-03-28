@@ -7,7 +7,7 @@ import './NavbarWallet.css';
 import { IconContext } from 'react-icons';
 import Logo from "../../assets/logo.png";
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
-import { Box, TextField, MenuItem, Button, Typography, LinearProgress } from "@mui/material"
+import { Box, Button, Typography } from "@mui/material"
 import Modal from '@mui/material/Modal';
 
 
@@ -26,14 +26,12 @@ function NavbarWallet() {
         <>
             <IconContext.Provider value={{ color: '#fff' }}>
                 <div className='navbar'>
-                    <Link to="#" className='menu-bars'>
-                        <FaIcons.FaBars onClick={showSidebar} />
-                    </Link>
+                    <FaIcons.FaBars className='menu-bars' onClick={showSidebar} />
                     <div className='logontitle'>
                         <img className='logo' src={Logo} height="40vh" width="40vh" />
                         <h2 className='title'>CREDWIZ</h2>
                     </div>
-                    <PowerSettingsNewIcon onClick={handleOpen} />
+                    <PowerSettingsNewIcon onClick={handleOpen} sx={{ color: "white", height:"40px", width:"40px"}}/>
                 </div>
                 <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
                     <ul className='nav-menu-items' onClick={showSidebar}>

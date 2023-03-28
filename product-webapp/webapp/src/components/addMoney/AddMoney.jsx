@@ -1,9 +1,8 @@
-import { Box, TextField, MenuItem, Button, Typography, LinearProgress } from "@mui/material"
-import { width } from "@mui/system"
+import { Box, TextField, Button, Typography } from "@mui/material"
 import Navbar from "../navbar/Navbar"
 import "./AddMoney.css"
 import InputAdornment from "@mui/material/InputAdornment"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../footer/Footer'
 import Modal from '@mui/material/Modal';
@@ -11,6 +10,7 @@ import GreenCheck from "../../assets/green_checkmark.svg";
 import RedCross from "../../assets/red-x-icon.svg"
 import * as yup from "yup"
 import { useFormik } from "formik"
+import { useNavigate } from "react-router-dom"
 
 
 const styles = {
@@ -37,12 +37,12 @@ const AddMoney = (props) => {
 
 
     const { classes } = props;
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const moneystatus = true;
 
-
+    
 
     return (
         <>
@@ -80,7 +80,6 @@ const AddMoney = (props) => {
                                 autoComplete="off"
                                 variant="filled"
                                 label="Amount"
-                                // placeholder="Amount"
                                 type="number"
                                 name="amount"
                                 onChange={addmoneyFormik.handleChange}

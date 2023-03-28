@@ -1,5 +1,4 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
-import { width } from "@mui/system";
 import './CreateWallet.css';
 import NavbarWallet from "./NavbarWallet"
 import Footer from "../footer/Footer"
@@ -40,11 +39,14 @@ const CreateWallet = (props) => {
                         width= "60%"
                         height= "auto"
                     >
-                            <TextField id="outlined-basic" label="Contact Number" variant="filled" />
-                            <TextField id="outlined-basic" label="PAN Number" variant="filled" />
-                            <TextField id="outlined-basic" label="Aadhaar Number" variant="filled" />
-                            <TextField id="outlined-basic" label="Account Number" variant="filled" />
+                        <div>
                             <TextField id="outlined-basic" label="Bank Name" variant="filled" />
+                            <TextField id="outlined-basic" label="Account Number" variant="filled" />
+                        </div>
+                        <div>
+                            <TextField id="outlined-basic" label="IFSC Code" variant="filled" />
+                            <TextField id="outlined-basic" label="Amount" variant="filled" />
+                        </div>
                         
                        
                         
