@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export const register=(data)=>{
     const datas={
         userName:`${data.firstName} ${data.lastName}`,
@@ -9,7 +8,7 @@ export const register=(data)=>{
         address:`${data.address1} ${data.address2}`
     }
     console.log(datas);
-    axios.post("http://localhost:8086/register",datas)
+    axios.post("http://localhost:8090/user/register",datas)
     .then((res)=>{
 
 
@@ -17,4 +16,21 @@ export const register=(data)=>{
         alert("registration successful")
         }
     });
+}
+export const addWallet=(data)=>{
+    const wallet={
+        bankName:`${data.bankName}`,
+        accountNumber:`${data.accountNumber}`,
+        aadhaarNumber:`${data.aadhaarNumber}`,
+        panNumber:`${data.panNumber}`,
+//        contactNumber:`${localStorage.getItem("contactNumber")}`
+ contactNumber:`${9999999999}`
+    }
+    console.log(data);
+        axios.post("http://localhost:8090/user/userUpdate",data)
+        .then((res)=>{
+            if(res.status===200){
+            alert("updated successful")
+            }
+        });
 }
