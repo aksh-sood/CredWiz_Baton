@@ -30,14 +30,6 @@ spring:
           uri: http://user-service:8090/
           predicates:
             - Path=/user/**
-
-#  cloud:
-#    gateway:
-#      routes:
-#      - id: USER-SERVICE
-#        uri: http://localhost:8090
-#        predicates:
-#          - Path=/user/**
 #      - id: WALLET-SERVICE
 #        uri: http://localhost:9092
 #        predicates:
