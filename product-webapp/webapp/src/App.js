@@ -15,9 +15,7 @@ import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import WalletRoute from "./components/walletRoute/WalletRoute";
 
 
-localStorage.setItem("isloggedin", true)
-localStorage.setItem("iswalletadded", true)
-
+localStorage.setItem("iswalletadded",true)
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,7 +32,6 @@ const router = createBrowserRouter(
 
       <Route exact path="/sendMoney" element={<WalletRoute> <SendMoney /> </WalletRoute>} />
       <Route exact path="/addMoney" element={<WalletRoute> <AddMoney /> </WalletRoute>} />
-      <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
       <Route exact path="/transactionStatus" element={<WalletRoute> <TransactionStatus /> </WalletRoute>} />
       <Route exact path="/transaction" element={<WalletRoute> <Transaction /> </WalletRoute>} />
     </Route>

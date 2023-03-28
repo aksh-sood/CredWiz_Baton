@@ -28,7 +28,7 @@ const CreateWallet = (props) => {
     });
     return (
         <>
-        <NavbarWallet iswalletadded={props.iswalletadded}></NavbarWallet>
+        <NavbarWallet></NavbarWallet>
             <Box sx={{ marginTop:"50px",width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
                     fontWeight: 'bolder',

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NavbarWalletOption } from './NavbarWalletOption';
 import './NavbarWallet.css';
 import { IconContext } from 'react-icons';
@@ -13,6 +13,8 @@ import Modal from '@mui/material/Modal';
 
 
 function NavbarWallet() {
+
+    const navigate=useNavigate()
 
     const [sidebar, setSidebar] = useState(false)
     const showSidebar = () => setSidebar(!sidebar)
@@ -76,7 +78,15 @@ function NavbarWallet() {
                     <Typography id="modal-modal-title" variant="h6" component="h2" textAlign="center">
                         Quit?
                     </Typography>
-                    <Button href="/" sx={{
+                    <Button onClick={ ()=>{
+                        localStorage.removeItem("isloggedin")
+                        localStorage.removeItem("iswalletadded")
+                        localStorage.removeItem("jwt_auth")
+                        localStorage.removeItem("contactNumber")
+                        localStorage.removeItem("iswalletadded")
+                        navigate("/")
+                    }} 
+                    sx={{
                         width: '100%',
                         textAlign: 'center'
                     }}>Yes</Button>

@@ -2,7 +2,7 @@ import { Box, Button, TextField } from "@mui/material"
 import InputAdornment from "@mui/material/InputAdornment"
 import axios from "axios"
 import { useFormik } from "formik"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import * as yup from "yup"
 import Logo from "../../assets/logo.png"
 import "./SignIn.css"
@@ -14,7 +14,7 @@ const SignIn = () => {
 
     const signinSchema = yup.object(
         {
-            contactNumber: yup.number("Invalid Email").required("Enter the Registered contact number"),
+            contactNumber: yup.string("Invalid Email").required("Enter the Registered contact number"),
             password: yup.string().required("Enter Password")
         }
     )
@@ -28,7 +28,7 @@ const SignIn = () => {
             validationSchema: signinSchema,
             onSubmit: (values) => {
                 console.log(values)
-                axios.post("http://localhost:8080/user/login", values)
+                axios.post("http://localhost:9090/user/login", values)
                     .then((res) => {
                         console.log(res)
                         localStorage.setItem("jwt_auth",res.data.jwt)     
@@ -115,7 +115,7 @@ const SignIn = () => {
                                 label="Mobile number"
                                 autoComplete="off"
                                 variant="filled"
-                                type="tel"
+                                type="text"
                                 name="contactNumber"
                                 onChange={signinFormik.handleChange}
                                 value={signinFormik.values.contactNumber}

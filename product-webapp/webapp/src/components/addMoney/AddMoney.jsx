@@ -10,6 +10,8 @@ import GreenCheck from "../../assets/green_checkmark.svg";
 import RedCross from "../../assets/red-x-icon.svg"
 import * as yup from "yup"
 import { useFormik } from "formik"
+import axios from "axios"
+
 import { useNavigate } from "react-router-dom"
 
 
@@ -23,15 +25,28 @@ const AddMoney = (props) => {
 
     const addmoneySchema = yup.object(
         {
-            amount: yup.number().positive("Invalid Input").required("Enter the amount")
+            amount: yup.string("Invalid Input").required("Enter the amount")
         }
     )
     const addmoneyFormik = useFormik(
         {
             initialValues: {
-                amount:""
+                amount: ""
             },
-            validationSchema: addmoneySchema
+            validationSchema: addmoneySchema,
+            onSubmit: (values) => {
+                // values["contactNumber"]=localStorage.getItem("contactNumber")
+                values["contactNumber"]="1111111111"
+                console.log(values)
+                axios.post("http://localhost:9090/wallet/addmoney", values)
+                    .then((res) => {
+                        console.log(res)
+                        alert(res.data)
+                    })
+                    .catch((res) => {
+                        alert("wrong input")
+                    })
+            }
         }
     )
 
@@ -42,7 +57,7 @@ const AddMoney = (props) => {
     const handleClose = () => setOpen(false);
     const moneystatus = true;
 
-    
+
 
     return (
         <>
@@ -107,7 +122,7 @@ const AddMoney = (props) => {
                                 id="sign-in-btn"
                                 value="Sign up"
                                 // onClick={addmoneyFormik.handleSubmit}
-                                onClick={handleOpen}
+                                onClick={addmoneyFormik.handleSubmit}
                                 sx={{
                                     width: "150px",
                                     backgroundColor: "#241C2C",
@@ -145,22 +160,22 @@ const AddMoney = (props) => {
                                 }}>
                                     {
                                         moneystatus == true ? (<>
-                                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                                        Money Added Successfully
-                                        </Typography> 
-                                        <div className='addstatus'>
-                                        <img src={GreenCheck} height="180vh" width="180vh" />
-                                        </div>
+                                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                                Money Added Successfully
+                                            </Typography>
+                                            <div className='addstatus'>
+                                                <img src={GreenCheck} height="180vh" width="180vh" />
+                                            </div>
                                         </>
                                         ) : (
-                                        <>
-                                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                                        Money Is Not Added
-                                        </Typography> 
-                                        <div className='addstatus'>
-                                        <img src={RedCross} height="180vh" width="180vh" />
-                                        </div>
-                                        </>
+                                            <>
+                                                <Typography id="modal-modal-title" variant="h6" component="h2">
+                                                    Money Is Not Added
+                                                </Typography>
+                                                <div className='addstatus'>
+                                                    <img src={RedCross} height="180vh" width="180vh" />
+                                                </div>
+                                            </>
                                         )
                                     }
                                     <Button onClick={handleClose} sx={{

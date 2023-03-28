@@ -10,6 +10,8 @@ import GreenCheck from "../../assets/green_checkmark.svg"
 import RedCross from "../../assets/red-x-icon.svg"
 import { useFormik } from "formik"
 import * as yup from "yup"
+import axios from "axios"
+
 
 const styles = {
     resize: {
@@ -21,8 +23,8 @@ const SendMoney = (props) => {
 
     const sendmoneySchema = yup.object(
         {
-            amount: yup.number().positive("Invalid Input").required("Enter the amount"),
-            recipientphonenumber: yup.number().required("Enter phone number")
+            amount: yup.string("Invalid Input").required("Enter the amount"),
+            receiverContactNumber: yup.string().required("Enter phone number")
         }
     )
 
@@ -30,9 +32,28 @@ const SendMoney = (props) => {
         {
             initialValues: {
                 amount: "",
-                recipientphonenumber: ""
+                receiverContactNumber: ""
             },
-            validationSchema: sendmoneySchema
+            validationSchema: sendmoneySchema,
+            onSubmit: (values) => {
+                // values["contactNumber"]=localStorage.getItem("contactNumber")
+                values["senderContactNumber"] = "1111111111"
+                console.log(values)
+                axios.post("http://localhost:9092/wallet/sendmoney", values)
+                    .then((res) => {
+                        console.log(res)
+                        //  alert(res.data)
+                        // {moneystatus=true}
+                        localStorage.setItem("moneystatus", true)
+                        setOpen(true)
+                    })
+                    .catch((res) => {
+                        //  alert("wrong input")
+                        localStorage.setItem("moneystatus", false)
+                        setOpen(true)
+                        // moneystatus=false
+                    })
+            }
         }
     )
 
@@ -40,7 +61,7 @@ const SendMoney = (props) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const moneystatus = true;
+    // const moneystatus = true;
 
 
     return (
@@ -96,13 +117,13 @@ const SendMoney = (props) => {
                             <TextField
                                 id="outlined-basic"
                                 label="Recipient Phone Number"
-                                type="number"
+                                type="text"
                                 variant="filled"
-                                name="recipientphonenumber"
+                                name="receiverContactNumber"
                                 onChange={sendmoneyFormik.handleChange}
-                                value={sendmoneyFormik.values.recipientphonenumber}
-                                error={sendmoneyFormik.touched.recipientphonenumber && Boolean(sendmoneyFormik.errors.recipientphonenumber)}
-                                helperText={sendmoneyFormik.touched.recipientphonenumber ? sendmoneyFormik.errors.recipientphonenumber : ""}
+                                value={sendmoneyFormik.values.receiverContactNumber}
+                                error={sendmoneyFormik.touched.receiverContactNumber && Boolean(sendmoneyFormik.errors.receiverContactNumber)}
+                                helperText={sendmoneyFormik.touched.receiverContactNumber ? sendmoneyFormik.errors.receiverContactNumber : ""}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -142,7 +163,6 @@ const SendMoney = (props) => {
 
                             <Modal
                                 open={open}
-                                onClose={handleClose}
                                 aria-labelledby="modal-modal-title"
                                 aria-describedby="modal-modal-description"
                             >
@@ -150,30 +170,30 @@ const SendMoney = (props) => {
                                     position: 'absolute',
                                     top: '50%',
                                     left: '50%',
-                                    height: 'auto',
-                                    width: 'auto',
+                                    height: '30%',
+                                    width: '30%',
                                     transform: 'translate(-50%, -50%)',
-                                    bgcolor: 'background.paper',
-                                    border: '2px solid #000',
+                                    bgcolor: '#241c2c',
+                                    border: '10px solid #aeae50',
                                     boxShadow: 24,
                                     p: 4,
                                 }}>
                                     {
-                                        moneystatus === true ? (<>
-                                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        localStorage.getItem("moneystatus") === "true" ? (<>
+                                            <Typography id="modal-modal-title" variant="h6" component="h2" align="center" color="#aeae50">
                                                 Money sent Successfully
                                             </Typography>
                                             <div className='sendstatus'>
-                                                <img src={GreenCheck} height="180vh" width="180vh" />
+                                                <img src={GreenCheck} height="30%" width="30%" />
                                             </div>
                                         </>
                                         ) : (
                                             <>
-                                                <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                    Money is not send
+                                                <Typography id="modal-modal-title" variant="h6" component="h2" align="center" color="#aeae50">
+                                                    Money is not Send, check details
                                                 </Typography>
                                                 <div className='sendstatus'>
-                                                    <img src={RedCross} height="180vh" width="180vh" />
+                                                    <img src={RedCross} height="30%" width="30%" />
                                                 </div>
                                             </>
                                         )

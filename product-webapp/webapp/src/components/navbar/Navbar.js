@@ -82,8 +82,11 @@ function Navbar() {
                         Quit?
                     </Typography>
                     <Button onClick={() => {
-                        localStorage.setItem("isloggedin", false)
-                        localStorage.setItem("iswalletadded", false)
+                        localStorage.removeItem("isloggedin")
+                        localStorage.removeItem("iswalletadded")
+                        localStorage.removeItem("jwt_auth")
+                        localStorage.removeItem("contactNumber")
+                        localStorage.removeItem("iswalletadded")
                         navigate("/")
                     }} sx={{
                         width: '100%',
