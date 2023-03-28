@@ -9,7 +9,18 @@ import { shadows } from '@mui/system';
 
 
 const iswalletadded = false
+function deleteUser() {
+    const contactNumber =localStorage.getItem("contactNumber");
 
+    axios.delete(`http://localhost:8090/user/delete/${contactNumber}`)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+            // Handle error
+            console.log(error);
+        });
+}
 const UserProfile = () => {
     localStorage.setItem("contactNumber",9876543210);
    // localStorage.setItem("jwt_auth","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5ODc2NTQzMjEwIiwiZXhwIjoxNjc5OTk4NzU3LCJpYXQiOjE2Nzk5OTY5NTd9.KfwM-w9k0Wgx7f7BiaGpNXKxpjewZh9HcP9OBFWAMzk");
@@ -136,7 +147,7 @@ const UserProfile = () => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
-                                href="/updateUser"
+                                onClick="deleteUser()"
                                 // color="#241C2C"
                                 sx={{
                                     backgroundColor: "#241C2C",
