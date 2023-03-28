@@ -28,7 +28,7 @@ const SignIn = () => {
             validationSchema: signinSchema,
             onSubmit: (values) => {
                 console.log(values)
-                axios.post("http://localhost:8090/user/login", values)
+                axios.post("http://localhost:8080/user/login", values)
                     .then((res) => {
                         console.log(res)
                         localStorage.setItem("jwt_auth",res.data.jwt)     
