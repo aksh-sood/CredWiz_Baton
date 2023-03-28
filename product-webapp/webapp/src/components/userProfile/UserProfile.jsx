@@ -11,6 +11,24 @@ import { shadows } from '@mui/system';
 const iswalletadded = false
 
 const UserProfile = () => {
+    fetch(`localhost:8090/user/contact/${localStorage.getItem("contactNumber")}`)
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById('userName').textContent = user.userName;
+            document.getElementById('address').textContent = user.address;
+            document.getElementById('email').textContent = user.emailId;
+            document.getElementById('contactNumber').textContent = user.contactNumber;
+        })
+        .catch(error => console.error(error));
+    fetch(`localhost:9092/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
+        .then(response => response.json())
+        .then(user => {
+            document.getElementById('aadharNumber').textContent = user.aadhaarNumber;
+            document.getElementById('panNumber').textContent = user.panNumber;
+            document.getElementById('bankName').textContent = user.bankName;
+            document.getElementById('accountNumber').textContent = user.accountNumber;
+        })
+        .catch(error => console.error(error));
     return (
         <> {
             iswalletadded == true ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
@@ -54,20 +72,20 @@ const UserProfile = () => {
                         height="100%"
                     >
                         <div>
-                            <TextField id="outlined-basic" multiline disabled label="User Name" variant="outlined" />
-                             <TextField id="outlined-basic" multiline  maxRows={4} label="Address" variant="outlined" />
+                            <TextField id="userName" multiline disabled label="User Name" variant="outlined" />
+                             <TextField id="address" multiline  maxRows={4} label="Address" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" disabled label="Contact No:" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Email" variant="outlined" />
+                            <TextField id="contactNumber" disabled label="Contact No:" variant="outlined" />
+                            <TextField id="email" disabled label="Email" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" disabled label="Bank Name" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Account Number" variant="outlined" />
+                            <TextField id="bankName" disabled label="Bank Name" variant="outlined" />
+                            <TextField id="accountNumber" disabled label="Account Number" variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" disabled label="PAN No:" variant="outlined" />
-                            <TextField id="outlined-basic" disabled label="Aadhar No:" variant="outlined" />
+                            <TextField id="panNumber" disabled label="PAN No:" variant="outlined" />
+                            <TextField id="aadharNumber" disabled label="Aadhar No:" variant="outlined" />
                         </div>
 
                         <Box sx={{

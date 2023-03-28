@@ -1,11 +1,10 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
-import { width } from "@mui/system";
 import './CreateWallet.css';
 import NavbarWallet from "./NavbarWallet"
 import Footer from "../footer/Footer"
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
+import {addWallet} from '../../Services/services'
 const CreateWallet = (props) => {
     const walletSchema=yup.object(
         {
@@ -24,7 +23,7 @@ const CreateWallet = (props) => {
          validationSchema:walletSchema,
         onSubmit: (values) => {
               console.log(values);
-
+              addWallet(values);
         }
     });
     return (
