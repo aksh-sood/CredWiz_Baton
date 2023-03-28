@@ -10,8 +10,6 @@ export const register=(data)=>{
     console.log(datas);
     axios.post("http://localhost:8090/user/register",datas)
     .then((res)=>{
-
-
         if(res.status===200){
         alert("registration successful")
         }
@@ -26,8 +24,8 @@ export const addWallet=(data)=>{
 //        contactNumber:`${localStorage.getItem("contactNumber")}`
  contactNumber:`${9999999999}`
     }
-    console.log(data);
-        axios.post("http://localhost:8090/user/userUpdate",data)
+    console.log(wallet);
+        axios.post("http://localhost:9092/wallet/createWallet",wallet)
         .then((res)=>{
             if(res.status===200){
             alert("updated successful")
