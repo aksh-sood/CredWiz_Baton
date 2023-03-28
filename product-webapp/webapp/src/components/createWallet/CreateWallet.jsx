@@ -1,5 +1,4 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
-import { width } from "@mui/system";
 import './CreateWallet.css';
 import NavbarWallet from "./NavbarWallet"
 import Footer from "../footer/Footer"
