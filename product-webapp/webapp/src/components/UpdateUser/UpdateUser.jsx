@@ -4,10 +4,66 @@ import Navbar from "../navbar/Navbar";
 import NavbarWallet from "../createWallet/NavbarWallet";
 import Footer from "../footer/Footer"
 import './UpdateUser.css';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import * as yup from 'yup';
+import { useFormik } from 'formik';
 
 const iswalletadded = false
 
 const UpdateUser = () => {
+    const navigate = useNavigate();
+    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+    const userSchema=yup.object().shape(
+    {
+        fname:yup.string("Should be String").matches(/^[a-zA-Z]+$/,'only alphabets').required("First name is required"),
+        lname:yup.string("Should be String").matches(/^[a-zA-Z]+$/,'only alphabets').required("Last name is required"),
+        email:yup.string("Should be string").email("must be valid email").required("Email is required"),
+        password:yup.string().required("password is required").min(8,"Required"),
+        cpassword:yup.string().oneOf([yup.ref('password'),null],"password must match"),
+        contactno:yup.string().matches(phoneRegExp, 'Phone number is not valid').min(10,"too short").max(10,"too long").required("phone number is required"),
+        address:yup.string("should be string").required("address is required")
+    }
+    );
+    const MyForm = () => {
+      const formik = useFormik({
+        initialValues: { fname: '', lname: '', email: '', password: '', cpassword: '', contactno: 0, address: ''},
+        validate: (values) => {
+          const errors = {};
+          const validationErrors = userSchema.validateSync(values, {
+            abortEarly: false,
+          });
+          validationErrors.inner.forEach((error) => {
+            errors[error.path] = error.message;
+          });
+          return errors;
+        },
+      })
+    }
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      let mapData = {
+        contactNumber: data.get("contactno"),
+        userName: data.get("fname").concat(" ",data.get("lname")),
+        emailId: data.get("email"),
+        address: data.get("address"),
+        password: data.get("password")
+      };
+      console.log(mapData);
+      const token = localStorage.getItem("jwt_auth");
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
+      axios
+      .post("http://localhost:8090/user/updateUser", mapData)
+      .then((res) => {
+        if(res.status == 201) {
+          navigate("");
+        }
+      })
+      .catch(function (error) {
+        console.log(error.response);
+      });
+        };
     return (
         <>
             {
@@ -30,6 +86,7 @@ const UpdateUser = () => {
                 <div className="updateForm">
                     <Box
                         component="form"
+                        onSubmit={handleSubmit}
                         sx={{
                             '& .MuiTextField-root': { width: 'auto' , background: 'white' ,borderRadius: "20px", margin: "2%"  },
                             '& #address': { width: '50ch' },
@@ -44,14 +101,14 @@ const UpdateUser = () => {
 
                     >
                         <div>
-                            <TextField id="outlined-basic" label="First Name" variant="filled"   InputProps={{
+                            <TextField id="outlined-basic" name="fname" label="First Name" variant="filled"   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-user" />
                       </InputAdornment>
                     ),
                   }}/>
-                            <TextField id="outlined-basic" label="Last Name" variant="filled"  InputProps={{
+                            <TextField id="outlined-basic" name="lname" label="Last Name" variant="filled"  InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-user" />
@@ -60,14 +117,14 @@ const UpdateUser = () => {
                   }}/>
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Contact No:" variant="filled" InputProps={{
+                            <TextField id="outlined-basic" name="contactno" label="Contact No:" variant="filled" InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-phone" />
                       </InputAdornment>
                     ),
                   }}/>
-                            <TextField id="outlined-basic" label="Email ID" variant="filled" InputProps={{
+                            <TextField id="outlined-basic" name="email" label="Email ID" variant="filled" InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-envelope" />
@@ -76,7 +133,7 @@ const UpdateUser = () => {
                   }} />
                         </div>
                         <div >
-                            <TextField fullWidth id="address" sx={{"#address":{width:{xs:"100%",lg:"50ch"}},marginLeft:"0%"}} label="Address" variant="filled"  InputProps={{
+                            <TextField fullWidth id="outlined-basic" name="address" sx={{"#address":{width:{xs:"100%",lg:"50ch"}},marginLeft:"0%"}} label="Address" variant="filled"  InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-house" />
@@ -86,14 +143,14 @@ const UpdateUser = () => {
                         </div>
 
                         <div>
-                            <TextField id="outlined-basic" label="Password" variant="filled"  InputProps={{
+                            <TextField id="outlined-basic" name="password" label="Password" variant="filled"  InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-lock" />
                       </InputAdornment>
                     ),
                   }}/>
-                            <TextField id="outlined-basic" label="Confirm Password" variant="filled" InputProps={{
+                            <TextField id="outlined-basic" name="cpassword" label="Confirm Password" variant="filled" InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
                         <i class="fas fa-lock" />

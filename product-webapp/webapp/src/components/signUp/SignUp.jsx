@@ -516,7 +516,7 @@ const SignUp = () => {
     onSubmit: (values) => {
       console.log(values);
       register(values)
-    },
+    }
   });
   return (
     <>
