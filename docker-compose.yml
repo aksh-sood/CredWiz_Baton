@@ -29,4 +29,35 @@ services:
     network_mode: "host"
     hostname: localhost
     ports:
-      - "8099:8099"
+      - 8099:8099
+  user-service:
+    image: user-image:latest
+    build: UserServiceApplication/
+    restart: always
+    depends_on:
+      - eureka-server
+      - api-gateway
+      - credWizUser
+    network_mode: host
+    container_name: user-service
+    ports:
+      - 8090:8090
+    healthcheck:
+      test: "exit 0"
+  wallet-service:
+    image: wallet-service:latest
+    build: WalletServiceApplication/
+    restart: always
+    depends_on:
+      - eureka-server
+      - api-gateway
+      - credWizWallet
+    network_mode: host
+    container_name: wallet-service
+    ports:
+      - 9092:9092
+    healthcheck:
+      test: "exit 0"
+
+
+

@@ -3,14 +3,11 @@ package com.stackroute.userservice.service;
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
 import com.stackroute.userservice.exceptions.CustomException;
-import com.stackroute.userservice.exceptions.EmailIdNotExistException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserDto;
 import com.stackroute.userservice.repository.UserRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
@@ -22,10 +19,6 @@ public class UserServiceImpl implements  UserService{
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private ModelMapper modelMapper;
-
 
     public User saveUser(User user) throws ContactNumberAlreadyExistsException{
         Optional<User> optionalUser = userRepository.findByContactNumber(user.getContactNumber());
@@ -40,18 +33,6 @@ public class UserServiceImpl implements  UserService{
         return userRepository.findAll();
     }
 
-    public User getUserByEmail(String emailId) throws EmailIdNotExistException{
-        Optional<User> optionalUser = userRepository.findById(emailId);
-        User user = optionalUser.isEmpty() ? null : optionalUser.get();
-        if(user==null){
-            throw new EmailIdNotExistException("Contact Number Does Not Exist");
-        }
-        return user;
-
-    }
-
-
-
     public boolean deleteUserByContactNumber(String contactNumber)throws ContactNumberNotExistException {
         Optional<User> optionalUser = userRepository.findByContactNumber(contactNumber);
         User user=optionalUser.isEmpty()?null:optionalUser.get();
@@ -63,11 +44,9 @@ public class UserServiceImpl implements  UserService{
     }
 
     public boolean validateUser(User user) {
-
         Optional<User> optionalUser = userRepository.findByContactNumberAndPassword(user.getContactNumber(), user.getPassword());
-        boolean isValid = optionalUser.isEmpty() ? false : true;
+        boolean isValid = optionalUser.isEmpty() || false;
         return isValid;
-
     }
 
     public User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException{
@@ -80,36 +59,42 @@ public class UserServiceImpl implements  UserService{
     }
 
     @Override
-    public User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException {
+    public User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException, ContactNumberNotExistException {
 
         Optional<User> optionalUser= userRepository.findByContactNumber(userDto.getContactNumber());
 
-        User oldUser=optionalUser.isEmpty()?null:optionalUser.get();
-        if(oldUser==null){
-            throw new CustomException("Contact Number Does Not Exist");
+        User user=optionalUser.isEmpty()?null:optionalUser.get();
+        if(user==null){
+            throw new ContactNumberNotExistException("Contact Number Does Not Exist");
         }
 
 
-//        if(userDto.getAddress().isEmpty() || userDto.getAddress().isBlank()){
-//           userDto.setAddress(oldUser.getAddress());
-//        }
-//        if(userDto.getUserName().isBlank()||userDto.getUserName().isEmpty()){
-//            userDto.setUserName(oldUser.getUserName());
-//        }
-//        if(userDto.getPassword().isBlank()||userDto.getPassword().isEmpty()){
-//            userDto.setPassword(oldUser.getPassword());
-//        }
-//        if(userDto.getEmailId().isBlank()||userDto.getEmailId().isEmpty()){
-//            userDto.setEmailId(oldUser.getEmailId());
-//        }
-        try{
-        this.modelMapper.map(userDto,oldUser);}catch(ConstraintViolationException e){
-            System.out.print("Errorrrrrrrrrrrrrrrrrrrrrrrrrrrrrooooooooooooooooooooorrrrrrrrrrrrrrrrrrrrrrrroooooo");
+        if (userDto.getEmailId() != null ) {
+            // Check email validation
+            if (!userDto.getEmailId().matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+                throw new CustomException("Invalid email format.");
+            }
+            user.setEmailId(userDto.getEmailId());
         }
-        return userRepository.save(oldUser);
+
+        if (userDto.getPassword() != null) {
+            // Check password validation
+            if (!userDto.getPassword().matches("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$")) {
+                throw new CustomException("Password must be between 8 and 20 characters.");
+            }
+            user.setPassword(userDto.getPassword());
+        }
+
+        if (userDto.getUserName() != null && !userDto.getUserName().isBlank()) {
+            user.setUserName(userDto.getUserName());
+        }
+
+        if (userDto.getAddress() != null && !userDto.getAddress().isBlank()) {
+            user.setAddress(userDto.getAddress());
+        }
+
+        return userRepository.save(user);
 
     }
-
-
 
 }
