@@ -11,22 +11,31 @@ import { shadows } from '@mui/system';
 const iswalletadded = false
 
 const UserProfile = () => {
-    fetch(`localhost:8090/user/contact/${localStorage.getItem("contactNumber")}`)
-        .then(response => response.json())
+    localStorage.setItem("contactNumber",9876543210);
+   // localStorage.setItem("jwt_auth","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5ODc2NTQzMjEwIiwiZXhwIjoxNjc5OTk4NzU3LCJpYXQiOjE2Nzk5OTY5NTd9.KfwM-w9k0Wgx7f7BiaGpNXKxpjewZh9HcP9OBFWAMzk");
+    const jwtToken = localStorage.getItem('jwt_auth');
+     fetch(`http://localhost:8090/user/contact/${localStorage.getItem("contactNumber")}`, {
+   // fetch(`https://58f152ea-bd1a-46f8-9592-aae49ff1e53c.mock.pstmn.io/user/userprofile`, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }).then(response => response.json())
         .then(user => {
-            document.getElementById('userName').textContent = user.userName;
-            document.getElementById('address').textContent = user.address;
-            document.getElementById('email').textContent = user.emailId;
-            document.getElementById('contactNumber').textContent = user.contactNumber;
+            console.log(user.userName,user.address,user.emailId,user.contactNumber)
+            document.getElementById('userName').value = user.userName;
+            document.getElementById('address').value = user.address;
+            document.getElementById('emailId').value = user.emailId;
+            document.getElementById('contactNumber').value = user.contactNumber;
         })
         .catch(error => console.error(error));
-    fetch(`localhost:9092/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
+     fetch(`localhost:9092/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
+   // fetch(`https://58f152ea-bd1a-46f8-9592-aae49ff1e53c.mock.pstmn.io/wallet/getwallet`)
         .then(response => response.json())
         .then(user => {
-            document.getElementById('aadharNumber').textContent = user.aadhaarNumber;
-            document.getElementById('panNumber').textContent = user.panNumber;
-            document.getElementById('bankName').textContent = user.bankName;
-            document.getElementById('accountNumber').textContent = user.accountNumber;
+            document.getElementById('aadharNumber').value = user.aadhaarNumber;
+            document.getElementById('panNumber').value = user.panNumber;
+            document.getElementById('bankName').value = user.bankName;
+            document.getElementById('accountNumber').value = user.accountNumber;
         })
         .catch(error => console.error(error));
     return (
@@ -46,7 +55,7 @@ const UserProfile = () => {
                 }} >“To become wealthy, you have to be making money while you sleep”</Typography></Box>
             <div className="userprofileBody">
                 <div className="userprofileForm">
-                    <Box 
+                    <Box
                         component="form"
                         sx={{
                             '& .MuiTextField-root': {
@@ -72,20 +81,20 @@ const UserProfile = () => {
                         height="100%"
                     >
                         <div>
-                            <TextField id="userName" multiline disabled label="User Name" variant="outlined" />
-                             <TextField id="address" multiline  maxRows={4} label="Address" variant="outlined" />
+                            <TextField id="userName" multiline disabled  variant="outlined" />
+                            <TextField id="address" multiline disabled maxRows={4}  variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="contactNumber" disabled label="Contact No:" variant="outlined" />
-                            <TextField id="email" disabled label="Email" variant="outlined" />
+                            <TextField id="contactNumber" disabled variant="outlined" />
+                            <TextField id="emailId" disabled  variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="bankName" disabled label="Bank Name" variant="outlined" />
-                            <TextField id="accountNumber" disabled label="Account Number" variant="outlined" />
+                            <TextField id="bankName" disabled  variant="outlined" />
+                            <TextField id="accountNumber" disabled variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="panNumber" disabled label="PAN No:" variant="outlined" />
-                            <TextField id="aadharNumber" disabled label="Aadhar No:" variant="outlined" />
+                            <TextField id="panNumber" disabled  variant="outlined" />
+                            <TextField id="aadharNumber" disabled  variant="outlined" />
                         </div>
 
                         <Box sx={{
@@ -115,7 +124,7 @@ const UserProfile = () => {
                             >
                                 Click Here to Update Your Profile
                             </Button>
-                            
+
                         </Box>
                         <Box sx={{
                             textAlign: 'center',
@@ -142,9 +151,9 @@ const UserProfile = () => {
                                     },
                                 }}
                             >
-                                Delete Profile                          
-                                 </Button>
-                            
+                                Delete Profile
+                            </Button>
+
                         </Box>
                     </Box>
                 </div>
