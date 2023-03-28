@@ -3,9 +3,30 @@ import { width } from "@mui/system";
 import './CreateWallet.css';
 import NavbarWallet from "./NavbarWallet"
 import Footer from "../footer/Footer"
-
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const CreateWallet = (props) => {
+    const walletSchema=yup.object(
+        {
+            bankName:yup.string().matches(/^[a-zA-Z]+$/,'only alphabets').required("Bank name is required"),
+            accountNumber:yup.number().integer("Bank number should not be decimal").positive("bank number should be positive").required("Account Number is required"),
+            aadhaarNumber:yup.number().integer("Aadhaar should not have decimal").positive("Aadhaar should be positive").min(12,"Aadhaar should be of 12 digits").required("Aadhaar is required"),
+            panNumber:yup.string().matches(/[A-Z]{5}[0-9]{4}[A-Z]{1}/,"pan card must be valid").required("Pan number is required")
+     });
+    const  walletFormik=useFormik({
+        initialValues:{
+            bankName:"",
+            accountNumber:0,
+            aadhaarNumber:0,
+            panNumber:""
+        },
+         validationSchema:walletSchema,
+        onSubmit: (values) => {
+              console.log(values);
+
+        }
+    });
     return (
         <>
         <NavbarWallet iswalletadded={props.iswalletadded}></NavbarWallet>
@@ -35,18 +56,58 @@ const CreateWallet = (props) => {
                             paddingTop:"30px"
 
                         }}
-                        noValidate
+                        //noValidate
                         autoComplete="off"
                         width= "60%"
                         height= "auto"
                     >
                         <div>
-                            <TextField id="outlined-basic" label="Bank Name" variant="filled" />
-                            <TextField id="outlined-basic" label="Account Number" variant="filled" />
+                            <TextField
+                                id="outlined-basic"
+                                label="Bank Name"
+                                type="text"
+                                 variant="filled"
+                                 name="bankName"
+                                 onChange={walletFormik.handleChange}
+                                 value={walletFormik.values.bankName}
+                                 error={walletFormik.touched.bankName && Boolean(walletFormik.errors.bankName)}
+                                 helperText={walletFormik.touched.bankName ? walletFormik.errors.bankName:""}
+                             />
+                            <TextField
+                                id="outlined-basic"
+                                type="number"
+                                label="Account Number"
+                                variant="filled"
+                                name="accountNumber"
+                                onChange={walletFormik.handleChange}
+                                value={walletFormik.values.accountNumber}
+                                error={walletFormik.touched.accountNumber && Boolean(walletFormik.errors.accountNumber)}
+                                helperText={walletFormik.touched.accountNumber?walletFormik.errors.accountNumber:""}
+                            />
                         </div>
                         <div>
-                            <TextField id="outlined-basic" label="Aadhar Number" variant="filled" />
-                            <TextField id="outlined-basic" label="PAN Card Number" variant="filled" />
+                            <TextField
+                                id="outlined-basic"
+                                label="Aadhaar Number"
+                                type="number"
+                                variant="filled"
+                                name="aadhaarNumber"
+                                onChange={walletFormik.handleChange}
+                                value={walletFormik.values.aadhaarNumber}
+                                error={walletFormik.touched.aadhaarNumber && Boolean(walletFormik.errors.aadhaarNumber)}
+                                helperText={walletFormik.touched.aadhaarNumber ? walletFormik.errors.aadhaarNumber:""}
+                            />
+                            <TextField
+                                id="outlined-basic"
+                                label="PAN Number"
+                                type="text"
+                                name="panNumber"
+                                variant="filled"
+                                onChange={walletFormik.handleChange}
+                                value={walletFormik.values.panNumber}
+                                error={walletFormik.touched.panNumber && Boolean(walletFormik.errors.panNumber)}
+                                helperText={walletFormik.touched.panNumber?walletFormik.errors.panNumber:""}
+                            />
                         </div>
                         
                        
@@ -61,6 +122,8 @@ const CreateWallet = (props) => {
                     className="btn bubble "
                     id="sign-in-btn"
                     value="Sign up"
+
+                     onClick={walletFormik.handleSubmit}
                     // color="#241C2C"
                     // marginBottom="20px"
                     sx={{
