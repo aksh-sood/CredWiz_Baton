@@ -1,12 +1,25 @@
+import React, { useState, useEffect } from "react";
 import { mockTransactions } from "../../data/mockData";
 import { Box, Button, Typography, useTheme } from "@mui/material";
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import StatBox from "../statebox/StatBox";
 import TransactionBar from "../history/TransactionBar";
 import Navbar from "../navbar/Navbar";
-import Footer from "../footer/Footer"
+import Footer from "../footer/Footer";
+import TransactionHistory from "../../Services/TransactionHistory";
 
 export default function Transaction() {
+  const [transactions, setTransactions] = useState([]);
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      const service = new TransactionHistory();
+      const transactionHistory = await service.getTransactionHistory();
+      setTransactions(transactionHistory);
+      console.log(transactionHistory);
+    };
+    fetchTransactions();
+  }, []);
+
   const theme = useTheme();
   return (
     <>
@@ -94,7 +107,18 @@ export default function Transaction() {
             Recent Transactions
           </Typography>
         </Box>
-        {mockTransactions.map((transaction, i) => (
+        {transactions.map(transaction => (
+          <TransactionBar
+            key={transaction.transactionId}
+            id={transaction.transactionId}
+            name={transaction.contactNumber}
+            cost={transaction.amount}
+            date={new Date(transaction.date).toLocaleString()}
+            status={transaction.transactionStatus}
+            type={transaction.transactionType}
+          />
+        ))}
+        {/* {transactions.map((transaction, i) => (
           <TransactionBar
             key={i}
             id={transaction.id}
@@ -104,7 +128,7 @@ export default function Transaction() {
             status={transaction.status}
             type={transaction.type}
           />
-        ))}
+        ))} */}
       </Box>
     </Box>
     <Footer></Footer>

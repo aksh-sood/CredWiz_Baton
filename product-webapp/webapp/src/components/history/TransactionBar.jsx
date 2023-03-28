@@ -36,10 +36,10 @@ const TransactionBar = (props) => {
         </Typography>
       </Box>
       <Box  color="#241C2C">{props.date}</Box>
-      <Box  color="#241C2C">${props.cost}</Box>
+      <Box  color="#241C2C">₹{props.cost}</Box>
       <Box>
         <IconButton>
-          {props.type === "credit" ? (
+          {props.type === "Credit" ? (
             <KeyboardDoubleArrowDownIcon sx={{ color: "white", backgroundColor: "green", fontSize: "28px" }} />
           ) : (
             <KeyboardDoubleArrowUpIcon sx={{ color: "white", backgroundColor: "red", fontSize: "28px" }} />
@@ -48,7 +48,7 @@ const TransactionBar = (props) => {
       </Box>
       <Box>
         <IconButton>
-          {props.status === "successful" ?
+          {props.status === "Successful" ?
             (<CheckCircleIcon sx={{ color: "white", backgroundColor: "green", fontSize: "28px" }} />)
             : (props.status === "failed" ? (<CancelIcon sx={{ color: "white", backgroundColor: "red", fontSize: "28px" }} />) :
               (<CachedIcon sx={{ backgroundColor: "yellow", fontSize: "28px" }} />))
