@@ -1,27 +1,23 @@
 package com.stackroute.userservice.service;
 
-import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
-import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
-import com.stackroute.userservice.exceptions.EmailIdAlreadyExistsException;
-import com.stackroute.userservice.exceptions.EmailIdNotExistException;
+import com.stackroute.userservice.exceptions.*;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserDto;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 public interface UserService {
-	public User saveUser(User user) throws ContactNumberAlreadyExistsException;
+	User saveUser(User user) throws ContactNumberAlreadyExistsException;
 
-	public List<User> getAllUser();
+	List<User> getAllUser();
 
-	public User getUserByEmail(String emailId) throws EmailIdNotExistException;
+	boolean deleteUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
-	public boolean deleteUserByContactNumber(long contactNumber) throws ContactNumberNotExistException;
+	boolean validateUser(User user);
 
-	public boolean validateUser(User user);
-
-	public User getUserByContactNumber(long contactNumber) throws ContactNumberNotExistException;
+	User getUserByContactNumber(String contactNumber) throws ContactNumberNotExistException;
 
 
-	public User updateUser(UserDto userDto) throws Exception;
+	User updateUser(UserDto userDto) throws CustomException, ConstraintViolationException, ContactNumberNotExistException;
 }

@@ -2,7 +2,7 @@ package com.stackroute.userservice.controller;
 
 import com.stackroute.userservice.exceptions.ContactNumberAlreadyExistsException;
 import com.stackroute.userservice.exceptions.ContactNumberNotExistException;
-
+import com.stackroute.userservice.exceptions.CustomException;
 import com.stackroute.userservice.model.User;
 import com.stackroute.userservice.payload.UserAuthenticateRequest;
 import com.stackroute.userservice.payload.UserAuthenticateResponse;
@@ -17,9 +17,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -30,109 +29,101 @@ import java.util.Map;
 @CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
-	@Autowired
-	private UserService userService;
-	@Autowired
-	private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-	@Autowired
-	JwtUtils jwtTokenUtil;
-	@Autowired
-	private CustomUserService userDetailsService;
-	@GetMapping("/admin/getAll")
-	public ResponseEntity<?> getAllUser() {
-		List<User> userList = userService.getAllUser();
-		Map<String,Object>map=new HashMap<String,Object>();
-		map.put("count",userList.size());
-		map.put("list",userList);
-		ResponseEntity<?> entity = new ResponseEntity<Map>(map, HttpStatus.OK);
-		return entity;
-	}
+    @Autowired
+    JwtUtils jwtTokenUtil;
+    @Autowired
+    private CustomUserService userDetailsService;
 
-	@PostMapping("/register")
-	public ResponseEntity<?> registerUser(@RequestBody @Valid User user) {
-		ResponseEntity<?> entity = null;
-		try {
-			userService.saveUser(user);
-			entity = new ResponseEntity<String>("User Registered Successfully...", HttpStatus.CREATED);
-		} catch (ContactNumberAlreadyExistsException e) {
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		}
-		return entity;
-	}
+    @GetMapping("/admin/getAll")
+    public ResponseEntity<?> getAllUser() {
+        List<User> userList = userService.getAllUser();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("count", userList.size());
+        map.put("list", userList);
+        ResponseEntity<?> entity = new ResponseEntity<Map>(map, HttpStatus.OK);
+        return entity;
+    }
 
-	@PostMapping("/login")
-	public ResponseEntity<?> createAuthenticationToken(@RequestBody UserAuthenticateRequest authenticationRequest)throws Exception{
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody @Valid User user) {
+        ResponseEntity<?> entity = null;
+        try {
+            userService.saveUser(user);
+            entity = new ResponseEntity<String>("User Registered Successfully...", HttpStatus.CREATED);
+        } catch (ContactNumberAlreadyExistsException e) {
+            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+        return entity;
+    }
 
-		ResponseEntity<?> entity = null;
-		try{authenticationManager.authenticate(
-			new UsernamePasswordAuthenticationToken(String.valueOf(authenticationRequest.getContactNumber()),authenticationRequest.getPassword()));
-	}catch(BadCredentialsException e){
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-	}
+    @PostMapping("/login")
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody @Valid UserAuthenticateRequest authenticationRequest)
+            throws Exception {
 
-		final UserDetails userDetails = userDetailsService.loadUserByUsername(String.valueOf(authenticationRequest.getContactNumber()));
-		final String jwt=jwtTokenUtil.generateToken(userDetails);
-		entity=
-		 ResponseEntity.ok(new UserAuthenticateResponse(jwt));
-return entity;
-	}
+        ResponseEntity<?> entity = null;
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authenticationRequest.getContactNumber(),
+                            authenticationRequest.getPassword()));
+        } catch (BadCredentialsException e) {
+            entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
 
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getContactNumber());
+        final String jwt = jwtTokenUtil.generateToken(userDetails);
+        entity = ResponseEntity.ok(new UserAuthenticateResponse(jwt));
+        return entity;
+    }
 
+    @DeleteMapping("/delete/{contactNumber}")
+    public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") String contactNumber)
+            throws ContactNumberNotExistException {
 
+//		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
+        ResponseEntity<?> entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);
+        return entity;
+    }
 
+    @GetMapping("/contact/{contactNumber}")
+    public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") String contactNumber)
+            throws ContactNumberNotExistException {
+        User user = null;
+        ResponseEntity<?> entity;
 
-	@DeleteMapping("/delete/{contactNumber}")
-	public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") long contactNumber)
-			throws ContactNumberNotExistException {
+        user = userService.getUserByContactNumber(contactNumber);
 
-		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
-		ResponseEntity<?> entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);
-		return entity;
-	}
+        entity = new ResponseEntity<User>(user, HttpStatus.OK);
+        return entity;
+    }
 
-	@GetMapping("/contact/{contactNumber}")
-	public ResponseEntity<?> getUserByContactNumber(@PathVariable("contactNumber") long contactNumber) throws  ContactNumberNotExistException{
-		User user = null;
-		ResponseEntity<?> entity ;
-
-
-			user= userService.getUserByContactNumber(contactNumber);
-
-		 entity = new ResponseEntity<User>(user, HttpStatus.OK);
-		return entity;
-	}
-
-
-
-
-
-	@PutMapping("/updateUser")
-	public ResponseEntity<?> updateUser(@RequestBody UserDto userDto){
-		User user;
-		ResponseEntity<?> entity ;
-		try{
-			user= userService.updateUser(userDto);
-			entity=new ResponseEntity<User>(user, HttpStatus.CREATED);
-
-		}catch (Exception e){
-			entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
-		}
+    @PutMapping("/updateUser")
+    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto) throws CustomException, ConstraintViolationException, ContactNumberNotExistException {
+        User updatedUser = userService.updateUser(userDto);
+        return ResponseEntity.ok(updatedUser);
+    }
 
 
+    @ExceptionHandler(ContactNumberNotExistException.class)
+    public ResponseEntity<?> noContactNumberExceptionHandler(Exception e) {
+        ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return entity;
+    }
 
-		return entity;
-	}
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<?> customExceptionHandler(Exception e) {
+        ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return entity;
+    }
 
-
-	@ExceptionHandler(ContactNumberNotExistException.class)
-	public ResponseEntity<?> noContactNumberExceptionHandler(Exception e) {
-		ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
-		return entity;
-	}
-
-
-
-
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> constraintViolationExceptionHandler(Exception e) {
+        ResponseEntity<?> entity = new ResponseEntity<String>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        return entity;
+    }
 
 }
