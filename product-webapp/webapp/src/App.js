@@ -6,40 +6,37 @@ import LandingPage from "./components/landing/LandingPage";
 import UserProfile from "./components/userProfile/UserProfile";
 import SendMoney from "./components/sendMoney/SendMoney";
 import AddMoney from "./components/addMoney/AddMoney";
-import RootLayout from "./components/rootLayout/RootLayout";
 import WithdrawMoney from "./components/widthdrawMoney/WithdrawMoney";
 import Dashboard from "./components/dashboard/Dashboard";
-import Navbar from "./components/navbar/Navbar";
 import Transaction from "./components/history/Transaction";
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-  Router,
-} from "react-router-dom";
-import Home from "./components/mui/Home";
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import TransactionStatus from "./components/transactionStatus/TransactionStatus";
+import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import WalletRoute from "./components/walletRoute/WalletRoute";
 
+
+localStorage.setItem("isloggedin", true)
+localStorage.setItem("iswalletadded", true)
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<LandingPage />} />
-
-      <Route exact path="/transaction" element={<Transaction />} />
-
-      <Route exact path="/dashboard" element={<Dashboard />} />
-      <Route exact path="/test" element={<Home />} />
-      <Route exact path="/updateUser" element={<UpdateUser />} />
       <Route exact path="/signIn" element={<SignIn />} />
       <Route exact path="/signUp" element={<SignUp />} />
-      <Route exact path="/userProfile" element={<UserProfile />} />
-      <Route exact path="/sendMoney" element={<SendMoney />} />
-      <Route exact path="/addMoney" element={<AddMoney />} />
+
+
+      <Route exact path="/dashboard" element={<PrivateRoute> <Dashboard /> </PrivateRoute>} />
+      <Route exact path="/updateUser" element={<PrivateRoute> <UpdateUser /> </PrivateRoute>} />
+      <Route exact path="/userProfile" element={<PrivateRoute> <UserProfile /> </PrivateRoute>} />
+
+
+      <Route exact path="/sendMoney" element={<WalletRoute> <SendMoney /> </WalletRoute>} />
+      <Route exact path="/addMoney" element={<WalletRoute> <AddMoney /> </WalletRoute>} />
       <Route exact path="/withdrawMoney" element={<WithdrawMoney />} />
-      <Route exact path="/transactionStatus" element={<TransactionStatus />} />
+      <Route exact path="/transactionStatus" element={<WalletRoute> <TransactionStatus /> </WalletRoute>} />
+      <Route exact path="/transaction" element={<WalletRoute> <Transaction /> </WalletRoute>} />
     </Route>
   )
 );

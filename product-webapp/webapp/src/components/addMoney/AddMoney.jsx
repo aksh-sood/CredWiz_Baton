@@ -1,15 +1,16 @@
-import { Box, TextField, MenuItem, Button, Typography, LinearProgress } from "@mui/material"
-import { width } from "@mui/system"
+import { Box, TextField, Button, Typography } from "@mui/material"
 import Navbar from "../navbar/Navbar"
-// import Navsample from "../sampleNav/sampleNav"
 import "./AddMoney.css"
 import InputAdornment from "@mui/material/InputAdornment"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../footer/Footer'
 import Modal from '@mui/material/Modal';
 import GreenCheck from "../../assets/green_checkmark.svg";
 import RedCross from "../../assets/red-x-icon.svg"
+import * as yup from "yup"
+import { useFormik } from "formik"
+import { useNavigate } from "react-router-dom"
 
 
 const styles = {
@@ -20,14 +21,28 @@ const styles = {
 
 const AddMoney = (props) => {
 
+    const addmoneySchema = yup.object(
+        {
+            amount: yup.number().positive("Invalid Input").required("Enter the amount")
+        }
+    )
+    const addmoneyFormik = useFormik(
+        {
+            initialValues: {
+                amount:""
+            },
+            validationSchema: addmoneySchema
+        }
+    )
+
 
     const { classes } = props;
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const path = RedCross; 
+    const moneystatus = true;
 
-
+    
 
     return (
         <>
@@ -62,12 +77,15 @@ const AddMoney = (props) => {
                     >
                         <div>
                             <TextField
-                                // autoComplete="off"
+                                autoComplete="off"
                                 variant="filled"
                                 label="Amount"
-                                // placeholder="Amount"
                                 type="number"
                                 name="amount"
+                                onChange={addmoneyFormik.handleChange}
+                                value={addmoneyFormik.values.amount}
+                                error={addmoneyFormik.touched.amount && Boolean(addmoneyFormik.errors.amount)}
+                                helperText={addmoneyFormik.touched.amount ? addmoneyFormik.errors.amount : ""}
                                 InputProps={{
                                     classes: { input: classes.resize },
                                     startAdornment: (
@@ -88,8 +106,8 @@ const AddMoney = (props) => {
                                 className="btn bubble "
                                 id="sign-in-btn"
                                 value="Sign up"
+                                // onClick={addmoneyFormik.handleSubmit}
                                 onClick={handleOpen}
-                                // color="#241C2C"
                                 sx={{
                                     width: "150px",
                                     backgroundColor: "#241C2C",
@@ -110,7 +128,6 @@ const AddMoney = (props) => {
 
                             <Modal
                                 open={open}
-                                onClose={handleClose}
                                 aria-labelledby="modal-modal-title"
                                 aria-describedby="modal-modal-description"
                             >
@@ -126,13 +143,30 @@ const AddMoney = (props) => {
                                     boxShadow: 24,
                                     p: 4,
                                 }}>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                                    {
+                                        moneystatus == true ? (<>
+                                        <Typography id="modal-modal-title" variant="h6" component="h2">
                                         Money Added Successfully
-                                    </Typography>
-                                    
-                                    <div className='tstatus'>
-                                        <img src={path} height="180vh" width="180vh" />
-                                    </div>
+                                        </Typography> 
+                                        <div className='addstatus'>
+                                        <img src={GreenCheck} height="180vh" width="180vh" />
+                                        </div>
+                                        </>
+                                        ) : (
+                                        <>
+                                        <Typography id="modal-modal-title" variant="h6" component="h2">
+                                        Money Is Not Added
+                                        </Typography> 
+                                        <div className='addstatus'>
+                                        <img src={RedCross} height="180vh" width="180vh" />
+                                        </div>
+                                        </>
+                                        )
+                                    }
+                                    <Button onClick={handleClose} sx={{
+                                        width: '100%',
+                                        textAlign: 'center'
+                                    }}>Close</Button>
                                 </Box>
                             </Modal>
 

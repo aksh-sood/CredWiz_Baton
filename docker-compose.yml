@@ -34,7 +34,7 @@ services:
     restart: always
     container_name: product-webapp
     ports:
-      - 4200:4200
+      - 3000:3000
     links:
       - eureka-server
     environment:
@@ -46,6 +46,7 @@ services:
     image: user-service
     build: user-service/
     container_name: user-service
+    restart: always
     ports:
       - 8090:8090
     links:
@@ -54,6 +55,28 @@ services:
       - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
     depends_on:
       - credwizmysqldb
+      - api-gateway
+
+
+#  wallet-service:
+#    image: wallet-service
+#    build: wallet-service/
+#    container_name: wallet-service
+#    restart: always
+#    ports:
+#      - 9092:9092
+#    links:
+#      - eureka-server
+#    environment:
+#      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+#    depends_on:
+#      - credwizmysqldb
+#      - api-gateway
+#      - eureka-server
+
+
+
+
 #  user-service:
 #    image: user-image:latest
 #    build: UserServiceApplication/
