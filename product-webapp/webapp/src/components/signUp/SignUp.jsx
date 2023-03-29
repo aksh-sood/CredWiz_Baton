@@ -22,7 +22,7 @@ const SignUp = () => {
       cPassword: yup.string().oneOf([yup.ref('password'), null], "password must match"),
       phoneNumber: yup.string().matches(phoneRegExp, 'Phone number is not valid').min(10, "too short").max(10, "too long").required("phone number is required"),
       address1: yup.string("should be string").required("address is required"),
-      address2: yup.string("should be string").required("address is required")
+      // address2: yup.string("should be string").required("address is required")
     }
   )
 

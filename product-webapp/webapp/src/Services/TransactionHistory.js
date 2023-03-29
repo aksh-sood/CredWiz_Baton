@@ -4,7 +4,7 @@ class TransactionHistory {
   getTransactionHistory = async () => {
     try {
       const response = await axios.get(
-        "https://bbe19ceb-c21a-4458-becc-212705a45469.mock.pstmn.io/getTransactions"
+        `http://localhost:9090/wallet/getTransactions/${localStorage.getItem("contactNumber")}`
       );
       const transactionData = response.data;
 

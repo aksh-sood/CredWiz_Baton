@@ -214,7 +214,7 @@ const SendMoney = (props) => {
                                             </>
                                         )
                                     }
-                                    <Button onClick={handleClose} sx={{
+                                    <Button onClick={()=>handleClose()} sx={{
                                         width: '100%',
                                         textAlign: 'center'
                                     }}>Close</Button>
