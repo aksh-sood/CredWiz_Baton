@@ -36,10 +36,8 @@ const SignIn = () => {
                         localStorage.setItem("contactNumber",values.contactNumber)
                         localStorage.setItem("isloggedin",true)
                         axios.get(`http://localhost:9090/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
-                        // axios.get("http://localhost:9090/wallet/getWallet/'8304055376'")
-                        
                         .then((res)=>{
-                            console.log(res)
+                            localStorage.setItem("accBalance",`${res.data.balance}`)
                             localStorage.setItem("iswalletadded",true)
                             console.log(localStorage.getItem("iswalletadded"));
                             navigate("/dashboard")

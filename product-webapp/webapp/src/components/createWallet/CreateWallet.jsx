@@ -62,7 +62,7 @@ const CreateWallet = (props) => {
     });
     return (
         <>
-        {isLoggedIn ? (
+        {localStorage.getItem("iswalletadded") ? (
         <>
             <NavbarWallet></NavbarWallet>
             <Box sx={{ marginTop: "50px", width: '100%', textAlign: 'center' }}>

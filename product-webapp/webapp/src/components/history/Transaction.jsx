@@ -65,7 +65,7 @@ export default function Transaction() {
           
           
           <StatBox
-            subtitle="12,361"
+            subtitle={localStorage.getItem("accBalance")}
             title="Balance"
             icon={
               <AccountBalanceIcon

@@ -23,7 +23,7 @@ const styles = {
 }
 
 const SendMoney = (props) => {
-    const navigate = useNavigate();
+    
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     useEffect(() => {
         async function checkLoginStatus() {
@@ -232,7 +232,7 @@ const SendMoney = (props) => {
             <div>
                     <p>You are not logged in. Please log in to access this page.</p>
                     {/* You can also redirect the user to the login page if needed */}
-                    {navigate("/signin")}
+                    
                 </div>
         )}
     </>

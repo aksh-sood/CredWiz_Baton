@@ -7,19 +7,21 @@ import { Link } from "react-router-dom";
 import NavbarWallet from "../createWallet/NavbarWallet";
 import { shadows } from "@mui/system";
 import axios from "axios";
+import InputAdornment from "@mui/material/InputAdornment"
+
 
 const iswalletadded = false;
 function deleteUser() {
-  const contactNumber = localStorage.getItem("contactNumber");
-  axios
-  .delete(`http://localhost:8090/user/delete/${contactNumber}`)
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((error) => {
-    // Handle error
-    console.log(error);
-  });
+    const contactNumber = localStorage.getItem("contactNumber");
+    axios
+        .delete(`http://localhost:8090/user/delete/${contactNumber}`)
+        .then((response) => {
+            console.log(response);
+        })
+        .catch((error) => {
+            // Handle error
+            console.log(error);
+        });
 }
 const UserProfile = () => {
 
@@ -94,20 +96,71 @@ const UserProfile = () => {
                         height="100%"
                     >
                         <div>
-                            <TextField id="userName" multiline disabled variant="outlined" />
-                            <TextField id="address" multiline disabled maxRows={4} variant="outlined" />
+                            <TextField id="userName" label="User Name" multiline variant="filled" InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-user" />
+                                    </InputAdornment>
+                                ),
+                                readOnly: true
+                            }} />
+                            <TextField id="address" label="Address" multiline maxRows={4} variant="filled" InputProps={{ 
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                      <i class="fas fa-house" />
+                                    </InputAdornment>
+                                  ),
+                                readOnly: true }} />
                         </div>
                         <div>
-                            <TextField id="contactNumber" disabled variant="outlined" />
-                            <TextField id="emailId" disabled variant="outlined" />
+                            <TextField id="contactNumber" label="Contact Number" variant="filled" InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-phone" />
+                                    </InputAdornment>
+                                ),
+                                readOnly: true
+                            }} />
+                            <TextField id="emailId" label="Email ID" variant="filled" InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-envelope" />
+                                    </InputAdornment>
+                                ),
+                                readOnly: true
+                            }} />
                         </div>
                         <div>
-                            <TextField id="bankName" disabled variant="outlined" />
-                            <TextField id="accountNumber" disabled variant="outlined" />
+                            <TextField id="bankName" label="Bank Name" variant="filled" InputProps={{ 
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-bank" />
+                                    </InputAdornment>
+                                ),
+                                readOnly: true }} />
+                            <TextField id="accountNumber" label="Account No." variant="filled" InputProps={{ 
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-lock" />
+                                    </InputAdornment>
+                                ),
+                                readOnly: true }} />
                         </div>
                         <div>
-                            <TextField id="panNumber" disabled variant="outlined" />
-                            <TextField id="aadhaarNumber" disabled variant="outlined" />
+                            <TextField id="panNumber" label="PAN No." variant="filled" InputProps={{ 
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-lock" />
+                                    </InputAdornment>
+                                ),
+                                readOnly: true }} />
+                            <TextField id="aadhaarNumber" label="Aadhaar No." variant="filled" InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <i class="fas fa-lock" />
+                                    </InputAdornment>
+                                ),
+                                 readOnly: true }} />
                         </div>
 
                         <Box sx={{
