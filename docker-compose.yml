@@ -56,23 +56,20 @@ services:
     depends_on:
       - credwizmysqldb
       - api-gateway
-
-
-#  wallet-service:
-#    image: wallet-service
-#    build: wallet-service/
-#    container_name: wallet-service
-#    restart: always
-#    ports:
-#      - 9092:9092
-#    links:
-#      - eureka-server
-#    environment:
-#      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
-#    depends_on:
-#      - credwizmysqldb
-#      - api-gateway
-#      - eureka-server
+  wallet-service:
+    image: wallet-service
+    build: wallet-service/
+    container_name: wallet-service
+    restart: always
+    ports:
+      - 9092:9092
+    links:
+      - eureka-server
+    environment:
+      - eureka.client.service-url.defaultZone=http://eureka-server:8761/eureka/
+    depends_on:
+      - credwizmysqldb
+      - api-gateway
 
 
 
