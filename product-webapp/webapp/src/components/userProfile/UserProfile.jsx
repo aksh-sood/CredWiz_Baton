@@ -1,14 +1,26 @@
 import { Box, Button, MenuItem, TextField, Typography } from "@mui/material";
 import { width } from "@mui/system";
 import Navbar from "../navbar/Navbar";
-import './UserProfile.css';
-import Footer from "../footer/Footer"
+import "./UserProfile.css";
+import Footer from "../footer/Footer";
 import { Link } from "react-router-dom";
 import NavbarWallet from "../createWallet/NavbarWallet";
-import { shadows } from '@mui/system';
+import { shadows } from "@mui/system";
+import axios from "axios";
 
-
-
+const iswalletadded = false;
+function deleteUser() {
+  const contactNumber = localStorage.getItem("contactNumber");
+  axios
+  .delete(`http://localhost:8090/user/delete/${contactNumber}`)
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    // Handle error
+    console.log(error);
+  });
+}
 const UserProfile = () => {
 
 
@@ -162,5 +174,7 @@ const UserProfile = () => {
             <Footer></Footer>
         </>
     );
-}
+
+
+};
 export default UserProfile;
