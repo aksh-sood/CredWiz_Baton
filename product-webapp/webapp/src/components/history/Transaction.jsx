@@ -7,10 +7,15 @@ import TransactionBar from "../history/TransactionBar";
 import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import TransactionHistory from "../../Services/TransactionHistory";
+// import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Transaction() {
   const [transactions, setTransactions] = useState([]);
+  const [user,setUser]=useState();
+  const [wallet,setWallet]=useState();
   useEffect(() => {
+    // const navigate = useNavigate()
     const fetchTransactions = async () => {
       const service = new TransactionHistory();
       const transactionHistory = await service.getTransactionHistory();
@@ -18,6 +23,34 @@ export default function Transaction() {
       console.log(transactionHistory);
     };
     fetchTransactions();
+
+    const jwtToken = localStorage.getItem('jwt_auth');
+    fetch(`http://localhost:9090/user/contact/${localStorage.getItem("contactNumber")}`, {
+        headers: {
+            Authorization: `Bearer ${jwtToken}`
+        }
+    }).then(response => response.json())
+        .then(user => {
+          console.log(user);
+          setUser(user)
+            localStorage.setItem("userName",user.userName);
+        })
+        .catch(error => {alert("Error fetching userName")});
+
+        axios.get(`http://localhost:9090/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
+        .then((res)=>{
+          setWallet(res.data);
+            localStorage.setItem("accBalance",`${res.data.balance}`)
+            localStorage.setItem("iswalletadded",true)
+            console.log(localStorage.getItem("iswalletadded"));
+           
+        })
+        .catch((res)=>{
+            localStorage.setItem("iswalletadded",false)
+            console.log(res)
+
+
+        })
   }, []);
 
   const theme = useTheme();
@@ -45,7 +78,7 @@ export default function Transaction() {
           
           
           <StatBox
-            subtitle="Austin George"
+            subtitle={localStorage.getItem("userName")}
             title="User Name"
             icon={
               <AccountBalanceIcon

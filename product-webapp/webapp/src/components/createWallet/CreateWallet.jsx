@@ -52,8 +52,10 @@ const CreateWallet = (props) => {
             axios.post("http://localhost:9090/wallet/createWallet", wallet)
                 .then((res) => {
                     localStorage.setItem("iswalletadded",true)
-                    alert("updated successful")
                     navigate("/dashboard")
+                    alert("created successful")
+                    window.location.reload(true);
+                 
                 })
                 .catch((res) => {
                     alert(res)
