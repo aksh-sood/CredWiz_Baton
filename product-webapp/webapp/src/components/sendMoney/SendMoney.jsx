@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useEffect, useState } from "react";
+
 import { Box, TextField, Button, Typography } from "@mui/material"
 import Navbar from "../navbar/Navbar"
 import "./SendMoney.css"
@@ -11,6 +12,8 @@ import RedCross from "../../assets/red-x-icon.svg"
 import { useFormik } from "formik"
 import * as yup from "yup"
 import axios from "axios"
+import { checkUserContact } from "../../Services/userAuthCheck";
+import { useNavigate } from "react-router-dom";
 
 
 const styles = {
@@ -20,6 +23,17 @@ const styles = {
 }
 
 const SendMoney = (props) => {
+    const navigate = useNavigate();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        async function checkLoginStatus() {
+            const jwtAuth = localStorage.getItem("jwt_auth");
+            const result = await checkUserContact(jwtAuth);
+            setIsLoggedIn(result);
+            console.log("isLoggedIn ", result);
+        }
+        checkLoginStatus();
+    }, []);
 
     const sendmoneySchema = yup.object(
         {
@@ -36,10 +50,10 @@ const SendMoney = (props) => {
             },
             validationSchema: sendmoneySchema,
             onSubmit: (values) => {
-                // values["contactNumber"]=localStorage.getItem("contactNumber")
-                values["senderContactNumber"] = "1111111111"
+                values["senderContactNumber"]=localStorage.getItem("contactNumber")
+                // values["senderContactNumber"] = "1111111111"
                 console.log(values)
-                axios.post("http://localhost:9092/wallet/sendmoney", values)
+                axios.post("http://localhost:9090/wallet/sendmoney", values)
                     .then((res) => {
                         console.log(res)
                         //  alert(res.data)
@@ -65,6 +79,8 @@ const SendMoney = (props) => {
 
 
     return (
+    <>
+    {isLoggedIn ? (
         <>
             <Navbar></Navbar>
             <Box sx={{ width: '100%', textAlign: 'center' }}>
@@ -212,7 +228,15 @@ const SendMoney = (props) => {
                 </div>
             </div>
             <Footer></Footer>
-        </>
+        </>):(
+            <div>
+                    <p>You are not logged in. Please log in to access this page.</p>
+                    {/* You can also redirect the user to the login page if needed */}
+                    {navigate("/signin")}
+                </div>
+        )}
+    </>
     )
+        
 }
 export default withStyles(styles)(SendMoney)

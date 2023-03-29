@@ -6,9 +6,24 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import { checkUserContact } from "../../Services/userAuthCheck";
+import React, { useEffect, useState } from "react";
+
 
 const CreateWallet = (props) => {
     const navigate=useNavigate()
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    useEffect(() => {
+        async function checkLoginStatus() {
+            const jwtAuth = localStorage.getItem("jwt_auth");
+            const result = await checkUserContact(jwtAuth);
+            setIsLoggedIn(result);
+            console.log("isLoggedIn ", result);
+        }
+        checkLoginStatus();
+    }, []);
+
     const walletSchema = yup.object(
         {
             bankName: yup.string().matches(/^[a-zA-Z]+$/, 'only alphabets').required("Bank name is required"),
@@ -46,6 +61,8 @@ const CreateWallet = (props) => {
         }
     });
     return (
+        <>
+        {isLoggedIn ? (
         <>
             <NavbarWallet></NavbarWallet>
             <Box sx={{ marginTop: "50px", width: '100%', textAlign: 'center' }}>
@@ -164,6 +181,13 @@ const CreateWallet = (props) => {
                 </div>
             </div>
             <Footer></Footer>
+        </>):(
+            <div>
+            <p>You are not logged in. Please log in to access this page.</p>
+            {/* You can also redirect the user to the login page if needed */}
+            {navigate("/signin")}
+            </div>
+        )}
         </>
     );
 }

@@ -69,7 +69,7 @@ const UpdateUser = () => {
     return (
         <>
             {
-                iswalletadded == true ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
+                localStorage.getItem("iswalletadded")=== "true" ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
             }
             <Box sx={{ marginTop: "50px", width: '100%', textAlign: 'center' }}>
                 <Typography variant="h2" gutterBottom sx={{
