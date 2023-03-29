@@ -1,34 +1,25 @@
 import axios from "axios";
-export const register=(data)=>{
-    const datas={
-        userName:`${data.firstName} ${data.lastName}`,
-        contactNumber:`${data.phoneNumber}`,
-        emailId:`${data.email}`,
-        password:`${data.password}`,
-        address:`${data.address1} ${data.address2}`
-    }
-    console.log(datas);
-    axios.post("http://localhost:8090/user/register",datas)
-    .then((res)=>{
-        if(res.status===200){
-        alert("registration successful")
-        }
-    });
-}
+import { Navigate, useNavigate } from "react-router-dom";
+
+
+
+
 export const addWallet=(data)=>{
     const wallet={
         bankName:`${data.bankName}`,
         accountNumber:`${data.accountNumber}`,
         aadhaarNumber:`${data.aadhaarNumber}`,
         panNumber:`${data.panNumber}`,
-//        contactNumber:`${localStorage.getItem("contactNumber")}`
- contactNumber:`${9999999999}`
+       contactNumber:`${localStorage.getItem("contactNumber")}`
     }
     console.log(wallet);
-        axios.post("http://localhost:9092/wallet/createWallet",wallet)
+        axios.post("http://localhost:9090/wallet/createWallet",wallet)
         .then((res)=>{
             if(res.status===200){
             alert("updated successful")
             }
-        });
+        })
+        .catch((res)=>{
+            alert(res)
+        })
 }

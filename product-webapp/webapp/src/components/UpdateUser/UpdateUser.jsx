@@ -54,14 +54,16 @@ const UpdateUser = () => {
       const token = localStorage.getItem("jwt_auth");
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`; 
       axios
-      .post("http://localhost:8090/user/updateUser", mapData)
+      .post("http://localhost:9090/user/updateUser", mapData)
       .then((res) => {
+        alert(res)
         if(res.status == 201) {
           navigate("");
         }
       })
       .catch(function (error) {
         console.log(error.response);
+        alert(error)
       });
         };
     return (

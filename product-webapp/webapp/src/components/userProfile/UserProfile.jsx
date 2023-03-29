@@ -8,39 +8,40 @@ import NavbarWallet from "../createWallet/NavbarWallet";
 import { shadows } from '@mui/system';
 
 
-const iswalletadded = false
 
 const UserProfile = () => {
-    localStorage.setItem("contactNumber",9876543210);
-   // localStorage.setItem("jwt_auth","eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5ODc2NTQzMjEwIiwiZXhwIjoxNjc5OTk4NzU3LCJpYXQiOjE2Nzk5OTY5NTd9.KfwM-w9k0Wgx7f7BiaGpNXKxpjewZh9HcP9OBFWAMzk");
+
+
     const jwtToken = localStorage.getItem('jwt_auth');
-     fetch(`http://localhost:8090/user/contact/${localStorage.getItem("contactNumber")}`, {
-   // fetch(`https://58f152ea-bd1a-46f8-9592-aae49ff1e53c.mock.pstmn.io/user/userprofile`, {
+    fetch(`http://localhost:9090/user/contact/${localStorage.getItem("contactNumber")}`, {
         headers: {
             Authorization: `Bearer ${jwtToken}`
         }
     }).then(response => response.json())
         .then(user => {
-            console.log(user.userName,user.address,user.emailId,user.contactNumber)
+            console.log(user.userName, user.address, user.emailId, user.contactNumber)
             document.getElementById('userName').value = user.userName;
             document.getElementById('address').value = user.address;
             document.getElementById('emailId').value = user.emailId;
             document.getElementById('contactNumber').value = user.contactNumber;
         })
-        .catch(error => console.error(error));
-     fetch(`localhost:9092/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
-   // fetch(`https://58f152ea-bd1a-46f8-9592-aae49ff1e53c.mock.pstmn.io/wallet/getwallet`)
+        .catch(error => alert(error + "userdetails"));
+
+
+    fetch(`http://localhost:9090/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
         .then(response => response.json())
         .then(user => {
-            document.getElementById('aadharNumber').value = user.aadhaarNumber;
+            document.getElementById('aadhaarNumber').value = user.aadhaarNumber;
             document.getElementById('panNumber').value = user.panNumber;
             document.getElementById('bankName').value = user.bankName;
             document.getElementById('accountNumber').value = user.accountNumber;
         })
-        .catch(error => console.error(error));
+        .catch(error => alert(error + "walletdetails"));
+
+
     return (
         <> {
-            iswalletadded == true ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
+            localStorage.getItem("iswalletadded") === "true" ? (<Navbar></Navbar>) : (<NavbarWallet></NavbarWallet>)
         }
 
             <Box sx={{ marginTop: "25px", width: '100%', textAlign: 'center' }}>
@@ -81,20 +82,20 @@ const UserProfile = () => {
                         height="100%"
                     >
                         <div>
-                            <TextField id="userName" multiline disabled  variant="outlined" />
-                            <TextField id="address" multiline disabled maxRows={4}  variant="outlined" />
+                            <TextField id="userName" multiline disabled variant="outlined" />
+                            <TextField id="address" multiline disabled maxRows={4} variant="outlined" />
                         </div>
                         <div>
                             <TextField id="contactNumber" disabled variant="outlined" />
-                            <TextField id="emailId" disabled  variant="outlined" />
+                            <TextField id="emailId" disabled variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="bankName" disabled  variant="outlined" />
+                            <TextField id="bankName" disabled variant="outlined" />
                             <TextField id="accountNumber" disabled variant="outlined" />
                         </div>
                         <div>
-                            <TextField id="panNumber" disabled  variant="outlined" />
-                            <TextField id="aadharNumber" disabled  variant="outlined" />
+                            <TextField id="panNumber" disabled variant="outlined" />
+                            <TextField id="aadhaarNumber" disabled variant="outlined" />
                         </div>
 
                         <Box sx={{

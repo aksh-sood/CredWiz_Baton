@@ -35,9 +35,27 @@ const SignIn = () => {
                         console.log(localStorage.getItem("jwt_auth"))
                         localStorage.setItem("contactNumber",values.contactNumber)
                         localStorage.setItem("isloggedin",true)
-                        navigate("/dashboard")
+                        axios.get(`http://localhost:9090/wallet/getWallet/${localStorage.getItem("contactNumber")}`)
+                        // axios.get("http://localhost:9090/wallet/getWallet/'8304055376'")
+                        
+                        .then((res)=>{
+                            console.log(res)
+                            localStorage.setItem("iswalletadded",true)
+                            console.log(localStorage.getItem("iswalletadded"));
+                            navigate("/dashboard")
+                        })
+                        .catch((res)=>{
+                            localStorage.setItem("iswalletadded",false)
+                            console.log(res)
+                            navigate("/dashboard")
+
+                        })
+
+                     
+                        
                     })
                     .catch((res) => {
+                        console.log(null===true)
                         alert("wrong input")
                     })
             }
