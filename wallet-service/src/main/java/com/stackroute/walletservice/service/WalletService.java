@@ -4,6 +4,7 @@ import com.stackroute.walletservice.entity.Transaction;
 import com.stackroute.walletservice.exception.InSufficientBalanceException;
 import com.stackroute.walletservice.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.stackroute.walletservice.entity.Wallet;
@@ -89,7 +90,7 @@ public class WalletService implements WalletServiceInterface {
 		transactionRepository.save(transaction);
 	}
 	public List<Transaction> getTransactionsByContactNumber(String contactNumber) {
-		return transactionRepository.findByContactNumber(contactNumber);
+		return transactionRepository.findByContactNumber(contactNumber, Sort.by("date").descending());
 	}
 
 }
