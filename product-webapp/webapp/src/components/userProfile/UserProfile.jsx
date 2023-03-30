@@ -23,7 +23,7 @@ const UserProfile = () => {
   function deleteUser() {
     const contactNumber = localStorage.getItem("contactNumber");
     axios
-      .delete(`http://localhost:8090/user/delete/${contactNumber}`, {
+      .delete(`http://localhost:9090/user/delete/${contactNumber}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ const UserProfile = () => {
         document.getElementById("contactNumber").value = user.contactNumber;
       })
       .catch((error) => {
-        alert("You have been loggged out");
+        alert("Session Expired: Please Log In Again");
         setIsLoggedIn(false);
         localStorage.clear();
         navigate("/signin");
@@ -85,7 +85,7 @@ const UserProfile = () => {
         document.getElementById("accountNumber").value = user.accountNumber;
       })
       .catch((error) => {
-        alert(" sorry something went wrong");
+        alert("Oops! Something Went Wrong. Please Try Again");
         setIsLoggedIn(false);
         localStorage.clear();
         navigate("/signin");

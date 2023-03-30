@@ -55,7 +55,7 @@ const AddMoney = (props) => {
           setMoneyAdded(true);
         })
         .catch((res) => {
-          alert("wrong input");
+          alert("Adding Money Failed. Enter Valid Inputs");
         });
     },
   });
@@ -186,7 +186,7 @@ const AddMoney = (props) => {
                             variant="h6"
                             component="h2"
                           >
-                            Money Added Successfully
+                            Transaction Successful: Amount Added
                           </Typography>
                           <div className="addstatus">
                             <img
@@ -203,7 +203,7 @@ const AddMoney = (props) => {
                             variant="h6"
                             component="h2"
                           >
-                            Money Is Not Added
+                            Transaction Failed: Amount Not Added
                           </Typography>
                           <div className="addstatus">
                             <img src={RedCross} height="180vh" width="180vh" />
@@ -229,7 +229,7 @@ const AddMoney = (props) => {
         </>
       ) : (
         <div>
-          <p>You are not logged in. Please log in to access this page.</p>
+          <p>Access Denied: Please Login</p>
           {/* You can also redirect the user to the login page if needed */}
           {navigate("/signin")}
         </div>

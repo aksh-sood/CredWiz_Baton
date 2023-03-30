@@ -129,7 +129,49 @@ export default function Transaction() {
             justifyContent="center"
             onClick={() => navigate("/addmoney")}
           >
-            <Button>Add Money</Button>
+            <Button
+              sx={{
+                width: "150px",
+                backgroundColor: "#241C2C",
+                color: "#AEAE50",
+                border: "2px solid #AEAE50",
+                borderRadius: "20px",
+                "&:hover": {
+                  boxShadow: "none",
+                  backgroundColor: "#AEAE50",
+                  color: "#241C2C",
+                  border: "2px solid #241C2C",
+                },
+              }}
+            >
+              Add Money
+            </Button>
+          </Box>
+          <Box
+            gridColumn={{ xs: "3", sm: "span 3" }}
+            backgroundColor="white"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            onClick={() => navigate("/sendmoney")}
+          >
+            <Button
+              sx={{
+                width: "150px",
+                backgroundColor: "#241C2C",
+                color: "#AEAE50",
+                border: "2px solid #AEAE50",
+                borderRadius: "20px",
+                "&:hover": {
+                  boxShadow: "none",
+                  backgroundColor: "#AEAE50",
+                  color: "#241C2C",
+                  border: "2px solid #241C2C",
+                },
+              }}
+            >
+              Send Money
+            </Button>
           </Box>
         </Box>
 

@@ -19,8 +19,8 @@ const StatBox = ({ title, subtitle, icon, progress, increase }) => {
           </Typography>
         </Box>
       </Box>
-      <Box display="flex" justifyContent="space-between" mt="2px">
-        <Typography variant="h5">
+      <Box display="flex" justifyContent="space-between" mt="2px" >
+        <Typography variant="h5"  paddingLeft="47px">
           {subtitle}
         </Typography>
       </Box>
