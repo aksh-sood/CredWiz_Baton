@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
 @EnableEurekaClient
-@CrossOrigin
+
 public class ApiGatewayApplication {
 
 	public static void main(String[] args) {
@@ -26,6 +26,9 @@ public class ApiGatewayApplication {
 						.uri("lb://USER-SERVICE"))
 				.route(r->r.path("/wallet/**")
 						.filters(f->f.dedupeResponseHeader("Access-Control-Allow-Origin","RETAIN_UNIQUE"))
-						.uri("lb://WALLET-SERVICE")) .build();
+						.uri("lb://WALLET-SERVICE"))
+				.route(r->r.path("/**")
+						.filters(f->f.dedupeResponseHeader("Access-Control-Allow-Origin","RETAIN_UNIQUE"))
+						.uri("http://localhost:4000/")).build();
 	}
 }
