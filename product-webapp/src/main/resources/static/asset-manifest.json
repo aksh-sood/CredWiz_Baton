@@ -1,13 +1,12 @@
 {
   "files": {
-    "main.css": "/static/css/main.f0ea862e.css",
-    "main.js": "/static/js/main.e8ec65de.js",
+    "main.css": "/static/css/main.43632778.css",
+    "main.js": "/static/js/main.8ae4c46a.js",
     "static/js/787.994511a4.chunk.js": "/static/js/787.994511a4.chunk.js",
     "static/media/addmoney.png": "/static/media/addmoney.7bdac5a24556a66d3770.png",
     "static/media/fa-solid-900.ttf": "/static/media/fa-solid-900.4a2cd718d7031b732e76.ttf",
     "static/media/home.png": "/static/media/home.ec8eb6fb3f2bcf298a09.png",
     "static/media/sendmoney.png": "/static/media/sendmoney.e5209658a78ed22368e3.png",
-    "static/media/withdrawmoney.png": "/static/media/withdrawmoney.e037a2e7508d9b48a788.png",
     "static/media/updatebg.png": "/static/media/updatebg.fdd1a893456a47d7ccbd.png",
     "static/media/userbg.png": "/static/media/userbg.7568697dfa7e37a3bc87.png",
     "static/media/fa-brands-400.ttf": "/static/media/fa-brands-400.150de8eaa454d669c405.ttf",
@@ -52,13 +51,13 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "static/media/red-x-icon.svg": "/static/media/red-x-icon.a118e9c61a86a45ffb27e884f6769a23.svg",
     "index.html": "/index.html",
-    "static/media/green_checkmark.svg": "/static/media/green_checkmark.811a046ee360e05216b987e4e4f0bd13.svg",
-    "main.f0ea862e.css.map": "/static/css/main.f0ea862e.css.map",
-    "main.e8ec65de.js.map": "/static/js/main.e8ec65de.js.map",
+    "static/media/green_checkmark.svg": "/static/media/green_checkmark.7f276fee4027bb8e1cd447ba7fad1a7f.svg",
+    "main.43632778.css.map": "/static/css/main.43632778.css.map",
+    "main.8ae4c46a.js.map": "/static/js/main.8ae4c46a.js.map",
     "787.994511a4.chunk.js.map": "/static/js/787.994511a4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f0ea862e.css",
-    "static/js/main.e8ec65de.js"
+    "static/css/main.43632778.css",
+    "static/js/main.8ae4c46a.js"
   ]
 }
