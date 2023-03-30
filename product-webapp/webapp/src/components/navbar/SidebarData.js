@@ -29,12 +29,7 @@ export const SidebarData = [
     icon: <AiIcons.AiOutlineTransaction />,
     cName: "nav-text",
   },
-  {
-    title: "About Us",
-    path: "/about_us",
-    icon: <AiIcons.AiFillInfoCircle />,
-    cName: "nav-text",
-  },
+
   {
     title: "User Profile",
     path: "/userProfile",

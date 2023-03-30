@@ -22,20 +22,25 @@ const UserProfile = () => {
 
   function deleteUser() {
     const contactNumber = localStorage.getItem("contactNumber");
-
     axios
-      .delete(`http://localhost:8090/user/delete/${contactNumber}`)
+      .delete(`http://localhost:8090/user/delete/${contactNumber}`, {
+        headers: {
+          Authorization: `Bearer ${jwtToken}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         console.log(response);
         alert("User deleted successfully");
         localStorage.clear();
-        navigate("/");
+        navigate("/signup");
       })
       .catch((error) => {
         // Handle error
         console.log(error);
       });
   }
+
   useEffect(() => {
     fetch(
       `http://localhost:9090/user/contact/${localStorage.getItem(
@@ -300,30 +305,7 @@ const UserProfile = () => {
                 marginTop: "30px",
                 marginBottom: "30px",
               }}
-            >
-              <Button
-                type="submit"
-                className="btn bubble "
-                id="sign-in-btn"
-                value="Sign up"
-                href="/updateUser"
-                // color="#241C2C"
-                sx={{
-                  backgroundColor: "#241C2C",
-                  color: "#AEAE50",
-                  border: "2px solid #AEAE50",
-                  borderRadius: "20px",
-                  "&:hover": {
-                    boxShadow: "none",
-                    backgroundColor: "#AEAE50",
-                    color: "#241C2C",
-                    border: "2px solid #241C2C",
-                  },
-                }}
-              >
-                Delete Profile
-              </Button>
-            </Box>
+            ></Box>
           </Box>
         </div>
       </div>
