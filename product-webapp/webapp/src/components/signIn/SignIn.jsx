@@ -10,7 +10,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import * as React from "react";
 import IconButton from "@mui/material/IconButton";
-
 const SignIn = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -38,7 +37,7 @@ const SignIn = () => {
     onSubmit: (values) => {
       console.log(values);
       axios
-        .post("https://CredWiz.stackroute.io/user/login", values)
+      .post("http://localhost:9090/user/login", values)
         .then((res) => {
           console.log(res);
           localStorage.setItem("jwt_auth", res.data.jwt);
@@ -47,7 +46,7 @@ const SignIn = () => {
           localStorage.setItem("isloggedin", true);
           axios
             .get(
-              `https://CredWiz.stackroute.io/wallet/getWallet/${localStorage.getItem(
+              `http://localhost:9090/wallet/getWallet/${localStorage.getItem(
                 "contactNumber"
               )}`
             )
@@ -69,26 +68,32 @@ const SignIn = () => {
         });
     },
   });
-
   return (
     <>
       <div className="signinbody">
         <div className="leftbody">
           <div className="leftinnerbody">
             <div className="leftbodylogo">
-              <Link to="/" height="auto" className="imagelogo">
-                <img src={Logo} alt="logo" href="/" />
-              </Link>
+              <Button
+                height="auto"
+                className="imagelogo"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <img src={Logo} alt="logo" />
+              </Button>
               <h1 style={{ color: "#AEAE50" }}>New here ?</h1>
               <p style={{ color: "#AEAE50" }}>
                 Join us to have the best expereince in digital wallet platforms
               </p>
               <Button
-                type="submit"
                 className="btn bubble "
                 id="sign-in-btn"
                 value="Sign up"
-                href="/signup"
+                onClick={() => {
+                  navigate("/signup");
+                }}
                 sx={{
                   width: "20ch",
                   backgroundColor: "#241C2C",

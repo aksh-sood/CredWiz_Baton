@@ -94,19 +94,26 @@ const SignUp = () => {
         <div className="leftbody">
           <div className="leftinnerbody">
             <div className="leftbodylogo">
-              <Link to="/" height="auto" className="imagelogo">
-                <img src={Logo} alt="logo" href="/" />
-              </Link>
+              <Button
+                height="auto"
+                className="imagelogo"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                <img src={Logo} alt="logo" />
+              </Button>
               <h1 style={{ color: "#AEAE50" }}>Existing user ?</h1>
               <p style={{ color: "#AEAE50" }}>
                 Login here to continue your journey with us
               </p>
               <Button
-                type="submit"
+                onClick={() => {
+                  navigate("/signIn");
+                }}
                 className="btn bubble "
                 id="sign-in-btn"
                 value="Sign up"
-                href="/signin"
                 sx={{
                   width: "20ch",
                   backgroundColor: "#241C2C",
