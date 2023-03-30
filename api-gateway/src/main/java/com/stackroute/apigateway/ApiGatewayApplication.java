@@ -6,7 +6,6 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 @SpringBootApplication
 @EnableEurekaClient
@@ -29,6 +28,6 @@ public class ApiGatewayApplication {
 						.uri("lb://WALLET-SERVICE"))
 				.route(r->r.path("/**")
 						.filters(f->f.dedupeResponseHeader("Access-Control-Allow-Origin","RETAIN_UNIQUE"))
-						.uri("http://localhost:4000/")).build();
+						.uri("http://localhost:3000/")).build();
 	}
 }
