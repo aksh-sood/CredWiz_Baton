@@ -7,7 +7,7 @@ eureka:
     fetch-registry: true
 
 server:
-  port: 5005
+  port: 8080
 
 
 
