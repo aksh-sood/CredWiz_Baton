@@ -14,7 +14,7 @@ import WalletRoute from "./components/walletRoute/WalletRoute";
 
 function App() {
   return (
-    <div className="App">
+    <>
       <HashRouter>
       <Routes>
         <Route path="/" exact component={LandingPage} />
@@ -30,7 +30,7 @@ function App() {
         <WalletRoute path="/transaction" exact component={Transaction} />
       </Routes>
       </HashRouter>
-    </div>
+    </>
   );
 }
 
