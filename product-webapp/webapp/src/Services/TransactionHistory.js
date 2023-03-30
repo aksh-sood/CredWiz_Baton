@@ -4,7 +4,9 @@ class TransactionHistory {
   getTransactionHistory = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:9090/wallet/getTransactions/${localStorage.getItem("contactNumber")}`
+        `https://CredWiz.stackroute.io/wallet/getTransactions/${localStorage.getItem(
+          "contactNumber"
+        )}`
       );
       const transactionData = response.data;
 
@@ -18,7 +20,7 @@ class TransactionHistory {
         remarks: transaction.remarks,
         receiverName: transaction.receiverName,
         amount: transaction.amount,
-        wallet: transaction.wallet
+        wallet: transaction.wallet,
       }));
 
       return transactionHistory;

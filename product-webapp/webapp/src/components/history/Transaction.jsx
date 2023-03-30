@@ -33,7 +33,7 @@ export default function Transaction() {
 
     const jwtToken = localStorage.getItem("jwt_auth");
     fetch(
-      `http://localhost:9090/user/contact/${localStorage.getItem(
+      `https://CredWiz.stackroute.io/user/contact/${localStorage.getItem(
         "contactNumber"
       )}`,
       {
@@ -57,7 +57,7 @@ export default function Transaction() {
 
     axios
       .get(
-        `http://localhost:9090/wallet/getWallet/${localStorage.getItem(
+        `https://CredWiz.stackroute.io/wallet/getWallet/${localStorage.getItem(
           "contactNumber"
         )}`
       )

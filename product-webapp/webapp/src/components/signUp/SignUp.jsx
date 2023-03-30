@@ -76,7 +76,7 @@ const SignUp = () => {
       };
       console.log(datas);
       axios
-        .post("http://localhost:9090/user/register", datas)
+        .post("https://CredWiz.stackroute.io/user/register", datas)
         .then((res) => {
           console.log(res);
           alert("Sign Up Successful: Please Sign In to Continue");

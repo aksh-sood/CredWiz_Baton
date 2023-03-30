@@ -48,7 +48,7 @@ const AddMoney = (props) => {
       // values["contactNumber"] = "1111111111";
       console.log(values);
       axios
-        .post("http://localhost:9090/wallet/addmoney", values)
+        .post("https://CredWiz.stackroute.io/wallet/addmoney", values)
         .then((res) => {
           console.log(res);
           alert(res.data);

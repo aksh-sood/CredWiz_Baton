@@ -18,7 +18,7 @@ const UpdateUser = () => {
   function deleteUser() {
     const contactNumber = localStorage.getItem("contactNumber");
 
-    fetch(`http://localhost:9090/user/delete/${contactNumber}`, {
+    fetch(`https://CredWiz.stackroute.io/user/delete/${contactNumber}`, {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
       },
@@ -121,7 +121,7 @@ const UpdateUser = () => {
 
     axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
     axios
-      .put("http://localhost:9090/user/updateUser", mapData)
+      .put("https://CredWiz.stackroute.io/user/updateUser", mapData)
       .then((res) => {
         alert("user updated");
         console.log(res.status);
@@ -329,7 +329,7 @@ const UpdateUser = () => {
           className="btn bubble "
           id="sign-in-btn"
           value="Sign up"
-          onClick={()=>deleteUser()}
+          onClick={() => deleteUser()}
           sx={{
             margin: "1%",
             backgroundColor: "#241C2C",

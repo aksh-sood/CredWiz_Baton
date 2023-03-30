@@ -23,7 +23,7 @@ const UserProfile = () => {
   function deleteUser() {
     const contactNumber = localStorage.getItem("contactNumber");
     axios
-      .delete(`http://localhost:9090/user/delete/${contactNumber}`, {
+      .delete(`https://CredWiz.stackroute.io/user/delete/${contactNumber}`, {
         headers: {
           Authorization: `Bearer ${jwtToken}`,
           "Content-Type": "application/json",
@@ -43,7 +43,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     fetch(
-      `http://localhost:9090/user/contact/${localStorage.getItem(
+      `https://CredWiz.stackroute.io/user/contact/${localStorage.getItem(
         "contactNumber"
       )}`,
       {
@@ -73,7 +73,7 @@ const UserProfile = () => {
       });
 
     fetch(
-      `http://localhost:9090/wallet/getWallet/${localStorage.getItem(
+      `https://CredWiz.stackroute.io/wallet/getWallet/${localStorage.getItem(
         "contactNumber"
       )}`
     )

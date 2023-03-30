@@ -48,7 +48,7 @@ const SendMoney = (props) => {
       // values["senderContactNumber"] = "1111111111"
       console.log(values);
       axios
-        .post("http://localhost:9090/wallet/sendmoney", values)
+        .post("https://CredWiz.stackroute.io/wallet/sendmoney", values)
         .then((res) => {
           console.log(res);
           //  alert(res.data)
@@ -241,7 +241,8 @@ const SendMoney = (props) => {
                             align="center"
                             color="#aeae50"
                           >
-                            Transaction Failed. Insufficient balance or incorrect details. Please check and try again.
+                            Transaction Failed. Insufficient balance or
+                            incorrect details. Please check and try again.
                           </Typography>
                           <div className="sendstatus">
                             <img src={RedCross} height="30%" width="30%" />
