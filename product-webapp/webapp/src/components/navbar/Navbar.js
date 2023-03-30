@@ -79,7 +79,7 @@ function Navbar() {
                     p: 4,
                 }}>
                     <Typography id="modal-modal-title" variant="h6" component="h2" textAlign="center">
-                        Quit?
+                        Sign out?
                     </Typography>
                     <Button onClick={() => {
                         localStorage.clear()
