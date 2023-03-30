@@ -83,9 +83,13 @@ public class UserController {
     @DeleteMapping("/delete/{contactNumber}")
     public ResponseEntity<?> deleteUserByContactNumber(@PathVariable("contactNumber") String contactNumber)
             throws ContactNumberNotExistException {
-
-//		boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
-        ResponseEntity<?> entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);
+        ResponseEntity<?> entity ;
+        boolean isDeleted = userService.deleteUserByContactNumber(contactNumber);
+      if(isDeleted)  {
+       entity = new ResponseEntity<String>("User Deleted Successfully", HttpStatus.OK);}
+      else{
+          entity=new ResponseEntity<String>("Unable to delete user", HttpStatus.BAD_REQUEST);
+      }
         return entity;
     }
 
