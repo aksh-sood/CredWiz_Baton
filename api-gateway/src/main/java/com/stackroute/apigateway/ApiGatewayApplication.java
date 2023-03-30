@@ -29,6 +29,6 @@ public class ApiGatewayApplication {
 						.uri("lb://WALLET-SERVICE"))
 				.route(r->r.path("/**")
 						.filters(f->f.dedupeResponseHeader("Access-Control-Allow-Origin","RETAIN_UNIQUE"))
-						.uri("http://localhost:3000/")).build();
+						.uri("http://product-webapp:3000/")).build();
 	}
 }
