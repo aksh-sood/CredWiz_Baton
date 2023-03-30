@@ -30,6 +30,10 @@ spring:
 #          uri: http://localhost:9092
           predicates:
             - Path=/wallet/**
+        - id: product-webapp
+          uri: http://product-webapp:3000
+          predicates:
+            - Path=/product-webapp/**
 
       global-cors:
         corsConfigurations:
