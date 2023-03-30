@@ -54,7 +54,7 @@ const SignIn = () => {
                     })
                     .catch((res) => {
                         console.log(null===true)
-                        alert("wrong input")
+                        alert("Incorrect Username or Password")
                     })
             }
         }

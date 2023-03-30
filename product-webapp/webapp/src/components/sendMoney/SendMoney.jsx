@@ -226,7 +226,7 @@ const SendMoney = (props) => {
                             align="center"
                             color="#aeae50"
                           >
-                            Money sent Successfully
+                            Transaction Complete
                           </Typography>
                           <div className="sendstatus">
                             <img src={GreenCheck} height="30%" width="30%" />
@@ -241,7 +241,7 @@ const SendMoney = (props) => {
                             align="center"
                             color="#aeae50"
                           >
-                            Money is not Send, check wallet balance or details
+                            Transaction Failed. Insufficient balance or incorrect details. Please check and try again.
                           </Typography>
                           <div className="sendstatus">
                             <img src={RedCross} height="30%" width="30%" />
@@ -267,7 +267,7 @@ const SendMoney = (props) => {
         </>
       ) : (
         <div>
-          <p>You are not logged in. Please log in to access this page.</p>
+          <p>Access Denied: Please Login</p>
           {/* You can also redirect the user to the login page if needed */}
         </div>
       )}

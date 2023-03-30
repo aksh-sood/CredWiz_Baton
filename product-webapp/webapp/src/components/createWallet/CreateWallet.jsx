@@ -53,7 +53,7 @@ const CreateWallet = (props) => {
                 .then((res) => {
                     localStorage.setItem("iswalletadded",true)
                     navigate("/dashboard")
-                    alert("created successful")
+                    alert("Wallet Created Successfully")
                     window.location.reload(true);
                  
                 })

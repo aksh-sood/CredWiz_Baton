@@ -329,7 +329,7 @@ const UpdateUser = () => {
           className="btn bubble "
           id="sign-in-btn"
           value="Sign up"
-          onClick={deleteUser}
+          onClick={()=>deleteUser()}
           sx={{
             margin: "1%",
             backgroundColor: "#241C2C",

@@ -51,12 +51,12 @@ const SignUp = () => {
       axios.post("http://localhost:9090/user/register", datas)
         .then((res) => {
           console.log(res)
-          alert("registration successful. login to continue")
+          alert("Sign Up Successful: Please Sign In to Continue")
           navigate("/signin")
         })
         .catch((res) => {
           console.log(res)
-          alert("User Already exit")
+          alert("Registration Failed: Invalid Form Inputs")
         })
     }
   });
