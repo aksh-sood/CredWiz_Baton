@@ -15,46 +15,47 @@ const UpdateUser = () => {
   const navigate = useNavigate();
   const jwtToken = localStorage.getItem("jwt_auth");
   const contactNumber = localStorage.getItem("contactNumber");
-  // function deleteUser() {
-  //   const contactNumber = localStorage.getItem("contactNumber");
-
-  //   fetch(`http://localhost:9090/user/delete/${contactNumber}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${jwtToken}`,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log(response);
-  //       alert("User deleted successfully");
-  //       localStorage.clear();
-  //       navigate("/");
-  //     })
-
-  //     .catch((error) => {
-  //       console.log(error);
-  //       alert("something went wrong please sign in again and try again");
-  //       navigate("/signin");
-  //     });
-  // }
   function deleteUser() {
-    axios
-      .delete(`http://localhost:8090/user/delete/${contactNumber}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwtToken}`,
-        },
-      })
+    const contactNumber = localStorage.getItem("contactNumber");
+
+    fetch(`http://localhost:9090/user/delete/${contactNumber}`, {
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      method: "DELETE",
+    })
       .then((response) => {
         console.log(response);
         alert("User deleted successfully");
         localStorage.clear();
-        navigate("/signup");
+        navigate("/");
       })
+
       .catch((error) => {
-        // Handle error
         console.log(error);
+        alert("something went wrong please sign in again and try again");
+        navigate("/signin");
       });
   }
+  // function deleteUser() {
+  //   axios
+  //     .delete(`http://localhost:8090/user/delete/${contactNumber}`, {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${jwtToken}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       alert("User deleted successfully");
+  //       localStorage.clear();
+  //       navigate("/signup");
+  //     })
+  //     .catch((error) => {
+  //       // Handle error
+  //       console.log(error);
+  //     });
+  // }
 
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
