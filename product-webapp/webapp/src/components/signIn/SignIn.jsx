@@ -37,7 +37,7 @@ const SignIn = () => {
     onSubmit: (values) => {
       console.log(values);
       axios
-      .post("http://localhost:9090/user/login", values)
+      .post("https://CredWiz.stackroute.io/user/login", values)
         .then((res) => {
           console.log(res);
           localStorage.setItem("jwt_auth", res.data.jwt);
@@ -46,7 +46,7 @@ const SignIn = () => {
           localStorage.setItem("isloggedin", true);
           axios
             .get(
-              `http://localhost:9090/wallet/getWallet/${localStorage.getItem(
+              `https://CredWiz.stackroute.io/wallet/getWallet/${localStorage.getItem(
                 "contactNumber"
               )}`
             )
