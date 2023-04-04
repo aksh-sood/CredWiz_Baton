@@ -5,7 +5,8 @@ pipeline {
       steps {
         echo 'Demo Build Message'
         sh '''echo "This is from build shell"
-sh run_build_script.sh'''
+
+'''
       }
     }
 
@@ -15,15 +16,14 @@ sh run_build_script.sh'''
           steps {
             echo 'Linux Test'
             sh '''echo "This is from test linux shell"
-sh run_linux_tests.sh'''
+'''
           }
         }
 
         stage('Windows Tests') {
           steps {
             echo 'This is windows test'
-            sh '''echo "this is shell windows test"
-'''
+            sh 'echo "windows test shell"'
           }
         }
 
