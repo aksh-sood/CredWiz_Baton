@@ -44,14 +44,4 @@ pipeline {
     }
 
   }
-  post {
-    always {
-      archiveArtifacts(artifacts: '**/target/**.jar', fingerprint: true)
-    }
-
-    failure {
-      mail(to: 'YOUR EMAIL ADDRESS', subject: "Failed Pipeline ${currentBuild.fullDisplayName}", body: " For details about the failure, see ${env.BUILD_URL}")
-    }
-
-  }
 }
