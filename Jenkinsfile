@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Demo Build Message'
-        mvn clean install -Dskiptests
+
 
 
       }
@@ -20,7 +20,7 @@ pipeline {
         stage('Linux Tests') {
           steps {
             echo 'Linux Test'
-            mvn clean install
+
           }
         }
 
