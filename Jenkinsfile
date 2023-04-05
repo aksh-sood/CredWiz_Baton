@@ -9,9 +9,6 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Demo Build Message'
-        clean install -Dskiptests
-
-
       }
     }
 
@@ -20,7 +17,7 @@ pipeline {
         stage('Linux Tests') {
           steps {
             echo 'Linux Test'
-            clean install
+
           }
         }
 
