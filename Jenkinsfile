@@ -9,7 +9,7 @@ pipeline {
     stage('Build') {
       steps {
         echo 'Demo Build Message'
-        mvn clean install
+        sh "mvn clean install"
       }
     }
 
