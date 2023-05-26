@@ -27,7 +27,7 @@ pipeline {
         }
         changed{
           echo 'versioning'
-          // sh 'mkdir -p versions/ cp $(find ../ -name "**/target/*.jar") versions/credwiz-$BUILD_ID'
+          sh 'mkdir -p versions/ cp $(find ../ -name "**/target/*.jar") versions/credwiz-$BUILD_ID'
           
         }
       }
