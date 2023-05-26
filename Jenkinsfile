@@ -17,12 +17,12 @@ pipeline {
 
     stage('Linux Tests') {
       // parallel {
-        stage('Run Tests') {
+        // stage('Run Tests') {
           steps {
             echo 'Running Tests'
             sh 'mvn test'
           }
-        }
+        // }
       post{
         success {
           echo 'Success and archiving it'
