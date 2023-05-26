@@ -3,31 +3,40 @@ pipeline {
     // tools {
     //     maven 'maven-x' 
     // }
+  options {
+    buildDiscarder(logRotator(numToKeep: '3', artifactNumToKeep: '2',daysToKeep:'2',artifactDaysToKeep: '1'))
+  }
   stages {
     stage('Build') {
       steps {
         echo 'Demo Build Message'
-        sh "mvn clean install"
+        sh "mvn clean install -DskipTests"
       }
+    
+    }
+
+    stage('Linux Tests') {
+      // parallel {
+        stage('Run Tests') {
+          steps {
+            echo 'Running Tests'
+            sh 'mvn test'
+          }
+        }
       post{
         success {
           echo 'Success and archiving it'
           archiveArtifacts artifacts: '**/target/*.jar'
         }
-      }
-    }
-
-    stage('Linux Tests') {
-      parallel {
-        stage('Linux Tests') {
-          steps {
-            echo 'Linux Test'
-
-          }
+        changed{
+          echo 'versioning'
+          sh "mkdir -p versions/ cp $(find ../ -name '**/target/*.jar') versions/credwiz-$BUILD_ID"
+          
         }
-
-
       }
+
+
+      // }
     }
 
     stage('Deploy Staging') {
