@@ -4,7 +4,7 @@ pipeline {
     //     maven 'maven-x' 
     // }
   options {
-    buildDiscarder(logRotator(numToKeep: 2, artifactNumToKeep: 2,daysToKeep:2,artifactDaysToKeep: 1))
+    buildDiscarder(logRotator(numToKeepStr: '2', artifactNumToKeepStr: '2',daysToKeepStr:'2',artifactDaysToKeepStr: '1'))
   }
   stages {
     stage('Build') {
