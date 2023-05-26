@@ -1,13 +1,19 @@
 pipeline {
   agent any
-    tools {
-        maven 'maven-x' 
-    }
+    // tools {
+    //     maven 'maven-x' 
+    // }
   stages {
     stage('Build') {
       steps {
         echo 'Demo Build Message'
         sh "mvn clean install"
+      }
+      post{
+        success {
+          echo 'Success and archiving it'
+          // archiveArtifacts artifacts: '**/target/*.'
+        }
       }
     }
 
@@ -20,12 +26,6 @@ pipeline {
           }
         }
 
-        stage('Windows Tests') {
-          steps {
-            echo 'This is windows test'
-            sh 'echo "windows test shell"'
-          }
-        }
 
       }
     }
