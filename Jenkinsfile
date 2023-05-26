@@ -24,6 +24,7 @@ pipeline {
         success {
           echo 'Success and archiving it'
           archiveArtifacts artifacts: '**/target/*.jar'
+          echo 'versioning'
           sh 'mkdir -p versions/ cp $(find ../ -name "**/target/*.jar") versions/credwiz-$BUILD_ID'
 
         }
