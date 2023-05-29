@@ -34,8 +34,12 @@ pipeline {
           
         }
       }
+    }
 
-
+    stage('checkstyle analysis'){
+      steps{
+        sh 'mvn checkstyle:checkstyle'
+      }
     }
 
     stage('Deploy Staging') {
