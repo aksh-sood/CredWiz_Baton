@@ -42,6 +42,25 @@ pipeline {
       }
     }
 
+    stage('Sonar Analysis'){
+      environment{
+        scannerhome = tool 'sonar4.7'
+      }
+      steps{
+        withSonarQubeEnv('sonar'){
+        sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=credwiz \
+        -Dsonar.projectName=vprofile-repo \
+        -Dsonar.projectVersion=1.0 \
+        -Dsonar.sources=user-servicesrc/ \
+        -Dsonar.java.binaries=target/test-classes/com/stackroute/userservice \
+        -Dsonar.junit.reportsPath=target/jacoco.exec \
+        -Dsonar.jacoco.reportspath=target/jacoco.exec \
+        -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml
+        '''
+        }
+      }
+    }
+
     stage('Deploy Staging') {
       steps {
         echo 'Deploy to staging environment'
