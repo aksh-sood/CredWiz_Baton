@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+agrregator
+api-gateway
+eureka-server
+user-service
+wallet-service
